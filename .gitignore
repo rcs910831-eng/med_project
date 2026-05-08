@@ -4,8 +4,9 @@
 .env.*.local
 
 # Google Cloud credentials (NEVER commit this!)
-google-cloud-key.json
-pharma-mobile-*.json
+google-cloud-key.json*
+pharma-mobile-*.json*
+*.json.json
 
 # Python
 __pycache__/

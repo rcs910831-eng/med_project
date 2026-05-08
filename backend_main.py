@@ -326,6 +326,33 @@ async def health_check():
     }
 
 
+@app.get("/api/health")
+async def api_health_check():
+    """API 헬스 체크 (Render 배포용)"""
+    try:
+        # 데이터베이스 연결 확인
+        conn = sqlite3.connect(DATABASE_PATH)
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        cursor.execute("SELECT 1")
+        cursor.close()
+        conn.close()
+
+        return {
+            "status": "healthy",
+            "database": "connected",
+            "timestamp": datetime.now().isoformat(),
+            "version": "1.0.0"
+        }
+    except Exception as e:
+        logger.error(f"Health check failed: {str(e)}")
+        return {
+            "status": "unhealthy",
+            "error": str(e),
+            "timestamp": datetime.now().isoformat()
+        }, 503
+
+
 # [2] 사용자 관리
 @app.post("/api/user/register")
 async def register_user(profile: UserProfile):
