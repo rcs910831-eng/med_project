@@ -5,6 +5,7 @@
 fastapi==0.104.1
 uvicorn[standard]==0.24.0
 python-multipart==0.0.6
+starlette==0.27.0
 
 # API 통신
 httpx==0.25.1
@@ -15,15 +16,11 @@ google-generativeai==0.3.0
 
 # 데이터베이스
 sqlalchemy==2.0.23
-psycopg2-binary==2.9.9
 alembic==1.12.1
-
-# 로컬 SQLite (개발용)
-sqlite3-python==1.0.0
 
 # 보안
 python-jose[cryptography]==3.3.0
-passlib[bcrypt]==1.7.4
+passlib[bcrypt]>=1.7.4
 pydantic[email]==2.5.0
 pydantic-settings==2.1.0
 
@@ -45,13 +42,9 @@ python-json-logger==2.0.7
 # 환경 변수
 python-dotenv==1.0.0
 
-# CORS
-fastapi-cors==0.0.6
-
 # 테스트
 pytest==7.4.3
 pytest-asyncio==0.21.1
-httpx==0.25.1
 
 # 배포
 gunicorn==21.2.0
