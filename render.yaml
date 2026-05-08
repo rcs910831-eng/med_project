@@ -3,50 +3,27 @@ services:
     name: pharma-mobile-backend
     env: python
     plan: starter
+    runtime: python-3.11
 
     # Build configuration
-    buildCommand: |
-      pip install --upgrade pip
-      pip install -r requirements_backend.txt
+    buildCommand: pip install -r requirements_backend.txt
 
     # Start command for production
-    startCommand: |
-      gunicorn -w 4 -k uvicorn.workers.UvicornWorker backend_main:app --bind 0.0.0.0:$PORT --timeout 120
+    startCommand: gunicorn -w 4 -k uvicorn.workers.UvicornWorker backend_main:app --bind 0.0.0.0:$PORT --timeout 120
 
     # Environment variables
     envVars:
       - key: PYTHON_VERSION
         value: 3.11
-      - key: PORT
-        value: 8000
       - key: ENVIRONMENT
         value: production
-      - key: LOG_LEVEL
-        value: info
-      - key: GOOGLE_APPLICATION_CREDENTIALS
-        sync: false  # This needs to be set manually in Render dashboard
 
     # Health check
     healthCheckPath: /health
-    healthCheckStartupFailureThresholdCount: 10
 
     # Scale configuration
     numInstances: 1
-    staticPublishPath: null
 
     # Git configuration
     repo: https://github.com/rcs910831-eng/med_project.git
     branch: main
-
-    # Disk
-    disk:
-      name: pharma_db
-      mountPath: /data
-      sizeGB: 1
-
-envVarGroups:
-  - name: google_cloud
-    envVars:
-      - key: GOOGLE_APPLICATION_CREDENTIALS
-        value: /var/run/secrets/google-cloud-key.json
-        sync: false
