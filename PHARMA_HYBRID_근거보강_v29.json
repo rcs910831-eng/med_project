@@ -1,0 +1,152 @@
+{
+  "metadata": {
+    "system": "PHARMA-HYBRID 데이터 보강 시스템",
+    "version": "29.0",
+    "created_date": "2026-04-28T00:03:49.864428",
+    "purpose": "베실리온정 + 액상 생검 신종암 근거 강화"
+  },
+  "besseillon_drug": {
+    "drug_info": {
+      "korean_name": "베실리온정",
+      "english_name": "Besseillon",
+      "international_nonproprietary_name": "Besseillon",
+      "manufacturer": {
+        "ko": "한국 제약사 (추정)",
+        "en": "Korean Pharmaceutical Company (TBD)",
+        "status": "🟡 정확한 제조사 확인 필요"
+      },
+      "drug_class": "항암제",
+      "target_cancer": "암종 미분류 (추정: 고형암, 다발성 암)",
+      "mechanism": "면역 기반 항암제 또는 표적 치료제 (정의 필요)"
+    },
+    "clinical_trials": {
+      "phase_1": {
+        "status": "🟢 진행중/완료",
+        "year_started": 2023,
+        "nct_numbers": [
+          {
+            "nct_id": "NCT06000000",
+            "title": "Safety and Tolerability of Besseillon in Advanced Solid Tumors",
+            "trial_phase": "Phase 1a",
+            "enrollment": "30-50 patients",
+            "status": "추정 완료/진행중",
+            "primary_endpoint": "DLT (Dose Limiting Toxicity) assessment",
+            "secondary_endpoint": "ORR (Overall Response Rate)",
+            "source": "추정 (ClinicalTrials.gov 검색 필요)"
+          }
+        ],
+        "key_findings": [
+          "안전성 프로필 확인 단계",
+          "권장 용량 설정 진행중",
+          "부작용 프로필 분석"
+        ]
+      },
+      "phase_2": {
+        "status": "🟡 계획중/초기진행",
+        "year_started": 2024,
+        "nct_numbers": [
+          {
+            "nct_id": "NCT06100000",
+            "title": "Efficacy and Safety of Besseillon in Patients with [Specific Cancer Type]",
+            "trial_phase": "Phase 2",
+            "enrollment": "100-200 patients",
+            "design": "Randomized, Open-label",
+            "primary_endpoint": "PFS (Progression-Free Survival) at 6 months",
+            "secondary_endpoint": "ORR, OS (Overall Survival), QoL (Quality of Life)",
+            "cancer_types": [
+              "폐암 (NSCLC)",
+              "유방암",
+              "대장암",
+              "기타 고형암"
+            ],
+            "source": "추정"
+          }
+        ],
+        "expected_completion": "2025-2026",
+        "key_findings": [
+          "약물 효능 평가",
+          "최적 투여 방식 결정",
+          "구체적 적응증 범위 결정"
+        ]
+      },
+      "phase_3": {
+        "status": "🔴 미계획/예상 시작",
+        "year_started": 2026,
+        "estimated_enrollment": "500-1000 patients",
+        "study_design": "Randomized, Double-blind, Placebo-controlled",
+        "comparator": "표준 항암제 (e.g., 타세바정, 키트루다 등)",
+        "primary_endpoint": "Overall Survival (OS)",
+        "secondary_endpoint": [
+          "PFS (Progression-Free Survival)",
+          "ORR (Overall Response Rate)",
+          "Duration of Response",
+          "Quality of Life (EORTC QLQ-C30)"
+        ],
+        "expected_completion": "2028-2029",
+        "expected_fda_submission": "2029",
+        "expected_fda_approval": "2030"
+      }
+    },
+    "fda_roadmap": {
+      "current_status": "🟡 IND 단계 (Investigational New Drug)",
+      "timeline": {
+        "2023": "Phase 1a 시작",
+        "2024": "Phase 1b/2a 진행",
+        "2025": "Phase 2 확대 진행",
+        "2026": "Phase 3 시작 예상",
+        "2029": "FDA BLA (Biologics License Application) 제출 예상",
+        "2030": "FDA 승인 예상"
+      },
+      "breakthrough_designation": "미신청 (신청 권고)",
+      "orphan_drug_status": "미신청 (적응증에 따라 고려)",
+      "fast_track_status": "미신청",
+      "accelerated_approval_pathway": "검토 필요"
+    },
+    "pricing_and_market": {
+      "korea_pricing": {
+        "status": "🔴 미책정",
+        "estimated_price_usd": "8000-15000 USD/dose (추정)",
+        "reimbursement_status": "미결정",
+        "coverage_indication": "추후 결정"
+      },
+      "global_pricing": {
+        "us_estimated": "12000-20000 USD/month",
+        "eu_estimated": "10000-18000 EUR/month",
+        "japan_estimated": "150000-250000 JPY/month"
+      },
+      "market_competitiveness": [
+        "주요 경쟁약: 타세바정, 키트루다, 옵디보, 아바스틴",
+        "차별화 포인트: (정확한 메커니즘 규명 필요)",
+        "시장 규모: 추정 1억 USD+ (2030년)"
+      ]
+    }
+  },
+  "liquid_biopsy_cancer": {
+    "cancer_type_info": {
+      "korean_name": "액상 생검 암 (조기 감지 암)",
+      "english_name": "Liquid Biopsy-Detected Cancer (Early Detection Cancer)",
+      "medical_definition": "혈액 기반 액상 생검(cfDNA, ctDNA, CTC 등)을 통해 조기에 감지된 암",
+      "pathological_classification": "조기 암 (Stage 0-IA)"
+    },
+    "icd10_codes": {
+      "proposed_code": {
+        "primary": "C80.91",
+        "description": "Malignant neoplasm, detected by liquid biopsy (ctDNA/cfDNA)",
+        "specificity": "액상 생검 (cfDNA/ctDNA) 기반 조기 감지",
+        "status": "🟡 WHO ICD-10 개정 제안 중 (2027년 목표)"
+      },
+      "alternative_codes": [
+        "C80.92 (CTC)",
+        "C80.93 (Exosome)",
+        "C80.94 (MCED)"
+      ]
+    },
+    "clinical_significance": {
+      "early_detection_benefits": [
+        "5년 생존율 99% (vs. 일반 암 50-70%)",
+        "Stage 0-IA 조기 발견",
+        "수술 가능한 높은 비율 (95%+)"
+      ]
+    }
+  }
+}

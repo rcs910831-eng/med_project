@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script>
+    function sendData(text) {
+        window.parent.postMessage({isStreamlitMessage: true, type: "setComponentValue", value: text}, "*");
+    }
+    window.addEventListener("message", function(e) {
+        if(e.data.type === "render") {
+            window.parent.postMessage({isStreamlitMessage: true, type: "setFrameHeight", height: 100}, "*");
+        }
+    });
+    var rec=null,on=false;
+    function toggle(){on?stop():start();}
+    function start(){
+      var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+      if(!SR){document.getElementById('vstatus').innerText='⚠️ Chrome 브라우저 권장';return;}
+      rec=new SR();rec.lang='ko-KR';rec.continuous=false;rec.interimResults=true;
+      on=true;
+      document.getElementById('vbtn').innerText='⏹ 중단';
+      document.getElementById('vbtn').classList.add('on');
+      document.getElementById('vstatus').innerText='🔴 듣고 있습니다...';
+      rec.onresult=function(e){
+        if(e.results[e.results.length-1].isFinal) {
+          var t='';
+          for(var i=0;i<e.results.length;i++) t+=e.results[i][0].transcript;
+          document.getElementById('vstatus').innerText='✅ 인식 완료! 전송 중...';
+          sendData(t);
+          stop();
+        }
+      };
+      rec.onerror=function(e){document.getElementById('vstatus').innerText='❌ '+e.error;stop();};
+      rec.onend=function(){stop();};
+      rec.start();
+    }
+    function stop(){
+      on=false;if(rec){try{rec.stop();}catch(e){}rec=null;}
+      document.getElementById('vbtn').innerText='🎙️ 자동 음성 인식 (클릭)';
+      document.getElementById('vbtn').classList.remove('on');
+    }
+  </script>
+  <style>
+    body { margin:0; padding:0; background:transparent; font-family:'Noto Sans KR',sans-serif; }
+    #vbtn { width:100%; padding:7px 0; background:transparent; border:1px solid rgba(0,242,255,0.5);
+            color:#00f2ff; border-radius:4px; cursor:pointer; font-size:0.65rem; margin-bottom:5px; transition:0.2s;}
+    #vbtn:hover { background:rgba(0,242,255,0.1); }
+    #vbtn.on { background:rgba(200,0,0,0.18); border-color:#ff4444; color:#ff7777; }
+    #vstatus { font-size:0.58rem; color:#00ff88; min-height:16px; margin-top:3px; word-break:keep-all; }
+  </style>
+</head>
+<body>
+  <button id="vbtn" onclick="toggle()">🎙️ 자동 음성 인식 (클릭)</button>
+  <div id="vstatus">클릭하고 말하면 AI가 자동 분석합니다</div>
+</body>
+</html>

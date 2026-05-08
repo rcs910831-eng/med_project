@@ -1,0 +1,58 @@
+{
+  "test_name": "Mock E2E Test",
+  "timestamp": "2026-05-07T01:29:47.993105",
+  "tests": [
+    {
+      "name": "Import Test",
+      "status": "PASS",
+      "details": "모든 에이전트 정상 import"
+    },
+    {
+      "name": "RAG Database Test",
+      "status": "PASS",
+      "details": {
+        "drugs": 3,
+        "papers": 6,
+        "guidelines": 5
+      }
+    },
+    {
+      "name": "Prescription Images Test",
+      "status": "PASS",
+      "details": {
+        "total_images": 33,
+        "samples": [
+          "RX_P001.png",
+          "RX_P002.png",
+          "RX_P003.png",
+          "RX_P004.png",
+          "RX_P005.png"
+        ]
+      }
+    },
+    {
+      "name": "Utility Modules Test",
+      "status": "PASS",
+      "details": "5 utility modules loaded"
+    },
+    {
+      "name": "Data Structure Test",
+      "status": "PASS",
+      "details": "All data structures valid"
+    },
+    {
+      "name": "Output Directories Test",
+      "status": "PASS",
+      "details": "All output directories ready"
+    },
+    {
+      "name": "API Keys Status Test",
+      "status": "PARTIAL",
+      "details": {
+        "anthropic": "NOT SET - REQUIRED",
+        "google": "SET",
+        "mfds": "SET"
+      }
+    }
+  ]
+}

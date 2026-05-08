@@ -1,0 +1,146 @@
+# Kubernetes PersistentVolumeClaims - Data Storage
+# 약자: PVC (영구적인 데이터 저장)
+
+---
+# 환자 이력 저장소
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pharma-patients-pvc
+  namespace: shield-pharma
+  labels:
+    app: pharma-hybrid
+    purpose: patient-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: standard
+
+---
+# 약가 데이터 저장소
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pharma-prices-pvc
+  namespace: shield-pharma
+  labels:
+    app: pharma-hybrid
+    purpose: price-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: standard
+
+---
+# 애플리케이션 출력 저장소 (PDF, 보고서 등)
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pharma-output-pvc
+  namespace: shield-pharma
+  labels:
+    app: pharma-hybrid
+    purpose: output-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+  storageClassName: standard
+
+---
+# 로그 저장소
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pharma-logs-pvc
+  namespace: shield-pharma
+  labels:
+    app: pharma-hybrid
+    purpose: logs
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: standard
+
+---
+# RAG 데이터베이스 저장소 (논문, 가이드라인 등)
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pharma-rag-db-pvc
+  namespace: shield-pharma
+  labels:
+    app: pharma-hybrid
+    purpose: rag-database
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 15Gi
+  storageClassName: standard
+
+---
+# PostgreSQL 데이터베이스 저장소
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pharma-database-pvc
+  namespace: shield-pharma
+  labels:
+    app: pharma-hybrid
+    component: postgres
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi
+  storageClassName: standard
+
+---
+# Prometheus 메트릭 저장소
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pharma-prometheus-pvc
+  namespace: shield-pharma
+  labels:
+    app: pharma-hybrid
+    component: prometheus
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+  storageClassName: standard
+
+---
+# Grafana 대시보드 저장소
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pharma-grafana-pvc
+  namespace: shield-pharma
+  labels:
+    app: pharma-hybrid
+    component: grafana
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: standard

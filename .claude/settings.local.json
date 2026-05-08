@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python pharma_data_collector.py --quick)",
+      "Bash(python pharma_data_collector.py)",
+      "Bash(python -c ' *)",
+      "Bash(python cancer_protocols_db.py)",
+      "WebFetch(domain:www.cancer.go.kr)",
+      "WebFetch(domain:cancer.org)",
+      "WebFetch(domain:www.dietitian.or.kr)",
+      "WebSearch",
+      "WebFetch(domain:www.cancer.gov)",
+      "WebFetch(domain:www.cancer.org)",
+      "WebFetch(domain:www.hopkinsmedicine.org)",
+      "WebFetch(domain:health.kdca.go.kr)",
+      "WebFetch(domain:medicine.yonsei.ac.kr)",
+      "WebFetch(domain:m.amc.seoul.kr)",
+      "WebFetch(domain:www.amc.seoul.kr)",
+      "WebFetch(domain:www.koreahealthlog.com)",
+      "PowerShell(Get-ChildItem \"$env:USERPROFILE\\\\.claude\" -Recurse | Select-Object FullName -First 40)",
+      "Bash(python nutrition_diet_db.py)",
+      "Bash(python -c \"import ast; ast.parse\\(open\\('main_app.py', encoding='utf-8'\\).read\\(\\)\\); print\\('OK'\\)\")",
+      "Bash(python -m py_compile celebrity_voice_engine.py)",
+      "Bash(python -m py_compile main_app.py)",
+      "PowerShell(head -20)",
+      "Bash(awk '{print $9, \"\\(\" $5 \"\\)\"}')",
+      "Bash(python -c \"import ast; ast.parse\\(open\\('main_app.py','r',encoding='utf-8'\\).read\\(\\)\\); print\\('AST OK'\\)\")",
+      "Bash(python -c \"import ast, sys; ast.parse\\(open\\('main_app.py','r',encoding='utf-8'\\).read\\(\\)\\); sys.stdout.buffer.write\\(b'AST OK\\\\n'\\)\")",
+      "Bash(python -u -W ignore -c ' *)",
+      "Bash(python -u -c ' *)",
+      "Read(//home/user/**)",
+      "Bash(python3 phase1_foundation_setup.py)"
+    ]
+  }
+}

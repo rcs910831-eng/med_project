@@ -1,0 +1,28 @@
+{
+  "generated_at": "2026-04-29T18:33:06.291135",
+  "mfds": {
+    "success": 0,
+    "pending": 70,
+    "note": "pending 항목은 data.go.kr에서 서비스 활용신청 후 재수집 가능",
+    "how_to_activate": [
+      "1. https://data.go.kr 로그인",
+      "2. '식약처 의약품 낱알 식별 정보' 검색",
+      "3. '활용신청' 클릭 → 즉시 또는 1-2일 내 승인",
+      "4. 승인 후 pharma_data_collector.py 재실행"
+    ]
+  },
+  "openfda": {
+    "label_found": 58,
+    "ae_found": 68,
+    "source": "api.fda.gov (미국 FDA 공개 API)"
+  },
+  "local": {
+    "image_count": 38,
+    "files_loaded": [
+      "knowledge_base",
+      "aihub_drug_info",
+      "med_master",
+      "images"
+    ]
+  }
+}

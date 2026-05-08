@@ -1,0 +1,1 @@
+﻿"#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n\"\"\"\n[SHIELD] PHARMA-HYBRID v20 (Restore 4:34 PM Stable)\n?듭떖 湲곕뒫 ?ㅼ젣 ?묐룞??(?띿뒪??湲곕컲 諛??덉젙??蹂듦뎄)\n\n?섏젙 ?ы빆:\n1. ?뚯꽦 ?몄떇(Sidebar Mic) ?쒓굅 ???띿뒪??梨?n<truncated 27178 bytes>

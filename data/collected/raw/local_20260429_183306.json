@@ -1,0 +1,533 @@
+{
+  "source": "프로젝트 로컬 데이터",
+  "files": [
+    "knowledge_base.json",
+    "medication_info_aihub.json",
+    "med_dataset_master.json",
+    "data/images/"
+  ],
+  "collected_at": "2026-04-29T18:33:06.277526",
+  "data": {
+    "knowledge_base": {
+      "data": {
+        "hospitals": [
+          {
+            "name": "S병원",
+            "diet_guide": {
+              "kidney": "저염, 저단백 식단 필수. 수분 섭취는 주치의 권고에 따라 조절.",
+              "liver": "고단백, 고비타민 식단. 간성혼수 위험 시 단백질 제한.",
+              "diabetes": "당지수(GI)가 낮은 복합 탄수화물 위주 식단. 규칙적인 식사 시간 엄수."
+            }
+          },
+          {
+            "name": "A병원",
+            "diet_guide": {
+              "kidney": "칼륨 제한 필요 (채소는 데쳐서 섭취). 소금 하루 5g 미만.",
+              "liver": "신선한 채소와 과일 섭취 권장. 가공식품 및 음주 절대 금지."
+            }
+          }
+        ],
+        "drugs": [
+          {
+            "name": "리리카캡슐",
+            "component": "Pregabalin",
+            "category": "신경통 치료제 / 근이완 보조",
+            "precautions": "졸음이나 어지러움을 유발할 수 있으므로 운전 시 주의.",
+            "interactions": {
+              "alcohol": "심한 졸음 및 호흡 억제 위험.",
+              "supplements": "밀크씨슬과 병용 시 간 대사 부담 가능성, 3시간 간격 권장."
+            },
+            "visual_descriptors": {
+              "form": "캡슐",
+              "color": "흰색 및 적갈색",
+              "imprint": "PGB 75",
+              "size": "소형"
+            },
+            "packaging_text_samples": [
+              "리리카",
+              "신경통",
+              "Pregabalin",
+              "75mg"
+            ],
+            "exercise_advice": "근육 이완 효과가 있으므로 격렬한 근력 운동보다는 가벼운 스트레칭 권장."
+          },
+          {
+            "name": "아토젯정",
+            "component": "Atorvastatin/Ezetimibe",
+            "category": "이상지질혈증 치료제",
+            "precautions": "자몽 주스 섭취 금지 (약물 농도 상승 위험).",
+            "interactions": {
+              "liver_toxic": "간 수치 상승 주의."
+            },
+            "visual_descriptors": {
+              "form": "정제",
+              "color": "흰색",
+              "shape": "원형",
+              "imprint": "없음"
+            },
+            "packaging_text_samples": [
+              "아토젯",
+              "이상지질혈증",
+              "콜레스테롤",
+              "Atorvastatin"
+            ]
+          },
+          {
+            "name": "타이레놀정 500mg",
+            "component": "Acetaminophen",
+            "category": "해열 진통제",
+            "precautions": "음주 후 복용 시 간 손상 위험 매우 높음. 1일 최대량 엄수.",
+            "visual_descriptors": {
+              "form": "정제",
+              "color": "흰색",
+              "shape": "장방형 (Oval)",
+              "imprint": "TYLENOL 500"
+            },
+            "packaging_text_samples": [
+              "타이레놀",
+              "해열진통",
+              "Acetaminophen",
+              "500"
+            ],
+            "interactions": {
+              "alcohol": "간 독성 급증"
+            }
+          },
+          {
+            "name": "아스피린정 100mg",
+            "component": "Aspirin",
+            "category": "혈전 예방제",
+            "precautions": "수술 전에는 지혈 방해를 막기 위해 복용을 중단해야 함. 위장 출혈 주의.",
+            "visual_descriptors": {
+              "form": "정제",
+              "color": "흰색",
+              "shape": "원형",
+              "imprint": "Bayer Cross"
+            },
+            "packaging_text_samples": [
+              "아스피린",
+              "저용량",
+              "심혈관",
+              "Aspi"
+            ],
+            "interactions": {
+              "anticoagulants": "출혈 위험 증가"
+            }
+          },
+          {
+            "name": "탁센",
+            "component": "Naproxen",
+            "category": "소염 진통제",
+            "precautions": "위장 장애가 있을 수 있으므로 식후 복용 권장.",
+            "visual_descriptors": {
+              "form": "연질캡슐",
+              "color": "청색",
+              "shape": "장방형",
+              "texture": "투명함"
+            },
+            "packaging_text_samples": [
+              "탁센",
+              "소염진통",
+              "나프록센",
+              "Naproxen"
+            ],
+            "interactions": {
+              "stomach_acid": "속쓰림 유발 가능"
+            }
+          },
+          {
+            "name": "넥사바정",
+            "component": "Sorafenib",
+            "category": "표적항암제 (간암, 신장암)",
+            "precautions": "손발 증후군(피부 발적, 통증) 주의. 자외선 차단 및 보습 철저.",
+            "visual_descriptors": {
+              "form": "정제",
+              "color": "적갈색",
+              "shape": "원형",
+              "imprint": "Bayer"
+            },
+            "interactions": {
+              "food": "식사 1시간 전 또는 2시간 후 공복 복용 권장."
+            }
+          },
+          {
+            "name": "수텐캡슐",
+            "component": "Sunitinib",
+            "category": "표적항암제 (신장암, 위암/GIST)",
+            "precautions": "피부색 변화(황색화) 또는 모발 탈색 가능성. 혈압 모니터링 필수.",
+            "visual_descriptors": {
+              "form": "캡슐",
+              "color": "오렌지색",
+              "imprint": "Pfizer / STN 50"
+            }
+          },
+          {
+            "name": "타그리소정",
+            "component": "Osimertinib",
+            "category": "표적항암제 (폐암)",
+            "precautions": "심장 기능 저하(QT 연장) 주의. 간질성 폐질환 증상(호흡곤란, 기침) 모니터링.",
+            "visual_descriptors": {
+              "form": "정제",
+              "color": "베이지색",
+              "shape": "원형",
+              "imprint": "AZ 80"
+            }
+          },
+          {
+            "name": "렌비마캡슐",
+            "component": "Lenvatinib",
+            "category": "표적항암제 (갑상선암, 간암)",
+            "precautions": "심한 고혈압 발생 빈도가 높음. 매일 혈압 체크 및 기록 권장.",
+            "visual_descriptors": {
+              "form": "캡슐",
+              "color": "빨간색 및 노란색",
+              "imprint": "LENV 10"
+            }
+          },
+          {
+            "name": "챔프시럽 (빨강)",
+            "component": "Acetaminophen",
+            "category": "어린이 해열제 (생후 4개월부터 복용 가능)",
+            "precautions": "다른 아세트아미노펜 약과 중복 복용 주의. 개봉 후 한 달 이내 사용.",
+            "visual_descriptors": {
+              "color": "빨간색 패키지",
+              "form": "액상 시럽 (스틱)"
+            }
+          },
+          {
+            "name": "챔프이부펜시럽 (파랑)",
+            "component": "Ibuprofen",
+            "category": "어린이 해열진통제 (1세 이상부터 복용 가능)",
+            "precautions": "빈 속에 먹지 않도록 주의. 신장 기능 저하 시 주의.",
+            "visual_descriptors": {
+              "color": "파란색 패키지",
+              "form": "액상 시럽 (스틱)"
+            }
+          },
+          {
+            "name": "챔프노즈 (초록)",
+            "component": "콧물/코막힘",
+            "category": "어린이 코감기약 (2세 이상부터)",
+            "visual_descriptors": {
+              "color": "초록색 패키지",
+              "form": "액상 시럽"
+            }
+          },
+          {
+            "name": "챔프코프 (주황)",
+            "component": "기침/가래",
+            "category": "어린이 목감기약 (2세 이상부터)",
+            "visual_descriptors": {
+              "color": "주황색 패키지",
+              "form": "액상 시럽"
+            }
+          },
+          {
+            "name": "모드콜S",
+            "component": "복합 성분",
+            "category": "종합감기약 (몸살, 코, 목감기)",
+            "precautions": "1일 3회, 1회 2캡슐 복용.",
+            "visual_descriptors": {
+              "form": "연질캡슐",
+              "color": "황색 (투명)",
+              "shape": "타원형"
+            }
+          },
+          {
+            "name": "탁센 (TAK-SEN)",
+            "component": "Naproxen",
+            "category": "강력한 소염진통제 (편두통, 치통, 근육통)",
+            "precautions": "위장 장애 주의. 나프록센 성분은 작용 시간이 깁니다.",
+            "visual_descriptors": {
+              "form": "연질캡슐",
+              "color": "청색 (투명)",
+              "shape": "장방형"
+            }
+          },
+          {
+            "name": "게보린정",
+            "component": "Acetaminophen, Isopropylantipyrine, Caffeine",
+            "category": "해열진통제 (오한, 발열, 통증 완화)",
+            "precautions": "빈속 복용 피할 것. 만 15세 미만 소아 복용 금지. 술 마신 후 금기.",
+            "visual_descriptors": {
+              "form": "정제",
+              "color": "분홍색",
+              "shape": "하트 모양",
+              "imprint": "GR"
+            }
+          },
+          {
+            "name": "베아제정",
+            "component": "소화효소제",
+            "category": "2단계 빠른 소화제 (과식, 체함)",
+            "visual_descriptors": {
+              "form": "정제",
+              "color": "녹색",
+              "shape": "장방형"
+            }
+          },
+          {
+            "name": "훼스탈 플러스",
+            "component": "소화효소제",
+            "category": "종합 소화제 (더부룩함, 식체)",
+            "visual_descriptors": {
+              "form": "당의정",
+              "color": "흰색",
+              "shape": "원형"
+            }
+          },
+          {
+            "name": "노루모 듀얼액션",
+            "component": "제산제",
+            "category": "위역류, 속쓰림, 소화불량 완화",
+            "visual_descriptors": {
+              "form": "현탁액 (스틱)",
+              "color": "청록색 패키지"
+            }
+          },
+          {
+            "name": "씨투스 (CITUS)",
+            "component": "Pranlukast",
+            "category": "기관지 천식, 알레르기 비염 치료제",
+            "visual_descriptors": {
+              "form": "정제/현탁정/건조시럽",
+              "color": "흰색",
+              "shape": "하트 모양 또는 장방형",
+              "imprint": "SA / CI"
+            }
+          },
+          {
+            "name": "씨프로바이정 250mg",
+            "component": "Ciprofloxacin",
+            "category": "항생제 (세균 감염증 치료)",
+            "precautions": "증상이 개선되더라도 전문가와 상의 없이 투약을 중단하지 마세요. 위장장애 가능성.",
+            "visual_descriptors": {
+              "form": "정제",
+              "color": "흰색"
+            }
+          },
+          {
+            "name": "화록소정",
+            "component": "Loxoprofen",
+            "category": "소염진통제 (염증 및 통증 완화)",
+            "precautions": "충분한 물과 함께 투여하세요. 위장장애 주의.",
+            "visual_descriptors": {
+              "form": "정제",
+              "color": "흰색"
+            }
+          },
+          {
+            "name": "라니드정",
+            "component": "Ranitidine (대체 성분 포함)",
+            "category": "위산과다증약 (위산 분비 억제)",
+            "precautions": "간질환/신장질환 환자는 미리 알리세요. 과도한 음주/흡연 삼가.",
+            "visual_descriptors": {
+              "form": "정제",
+              "color": "분홍색"
+            }
+          }
+        ],
+        "lifestyle_coaching": {
+          "edema_detected": "신장 부담을 줄이기 위해 오늘 운동은 강도를 50% 낮추고 수분 섭취를 20% 늘리세요.",
+          "jaundice_detected": "간 휴식이 필요합니다. 단백질 섭취를 일시적으로 줄이고 충분한 수면을 취하세요."
+        }
+      },
+      "source": "프로젝트 로컬 파일: knowledge_base.json",
+      "source_original": "병원 식이·약물 지식 베이스 (프로젝트 구축)",
+      "file_path": ".\\knowledge_base.json",
+      "count": 3
+    },
+    "aihub_drug_info": {
+      "data": [
+        {
+          "category": "Hypertension",
+          "drug_name": "노바스크정 5mg (Amlodipine)",
+          "ingredients": "암로디핀베실산염 (Amlodipine Besylate)",
+          "appearance": {
+            "color": "흰색",
+            "shape": "팔각형",
+            "imprint": "앞: PF / 뒤: NV 5"
+          },
+          "mfds_precautions": "자몽주스 섭취 시 약효가 과도하게 상승할 수 있으므로 피해야 함. 혈압 강하로 인한 어지러움 주의.",
+          "source": "AI Hub 의약품 제형 이미지 데이터 (dataSetSn=576) 및 식약처 가이드라인"
+        },
+        {
+          "category": "Diabetes",
+          "drug_name": "다이아벡스정 500mg (Metformin)",
+          "ingredients": "메트포르민염산염 (Metformin Hydrochloride)",
+          "appearance": {
+            "color": "흰색",
+            "shape": "원형",
+            "imprint": "앞: DW / 뒤: D"
+          },
+          "mfds_precautions": "신장 기능 저하 환자에게는 유산산증 위험이 있으므로 주의. CT 검사 등 조영제 사용 시 일시 중단 필요.",
+          "source": "AI Hub 의약품 제형 이미지 데이터 (dataSetSn=576) 및 식약처 가이드라인"
+        },
+        {
+          "category": "Cerebrovascular Disease",
+          "drug_name": "플라빅스정 75mg (Clopidogrel)",
+          "ingredients": "클로피도그렐황산염 (Clopidogrel Bisulfate)",
+          "appearance": {
+            "color": "분홍색",
+            "shape": "원형",
+            "imprint": "앞: 75 / 뒤: 1171"
+          },
+          "mfds_precautions": "출혈 위험이 있으므로 수술이나 치과 치료 전 반드시 의사에게 알려야 함. 항응고제 병용 주의.",
+          "source": "AI Hub 의약품 제형 이미지 데이터 (dataSetSn=576) 및 식약처 가이드라인"
+        },
+        {
+          "category": "Uterine Sarcoma (Targeted Therapy)",
+          "drug_name": "보트리에트정 200mg (Pazopanib)",
+          "ingredients": "파조파닙염산염 (Pazopanib Hydrochloride)",
+          "appearance": {
+            "color": "흰색",
+            "shape": "장방형",
+            "imprint": "앞: GS / 뒤: JT"
+          },
+          "mfds_precautions": "간독성 위험이 있어 정기적인 간 기능 검사 필수. 고혈압 부작용이 흔하므로 지속적인 혈압 모니터링 필요.",
+          "source": "AI Hub 의약품 제형 이미지 데이터 (dataSetSn=576) 및 식약처 가이드라인"
+        },
+        {
+          "category": "General (Pain/Fever)",
+          "drug_name": "타이레놀정 500mg (Acetaminophen)",
+          "ingredients": "아세트아미노펜 (Acetaminophen)",
+          "appearance": {
+            "color": "흰색",
+            "shape": "장방형",
+            "imprint": "앞: TYLENOL / 뒤: 없음"
+          },
+          "mfds_precautions": "음주 후 복용 시 간 손상 위험이 매우 높음. 일일 최대 복용량(4,000mg)을 초과하지 말 것.",
+          "source": "AI Hub 의약품 제형 이미지 데이터 (dataSetSn=576) 및 식약처 가이드라인"
+        }
+      ],
+      "source": "프로젝트 로컬 파일: medication_info_aihub.json",
+      "source_original": "AI Hub 의약품 제형 이미지 데이터 (dataSetSn=576) + 식약처 가이드라인",
+      "file_path": ".\\data/raw/texts/medication_info_aihub.json",
+      "count": 5
+    },
+    "med_master": {
+      "data": [
+        {
+          "category": "Hypertension",
+          "drug_name": "노바스크정 5mg (Amlodipine)",
+          "ingredients": "암로디핀베실산염 (Amlodipine Besylate)",
+          "appearance": {
+            "color": "흰색",
+            "shape": "팔각형",
+            "imprint": "앞: PF / 뒤: NV 5"
+          },
+          "mfds_precautions": "자몽주스 섭취 시 약효가 과도하게 상승할 수 있으므로 피해야 함. 혈압 강하로 인한 어지러움 주의.",
+          "source": "AI Hub 의약품 제형 이미지 데이터 (dataSetSn=576) 및 식약처 가이드라인",
+          "image_path": "NOT_FOUND"
+        },
+        {
+          "category": "Diabetes",
+          "drug_name": "다이아벡스정 500mg (Metformin)",
+          "ingredients": "메트포르민염산염 (Metformin Hydrochloride)",
+          "appearance": {
+            "color": "흰색",
+            "shape": "원형",
+            "imprint": "앞: DW / 뒤: D"
+          },
+          "mfds_precautions": "신장 기능 저하 환자에게는 유산산증 위험이 있으므로 주의. CT 검사 등 조영제 사용 시 일시 중단 필요.",
+          "source": "AI Hub 의약품 제형 이미지 데이터 (dataSetSn=576) 및 식약처 가이드라인",
+          "image_path": "NOT_FOUND"
+        },
+        {
+          "category": "Cerebrovascular Disease",
+          "drug_name": "플라빅스정 75mg (Clopidogrel)",
+          "ingredients": "클로피도그렐황산염 (Clopidogrel Bisulfate)",
+          "appearance": {
+            "color": "분홍색",
+            "shape": "원형",
+            "imprint": "앞: 75 / 뒤: 1171"
+          },
+          "mfds_precautions": "출혈 위험이 있으므로 수술이나 치과 치료 전 반드시 의사에게 알려야 함. 항응고제 병용 주의.",
+          "source": "AI Hub 의약품 제형 이미지 데이터 (dataSetSn=576) 및 식약처 가이드라인",
+          "image_path": "NOT_FOUND"
+        },
+        {
+          "category": "Uterine Sarcoma (Targeted Therapy)",
+          "drug_name": "보트리에트정 200mg (Pazopanib)",
+          "ingredients": "파조파닙염산염 (Pazopanib Hydrochloride)",
+          "appearance": {
+            "color": "흰색",
+            "shape": "장방형",
+            "imprint": "앞: GS / 뒤: JT"
+          },
+          "mfds_precautions": "간독성 위험이 있어 정기적인 간 기능 검사 필수. 고혈압 부작용이 흔하므로 지속적인 혈압 모니터링 필요.",
+          "source": "AI Hub 의약품 제형 이미지 데이터 (dataSetSn=576) 및 식약처 가이드라인",
+          "image_path": "NOT_FOUND"
+        },
+        {
+          "category": "General (Pain/Fever)",
+          "drug_name": "타이레놀정 500mg (Acetaminophen)",
+          "ingredients": "아세트아미노펜 (Acetaminophen)",
+          "appearance": {
+            "color": "흰색",
+            "shape": "장방형",
+            "imprint": "앞: TYLENOL / 뒤: 없음"
+          },
+          "mfds_precautions": "음주 후 복용 시 간 손상 위험이 매우 높음. 일일 최대 복용량(4,000mg)을 초과하지 말 것.",
+          "source": "AI Hub 의약품 제형 이미지 데이터 (dataSetSn=576) 및 식약처 가이드라인",
+          "image_path": "NOT_FOUND"
+        }
+      ],
+      "source": "프로젝트 로컬 파일: med_dataset_master.json",
+      "source_original": "국내 의약품 마스터 데이터셋 (식약처·약학정보원 기반)",
+      "file_path": ".\\data/raw/texts/med_dataset_master.json",
+      "count": 5
+    },
+    "images": {
+      "data": {
+        "images": [
+          "data/images/Bearse_Tab.jpg",
+          "data/images/Champ_Syrup_Guide.jpg",
+          "data/images/Citus_Tab_Guide.jpg",
+          "data/images/Diabex_500mg.jpg",
+          "data/images/Festal_Plus.jpg",
+          "data/images/Geworin_Tab.jpg",
+          "data/images/Modecol_S.jpg",
+          "data/images/Norumo_Dual.jpg",
+          "data/images/Norvasc_5mg.jpg",
+          "data/images/Plavix_75mg.jpg",
+          "data/images/Tak_Sen.jpg",
+          "data/images/Tylenol_500mg.jpg",
+          "data/images/Votrient_200mg.jpg"
+        ],
+        "bags": [
+          "data/images/bags/bag_sample_162933.jpg",
+          "data/images/bags/bag_sample_164816.jpg",
+          "data/images/bags/pill_bag_sample_1.jpg"
+        ],
+        "prescriptions": [
+          "data/images/prescriptions/prescription_sample_2.jpg",
+          "data/images/prescriptions/prescription_sample_3.jpg",
+          "data/images/prescriptions/template_0.jpg",
+          "data/images/prescriptions/template_1.jpg",
+          "data/images/prescriptions/template_10.jpg",
+          "data/images/prescriptions/template_11.jpg",
+          "data/images/prescriptions/template_12.jpg",
+          "data/images/prescriptions/template_13.jpg",
+          "data/images/prescriptions/template_14.jpg",
+          "data/images/prescriptions/template_15.jpg",
+          "data/images/prescriptions/template_16.jpg",
+          "data/images/prescriptions/template_17.jpg",
+          "data/images/prescriptions/template_18.jpg",
+          "data/images/prescriptions/template_19.jpg",
+          "data/images/prescriptions/template_2.jpg",
+          "data/images/prescriptions/template_3.jpg",
+          "data/images/prescriptions/template_4.jpg",
+          "data/images/prescriptions/template_5.jpg",
+          "data/images/prescriptions/template_6.jpg",
+          "data/images/prescriptions/template_7.jpg",
+          "data/images/prescriptions/template_8.jpg",
+          "data/images/prescriptions/template_9.jpg"
+        ]
+      },
+      "source": "프로젝트 로컬 이미지 (data/images/)",
+      "source_original": "AI Hub 의약품 제형 이미지 데이터 (dataSetSn=576) + 처방전/약봉지 샘플",
+      "total_count": 38
+    }
+  }
+}

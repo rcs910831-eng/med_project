@@ -1,0 +1,67 @@
+[
+  {
+    "category": "Hypertension",
+    "drug_name": "노바스크정 5mg (Amlodipine)",
+    "ingredients": "암로디핀베실산염 (Amlodipine Besylate)",
+    "appearance": {
+      "color": "흰색",
+      "shape": "팔각형",
+      "imprint": "앞: PF / 뒤: NV 5"
+    },
+    "mfds_precautions": "자몽주스 섭취 시 약효가 과도하게 상승할 수 있으므로 피해야 함. 혈압 강하로 인한 어지러움 주의.",
+    "source": "AI Hub 의약품 제형 이미지 데이터 (dataSetSn=576) 및 식약처 가이드라인",
+    "image_path": "NOT_FOUND"
+  },
+  {
+    "category": "Diabetes",
+    "drug_name": "다이아벡스정 500mg (Metformin)",
+    "ingredients": "메트포르민염산염 (Metformin Hydrochloride)",
+    "appearance": {
+      "color": "흰색",
+      "shape": "원형",
+      "imprint": "앞: DW / 뒤: D"
+    },
+    "mfds_precautions": "신장 기능 저하 환자에게는 유산산증 위험이 있으므로 주의. CT 검사 등 조영제 사용 시 일시 중단 필요.",
+    "source": "AI Hub 의약품 제형 이미지 데이터 (dataSetSn=576) 및 식약처 가이드라인",
+    "image_path": "NOT_FOUND"
+  },
+  {
+    "category": "Cerebrovascular Disease",
+    "drug_name": "플라빅스정 75mg (Clopidogrel)",
+    "ingredients": "클로피도그렐황산염 (Clopidogrel Bisulfate)",
+    "appearance": {
+      "color": "분홍색",
+      "shape": "원형",
+      "imprint": "앞: 75 / 뒤: 1171"
+    },
+    "mfds_precautions": "출혈 위험이 있으므로 수술이나 치과 치료 전 반드시 의사에게 알려야 함. 항응고제 병용 주의.",
+    "source": "AI Hub 의약품 제형 이미지 데이터 (dataSetSn=576) 및 식약처 가이드라인",
+    "image_path": "NOT_FOUND"
+  },
+  {
+    "category": "Uterine Sarcoma (Targeted Therapy)",
+    "drug_name": "보트리에트정 200mg (Pazopanib)",
+    "ingredients": "파조파닙염산염 (Pazopanib Hydrochloride)",
+    "appearance": {
+      "color": "흰색",
+      "shape": "장방형",
+      "imprint": "앞: GS / 뒤: JT"
+    },
+    "mfds_precautions": "간독성 위험이 있어 정기적인 간 기능 검사 필수. 고혈압 부작용이 흔하므로 지속적인 혈압 모니터링 필요.",
+    "source": "AI Hub 의약품 제형 이미지 데이터 (dataSetSn=576) 및 식약처 가이드라인",
+    "image_path": "NOT_FOUND"
+  },
+  {
+    "category": "General (Pain/Fever)",
+    "drug_name": "타이레놀정 500mg (Acetaminophen)",
+    "ingredients": "아세트아미노펜 (Acetaminophen)",
+    "appearance": {
+      "color": "흰색",
+      "shape": "장방형",
+      "imprint": "앞: TYLENOL / 뒤: 없음"
+    },
+    "mfds_precautions": "음주 후 복용 시 간 손상 위험이 매우 높음. 일일 최대 복용량(4,000mg)을 초과하지 말 것.",
+    "source": "AI Hub 의약품 제형 이미지 데이터 (dataSetSn=576) 및 식약처 가이드라인",
+    "image_path": "NOT_FOUND"
+  }
+]

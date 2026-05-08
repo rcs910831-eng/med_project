@@ -1,0 +1,74 @@
+{
+  "version": "21.0",
+  "timestamp": "2024-05-07",
+  "agents": [
+    {
+      "id": "agent_ocr_vision",
+      "name": "OCR & Vision Specialist",
+      "model": "claude-opus-4-7",
+      "status": "implemented",
+      "capabilities": [
+        "image_analysis",
+        "text_extraction",
+        "json_output"
+      ]
+    },
+    {
+      "id": "agent_rag_drug",
+      "name": "RAG & Drug Information Specialist",
+      "model": "claude-opus-4-7",
+      "status": "ready_for_implementation",
+      "capabilities": [
+        "drug_search",
+        "rag_retrieval",
+        "safety_validation"
+      ]
+    },
+    {
+      "id": "agent_google_pharmacy",
+      "name": "Google Places & Real-time Information Specialist",
+      "model": "claude-opus-4-6",
+      "status": "ready_for_implementation",
+      "capabilities": [
+        "pharmacy_search",
+        "location_services",
+        "pricing"
+      ]
+    },
+    {
+      "id": "agent_orchestrator",
+      "name": "Orchestrator & Final Report Generator",
+      "model": "claude-opus-4-7",
+      "status": "ready_for_implementation",
+      "capabilities": [
+        "data_integration",
+        "report_generation",
+        "tts"
+      ]
+    }
+  ],
+  "memory_stores": [
+    {
+      "id": "drug_rag_database",
+      "description": "Drug information, clinical guidelines, research papers"
+    },
+    {
+      "id": "patient_data_vault",
+      "description": "Patient prescriptions, allergies, chronic diseases"
+    },
+    {
+      "id": "pharmacy_catalog",
+      "description": "Pharmacy locations, pricing, inventory"
+    }
+  ],
+  "dependencies": {
+    "required": [
+      "anthropic>=0.32.0",
+      "requests>=2.31.0"
+    ],
+    "optional": [
+      "google-cloud-texttospeech>=2.14.0",
+      "reportlab>=4.0.0"
+    ]
+  }
+}

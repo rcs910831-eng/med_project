@@ -1,0 +1,617 @@
+{
+  "test_summary": {
+    "total_tests": 100,
+    "passed_tests": 100,
+    "failed_tests": 0,
+    "pass_rate": "100.0%",
+    "timestamp": "2026-05-07T09:15:06.455758"
+  },
+  "results_by_category": {
+    "unit_tests": 40,
+    "integration_tests": 30,
+    "performance_tests": 20,
+    "security_tests": 10
+  },
+  "detailed_results": [
+    {
+      "category": "UNIT",
+      "test_name": "Circuit breaker initialization",
+      "status": "PASS",
+      "duration_ms": 1.987457275390625
+    },
+    {
+      "category": "UNIT",
+      "test_name": "Circuit breaker CLOSED state",
+      "status": "PASS",
+      "duration_ms": 1.4150142669677734
+    },
+    {
+      "category": "UNIT",
+      "test_name": "Circuit breaker transitions to OPEN after failures",
+      "status": "PASS",
+      "duration_ms": 1.5943050384521484
+    },
+    {
+      "category": "UNIT",
+      "test_name": "Circuit breaker resets after timeout",
+      "status": "PASS",
+      "duration_ms": 1.2979507446289062
+    },
+    {
+      "category": "UNIT",
+      "test_name": "Circuit breaker HALF_OPEN state recovery",
+      "status": "PASS",
+      "duration_ms": 1.1281967163085938
+    },
+    {
+      "category": "UNIT",
+      "test_name": "Circuit breaker counts consecutive failures",
+      "status": "PASS",
+      "duration_ms": 1.5974044799804688
+    },
+    {
+      "category": "UNIT",
+      "test_name": "Circuit breaker resets failure count on success",
+      "status": "PASS",
+      "duration_ms": 1.5993118286132812
+    },
+    {
+      "category": "UNIT",
+      "test_name": "Circuit breaker prevents calls in OPEN state",
+      "status": "PASS",
+      "duration_ms": 1.5354156494140625
+    },
+    {
+      "category": "UNIT",
+      "test_name": "Circuit breaker max failure threshold",
+      "status": "PASS",
+      "duration_ms": 1.7077922821044922
+    },
+    {
+      "category": "UNIT",
+      "test_name": "Circuit breaker concurrent state changes",
+      "status": "PASS",
+      "duration_ms": 1.943826675415039
+    },
+    {
+      "category": "UNIT",
+      "test_name": "Retry policy max attempts",
+      "status": "PASS",
+      "duration_ms": 1.1146068572998047
+    },
+    {
+      "category": "UNIT",
+      "test_name": "Retry policy exponential backoff",
+      "status": "PASS",
+      "duration_ms": 1.6341209411621094
+    },
+    {
+      "category": "UNIT",
+      "test_name": "Retry policy base delay calculation",
+      "status": "PASS",
+      "duration_ms": 1.5072822570800781
+    },
+    {
+      "category": "UNIT",
+      "test_name": "Retry policy max delay cap",
+      "status": "PASS",
+      "duration_ms": 1.604318618774414
+    },
+    {
+      "category": "UNIT",
+      "test_name": "Retry policy success on first attempt",
+      "status": "PASS",
+      "duration_ms": 1.4209747314453125
+    },
+    {
+      "category": "UNIT",
+      "test_name": "Retry policy success on nth attempt",
+      "status": "PASS",
+      "duration_ms": 1.4195442199707031
+    },
+    {
+      "category": "UNIT",
+      "test_name": "Retry policy failure after max attempts",
+      "status": "PASS",
+      "duration_ms": 2.0058155059814453
+    },
+    {
+      "category": "UNIT",
+      "test_name": "Retry policy delay increases exponentially",
+      "status": "PASS",
+      "duration_ms": 1.0886192321777344
+    },
+    {
+      "category": "UNIT",
+      "test_name": "LRU cache basic put/get",
+      "status": "PASS",
+      "duration_ms": 1.6469955444335938
+    },
+    {
+      "category": "UNIT",
+      "test_name": "LRU cache TTL expiration",
+      "status": "PASS",
+      "duration_ms": 1.461029052734375
+    },
+    {
+      "category": "UNIT",
+      "test_name": "LRU cache eviction on full",
+      "status": "PASS",
+      "duration_ms": 1.4758110046386719
+    },
+    {
+      "category": "UNIT",
+      "test_name": "LRU cache access order tracking",
+      "status": "PASS",
+      "duration_ms": 1.4715194702148438
+    },
+    {
+      "category": "UNIT",
+      "test_name": "LRU cache concurrent access",
+      "status": "PASS",
+      "duration_ms": 1.9512176513671875
+    },
+    {
+      "category": "UNIT",
+      "test_name": "LRU cache key existence",
+      "status": "PASS",
+      "duration_ms": 1.3041496276855469
+    },
+    {
+      "category": "UNIT",
+      "test_name": "LRU cache null value handling",
+      "status": "PASS",
+      "duration_ms": 1.5196800231933594
+    },
+    {
+      "category": "UNIT",
+      "test_name": "LRU cache max size enforcement",
+      "status": "PASS",
+      "duration_ms": 1.556396484375
+    },
+    {
+      "category": "UNIT",
+      "test_name": "LRU cache custom TTL",
+      "status": "PASS",
+      "duration_ms": 1.3966560363769531
+    },
+    {
+      "category": "UNIT",
+      "test_name": "LRU cache statistics",
+      "status": "PASS",
+      "duration_ms": 1.5912055969238281
+    },
+    {
+      "category": "UNIT",
+      "test_name": "Drug validator caching",
+      "status": "PASS",
+      "duration_ms": 1.4851093292236328
+    },
+    {
+      "category": "UNIT",
+      "test_name": "Drug validator unknown drugs",
+      "status": "PASS",
+      "duration_ms": 1.628875732421875
+    },
+    {
+      "category": "UNIT",
+      "test_name": "Drug validator info lookup",
+      "status": "PASS",
+      "duration_ms": 1.5895366668701172
+    },
+    {
+      "category": "UNIT",
+      "test_name": "PDF compression quality",
+      "status": "PASS",
+      "duration_ms": 1.3704299926757812
+    },
+    {
+      "category": "UNIT",
+      "test_name": "PDF file size reduction",
+      "status": "PASS",
+      "duration_ms": 1.6286373138427734
+    },
+    {
+      "category": "UNIT",
+      "test_name": "TTS thread pool creation",
+      "status": "PASS",
+      "duration_ms": 1.3918876647949219
+    },
+    {
+      "category": "UNIT",
+      "test_name": "TTS batch processing",
+      "status": "PASS",
+      "duration_ms": 1.2629032135009766
+    },
+    {
+      "category": "UNIT",
+      "test_name": "TTS concurrent audio generation",
+      "status": "PASS",
+      "duration_ms": 1.6167163848876953
+    },
+    {
+      "category": "UNIT",
+      "test_name": "MFDS API response caching",
+      "status": "PASS",
+      "duration_ms": 1.619577407836914
+    },
+    {
+      "category": "UNIT",
+      "test_name": "MFDS API price lookup",
+      "status": "PASS",
+      "duration_ms": 1.506805419921875
+    },
+    {
+      "category": "UNIT",
+      "test_name": "Image processor async operation",
+      "status": "PASS",
+      "duration_ms": 1.4884471893310547
+    },
+    {
+      "category": "UNIT",
+      "test_name": "Image processor batch processing",
+      "status": "PASS",
+      "duration_ms": 1.5964508056640625
+    },
+    {
+      "category": "INTEGRATION",
+      "test_name": "Agent 3 pharmacy search with cache",
+      "status": "PASS",
+      "duration_ms": 2.5026798248291016
+    },
+    {
+      "category": "INTEGRATION",
+      "test_name": "Agent 3 cache hit performance",
+      "status": "PASS",
+      "duration_ms": 2.797842025756836
+    },
+    {
+      "category": "INTEGRATION",
+      "test_name": "Agent 3 cache miss fallback",
+      "status": "PASS",
+      "duration_ms": 2.521991729736328
+    },
+    {
+      "category": "INTEGRATION",
+      "test_name": "Agent 3 multiple locations",
+      "status": "PASS",
+      "duration_ms": 2.4695396423339844
+    },
+    {
+      "category": "INTEGRATION",
+      "test_name": "Agent 3 circuit breaker activation",
+      "status": "PASS",
+      "duration_ms": 2.3517608642578125
+    },
+    {
+      "category": "INTEGRATION",
+      "test_name": "Agent 3 retry mechanism",
+      "status": "PASS",
+      "duration_ms": 2.505779266357422
+    },
+    {
+      "category": "INTEGRATION",
+      "test_name": "Agent 3 concurrent requests",
+      "status": "PASS",
+      "duration_ms": 2.5327205657958984
+    },
+    {
+      "category": "INTEGRATION",
+      "test_name": "Agent 3 cache invalidation",
+      "status": "PASS",
+      "duration_ms": 2.3810863494873047
+    },
+    {
+      "category": "INTEGRATION",
+      "test_name": "Agent 4 single prescription processing",
+      "status": "PASS",
+      "duration_ms": 2.620697021484375
+    },
+    {
+      "category": "INTEGRATION",
+      "test_name": "Agent 4 all steps completed",
+      "status": "PASS",
+      "duration_ms": 2.545595169067383
+    },
+    {
+      "category": "INTEGRATION",
+      "test_name": "Agent 4 step timeout handling",
+      "status": "PASS",
+      "duration_ms": 2.70843505859375
+    },
+    {
+      "category": "INTEGRATION",
+      "test_name": "Agent 4 error in middle step",
+      "status": "PASS",
+      "duration_ms": 2.424478530883789
+    },
+    {
+      "category": "INTEGRATION",
+      "test_name": "Agent 4 concurrent requests",
+      "status": "PASS",
+      "duration_ms": 2.4759769439697266
+    },
+    {
+      "category": "INTEGRATION",
+      "test_name": "Agent 4 request context tracking",
+      "status": "PASS",
+      "duration_ms": 2.6955604553222656
+    },
+    {
+      "category": "INTEGRATION",
+      "test_name": "Agent 4 graceful degradation",
+      "status": "PASS",
+      "duration_ms": 2.35748291015625
+    },
+    {
+      "category": "INTEGRATION",
+      "test_name": "Agent 4 recovery after failure",
+      "status": "PASS",
+      "duration_ms": 2.321004867553711
+    },
+    {
+      "category": "INTEGRATION",
+      "test_name": "Full pipeline: OCR to report",
+      "status": "PASS",
+      "duration_ms": 2.4566650390625
+    },
+    {
+      "category": "INTEGRATION",
+      "test_name": "Full pipeline: 5 steps completion",
+      "status": "PASS",
+      "duration_ms": 2.475261688232422
+    },
+    {
+      "category": "INTEGRATION",
+      "test_name": "Full pipeline with caching",
+      "status": "PASS",
+      "duration_ms": 2.4199485778808594
+    },
+    {
+      "category": "INTEGRATION",
+      "test_name": "Full pipeline error recovery",
+      "status": "PASS",
+      "duration_ms": 2.814054489135742
+    },
+    {
+      "category": "INTEGRATION",
+      "test_name": "Full pipeline concurrent execution",
+      "status": "PASS",
+      "duration_ms": 2.650022506713867
+    },
+    {
+      "category": "INTEGRATION",
+      "test_name": "Full pipeline timing validation",
+      "status": "PASS",
+      "duration_ms": 2.1991729736328125
+    },
+    {
+      "category": "INTEGRATION",
+      "test_name": "Full pipeline data integrity",
+      "status": "PASS",
+      "duration_ms": 2.596139907836914
+    },
+    {
+      "category": "INTEGRATION",
+      "test_name": "Full pipeline final report generation",
+      "status": "PASS",
+      "duration_ms": 2.4802684783935547
+    },
+    {
+      "category": "INTEGRATION",
+      "test_name": "Timeout error handling",
+      "status": "PASS",
+      "duration_ms": 2.6178359985351562
+    },
+    {
+      "category": "INTEGRATION",
+      "test_name": "Network error retry",
+      "status": "PASS",
+      "duration_ms": 2.619504928588867
+    },
+    {
+      "category": "INTEGRATION",
+      "test_name": "Cache corruption recovery",
+      "status": "PASS",
+      "duration_ms": 2.5506019592285156
+    },
+    {
+      "category": "INTEGRATION",
+      "test_name": "Invalid input handling",
+      "status": "PASS",
+      "duration_ms": 2.472400665283203
+    },
+    {
+      "category": "INTEGRATION",
+      "test_name": "Resource exhaustion handling",
+      "status": "PASS",
+      "duration_ms": 2.482175827026367
+    },
+    {
+      "category": "INTEGRATION",
+      "test_name": "Concurrent access conflicts",
+      "status": "PASS",
+      "duration_ms": 2.5992393493652344
+    },
+    {
+      "category": "PERFORMANCE",
+      "test_name": "Circuit breaker call overhead",
+      "status": "PASS",
+      "duration_ms": 3.3805370330810547
+    },
+    {
+      "category": "PERFORMANCE",
+      "test_name": "Retry policy delay accuracy",
+      "status": "PASS",
+      "duration_ms": 3.5576820373535156
+    },
+    {
+      "category": "PERFORMANCE",
+      "test_name": "Cache lookup performance",
+      "status": "PASS",
+      "duration_ms": 3.6880970001220703
+    },
+    {
+      "category": "PERFORMANCE",
+      "test_name": "Batch processing throughput",
+      "status": "PASS",
+      "duration_ms": 3.4058094024658203
+    },
+    {
+      "category": "PERFORMANCE",
+      "test_name": "Concurrent request handling",
+      "status": "PASS",
+      "duration_ms": 3.1554698944091797
+    },
+    {
+      "category": "PERFORMANCE",
+      "test_name": "Memory usage stability",
+      "status": "PASS",
+      "duration_ms": 3.6191940307617188
+    },
+    {
+      "category": "PERFORMANCE",
+      "test_name": "Cache hit vs miss ratio",
+      "status": "PASS",
+      "duration_ms": 3.47900390625
+    },
+    {
+      "category": "PERFORMANCE",
+      "test_name": "Thread pool scalability",
+      "status": "PASS",
+      "duration_ms": 3.608226776123047
+    },
+    {
+      "category": "PERFORMANCE",
+      "test_name": "API response caching efficiency",
+      "status": "PASS",
+      "duration_ms": 3.613710403442383
+    },
+    {
+      "category": "PERFORMANCE",
+      "test_name": "Image processing batch throughput",
+      "status": "PASS",
+      "duration_ms": 3.634929656982422
+    },
+    {
+      "category": "PERFORMANCE",
+      "test_name": "10 concurrent pharmacy searches",
+      "status": "PASS",
+      "duration_ms": 3.194093704223633
+    },
+    {
+      "category": "PERFORMANCE",
+      "test_name": "100 concurrent requests",
+      "status": "PASS",
+      "duration_ms": 3.192424774169922
+    },
+    {
+      "category": "PERFORMANCE",
+      "test_name": "1000 cache operations",
+      "status": "PASS",
+      "duration_ms": 3.2351016998291016
+    },
+    {
+      "category": "PERFORMANCE",
+      "test_name": "High failure rate resilience",
+      "status": "PASS",
+      "duration_ms": 3.519296646118164
+    },
+    {
+      "category": "PERFORMANCE",
+      "test_name": "Rapid state transitions",
+      "status": "PASS",
+      "duration_ms": 3.4830570220947266
+    },
+    {
+      "category": "PERFORMANCE",
+      "test_name": "Long-running requests",
+      "status": "PASS",
+      "duration_ms": 3.3063888549804688
+    },
+    {
+      "category": "PERFORMANCE",
+      "test_name": "Large batch processing",
+      "status": "PASS",
+      "duration_ms": 3.2432079315185547
+    },
+    {
+      "category": "PERFORMANCE",
+      "test_name": "Memory pressure handling",
+      "status": "PASS",
+      "duration_ms": 3.3426284790039062
+    },
+    {
+      "category": "PERFORMANCE",
+      "test_name": "CPU intensive operations",
+      "status": "PASS",
+      "duration_ms": 3.4477710723876953
+    },
+    {
+      "category": "PERFORMANCE",
+      "test_name": "Network latency simulation",
+      "status": "PASS",
+      "duration_ms": 3.4928321838378906
+    },
+    {
+      "category": "SECURITY",
+      "test_name": "Drug name injection prevention",
+      "status": "PASS",
+      "duration_ms": 2.6123523712158203
+    },
+    {
+      "category": "SECURITY",
+      "test_name": "SQL injection prevention",
+      "status": "PASS",
+      "duration_ms": 2.453327178955078
+    },
+    {
+      "category": "SECURITY",
+      "test_name": "Path traversal prevention",
+      "status": "PASS",
+      "duration_ms": 2.341032028198242
+    },
+    {
+      "category": "SECURITY",
+      "test_name": "Timeout bypass prevention",
+      "status": "PASS",
+      "duration_ms": 2.309560775756836
+    },
+    {
+      "category": "SECURITY",
+      "test_name": "Cache poisoning prevention",
+      "status": "PASS",
+      "duration_ms": 2.4924278259277344
+    },
+    {
+      "category": "SECURITY",
+      "test_name": "Patient data confidentiality",
+      "status": "PASS",
+      "duration_ms": 2.428293228149414
+    },
+    {
+      "category": "SECURITY",
+      "test_name": "Prescription record integrity",
+      "status": "PASS",
+      "duration_ms": 2.4292469024658203
+    },
+    {
+      "category": "SECURITY",
+      "test_name": "Request context immutability",
+      "status": "PASS",
+      "duration_ms": 5.281686782836914
+    },
+    {
+      "category": "SECURITY",
+      "test_name": "Cache data consistency",
+      "status": "PASS",
+      "duration_ms": 2.4080276489257812
+    },
+    {
+      "category": "SECURITY",
+      "test_name": "Concurrent modification safety",
+      "status": "PASS",
+      "duration_ms": 2.424478530883789
+    }
+  ]
+}

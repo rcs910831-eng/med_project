@@ -1,0 +1,57 @@
+# Kubernetes ConfigMap - Application Configuration
+# 설정 정보를 Kubernetes ConfigMap으로 관리
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pharma-config
+  namespace: shield-pharma
+  labels:
+    app: pharma-hybrid
+    version: v21.0
+data:
+  # 애플리케이션 설정
+  APP_ENV: "production"
+  LOG_LEVEL: "INFO"
+  STREAMLIT_PORT: "8501"
+
+  # 데이터베이스 설정
+  DATABASE_HOST: "pharma-postgres"
+  DATABASE_PORT: "5432"
+  DATABASE_NAME: "pharma_db"
+  DATABASE_POOL_SIZE: "20"
+
+  # API 설정
+  API_TIMEOUT: "30"
+  API_RETRIES: "3"
+  API_RATE_LIMIT: "100"
+
+  # 캐시 설정
+  CACHE_TTL_HOURS: "1"
+  CACHE_MAX_SIZE: "1000"
+
+  # 로깅 설정
+  LOG_FORMAT: "json"
+  LOG_OUTPUT: "stdout"
+
+  # 모니터링 설정
+  PROMETHEUS_ENABLED: "true"
+  METRICS_PORT: "8888"
+
+  # Streamlit 특정 설정
+  STREAMLIT_CONFIG: |
+    [client]
+    showErrorDetails = true
+
+    [logger]
+    level = "info"
+
+    [server]
+    enableXsrfProtection = true
+    enableCORS = true
+
+    [theme]
+    primaryColor = "#0066cc"
+    backgroundColor = "#ffffff"
+    secondaryBackgroundColor = "#f0f2f6"
+    textColor = "#262730"

@@ -1,0 +1,233 @@
+# Managed Agents Configuration - SHIELD PHARMA-HYBRID v21.0
+# Medical Prescription Analysis System with 4 Specialized Agents
+
+environment:
+  name: "shield-pharma-hybrid-v21"
+  version: "21.0"
+  deployment: "cloud"
+  networking:
+    type: "unrestricted"  # Required for MFDS API, Google Places, paper search
+
+api_keys:
+  anthropic:
+    model_opus_47: "claude-opus-4-7"  # High-res vision, complex reasoning
+    model_opus_46: "claude-opus-4-6"  # Cost-optimized variant
+    model_haiku: "claude-3-5-haiku"   # Quick filtering tasks
+
+  google:
+    places_api: "${GOOGLE_API_KEY}"
+    cloud_texttospeech: "${GOOGLE_API_KEY}"
+
+  mfds:
+    api_key: "${MFDS_API_KEY}"
+    base_url: "https://apis.data.go.kr/1471000/MdcinGrnIdntfcInfoService01"
+
+  openfda:
+    base_url: "https://api.fda.gov/drug"
+
+memory_stores:
+  - id: "drug_rag_database"
+    description: "Drug information, clinical guidelines, research papers"
+    type: "vector_search"
+    capacity: "large"
+
+  - id: "patient_data_vault"
+    description: "Patient prescriptions, allergies, chronic diseases"
+    type: "transactional"
+    capacity: "large"
+
+  - id: "pharmacy_catalog"
+    description: "Pharmacy locations, pricing, inventory"
+    type: "indexed"
+    capacity: "medium"
+
+agents:
+  # Agent 1: Vision & OCR Specialist
+  - id: "agent_ocr_vision"
+    name: "OCR & Vision Specialist"
+    display_name: "처방전 분석 전문가"
+    version: "1.0"
+    model: "claude-opus-4-7"
+    max_tokens: 4096
+    tools:
+      - type: "vision"
+        features: ["high_resolution", "text_extraction", "handwriting_recognition"]
+      - type: "code_execution"
+        languages: ["python"]
+        capabilities: ["image_processing", "json_generation"]
+      - type: "file_operations"
+        capabilities: ["read", "write"]
+
+    system_prompt: |
+      You are a medical prescription image analysis specialist.
+      Your task is to:
+      1. Extract structured data from prescription images
+      2. Identify patient information (name, age, sex, diagnosis)
+      3. Extract medication details (name, dose, quantity, frequency)
+      4. Validate prescription authenticity
+      5. Return structured JSON output
+
+      Output format MUST be valid JSON with keys:
+      - patient: {name, age, sex, diagnosis_primary, diagnosis_secondary}
+      - medications: [{name, dose, unit, quantity, frequency}]
+      - metadata: {prescription_date, doctor_signature_verified, image_quality}
+
+  # Agent 2: RAG & Drug Information Specialist
+  - id: "agent_rag_drug"
+    name: "RAG & Drug Information Specialist"
+    display_name: "의약정보 조회 전문가"
+    version: "1.0"
+    model: "claude-opus-4-7"
+    max_tokens: 8192
+    tools:
+      - type: "memory_store"
+        store_id: "drug_rag_database"
+        operations: ["search", "retrieve"]
+      - type: "web_search"
+        capabilities: ["mfds_api", "clinical_databases", "research_papers"]
+      - type: "web_fetch"
+        endpoints:
+          - "https://apis.data.go.kr/1471000/MdcinGrnIdntfcInfoService01"
+          - "https://api.fda.gov/drug"
+      - type: "code_execution"
+        languages: ["python"]
+        capabilities: ["data_parsing", "dose_calculation"]
+
+    system_prompt: |
+      You are a pharmaceutical information retrieval specialist.
+      Your task is to:
+      1. Search drug information from MFDS database and research papers
+      2. Extract recommended dosage, frequency, and duration
+      3. Calculate daily dose from prescription data
+      4. Identify warnings, contraindications, and drug interactions
+      5. Provide evidence-based medication information
+
+      Data sources (in priority order):
+      - MFDS Official Database (Korean FDA)
+      - Research papers in Memory Store
+      - OpenFDA for international reference
+      - Clinical guidelines from major medical organizations
+
+  # Agent 3: Google Places & Real-time Information Specialist
+  - id: "agent_google_pharmacy"
+    name: "Google Places & Real-time Information Specialist"
+    display_name: "약국정보 조회 전문가"
+    version: "1.0"
+    model: "claude-opus-4-6"  # Cost-optimized
+    max_tokens: 4096
+    tools:
+      - type: "web_fetch"
+        endpoints:
+          - "https://maps.googleapis.com/maps/api"
+          - "https://apis.data.go.kr/1471000"
+      - type: "code_execution"
+        languages: ["python"]
+        capabilities: ["api_parsing", "geo_calculation", "price_comparison"]
+      - type: "memory_store"
+        store_id: "pharmacy_catalog"
+        operations: ["search", "retrieve", "cache"]
+
+    system_prompt: |
+      You are a pharmacy information retrieval specialist.
+      Your task is to:
+      1. Search nearby pharmacies using Google Places API
+      2. Retrieve pharmacy details (name, address, phone, hours, ratings)
+      3. Query MFDS official drug pricing
+      4. Check pharmacy delivery availability
+      5. Compile pharmacy information with pricing data
+
+      Return structured data with: pharmacy name, distance, contact, hours, MFDS_official_price
+
+  # Agent 4: Orchestrator & Final Report Generator
+  - id: "agent_orchestrator"
+    name: "Orchestrator & Final Report Generator"
+    display_name: "정보통합 및 보고서 생성"
+    version: "1.0"
+    model: "claude-opus-4-7"
+    max_tokens: 12288
+    tools:
+      - type: "memory_store"
+        store_id: "patient_data_vault"
+        operations: ["search", "retrieve", "create", "update"]
+      - type: "code_execution"
+        languages: ["python"]
+        capabilities: ["pdf_generation", "html_rendering", "image_embedding"]
+      - type: "google_texttospeech"
+        languages: ["ko-KR", "en-US"]
+        voice_types: ["neural"]
+      - type: "web_fetch"
+        endpoints: ["https://images.google.com", "https://pills.nlm.nih.gov"]
+      - type: "file_operations"
+        capabilities: ["read", "write", "generate"]
+
+    system_prompt: |
+      You are a medical information integration and report generation specialist.
+      Your task is to:
+      1. Integrate results from all 3 agents
+      2. Validate data consistency and completeness
+      3. Search for and embed medication images
+      4. Generate age/gender-specific warnings
+      5. Create comprehensive HTML/PDF report
+      6. Generate voice explanation script (TTS)
+      7. Store patient history in Memory Store
+
+      Output deliverables:
+      - HTML report with styling
+      - PDF report with images
+      - JSON structured data
+      - TTS voice script (Korean)
+      - Patient record in Memory Store
+
+data_processing:
+  image_handling:
+    max_size_mb: 50
+    supported_formats: ["png", "jpg", "jpeg", "pdf"]
+    dpi_requirement: 150
+    preprocessing: "auto_normalize"
+
+  text_extraction:
+    ocr_confidence_threshold: 0.85
+    handwriting_support: true
+    multiple_language_support: ["ko", "en"]
+
+  storage:
+    memory_store_version_control: true
+    audit_trail_enabled: true
+    automatic_backup: "daily"
+
+validation:
+  prescription_authenticity:
+    check_doctor_signature: true
+    verify_hospital_seal: true
+    cross_reference_mfds: true
+
+  medication_safety:
+    check_drug_interactions: true
+    verify_dosage_range: true
+    age_specific_warnings: true
+    pregnancy_status_check: true
+
+  data_quality:
+    require_patient_consent: true
+    pii_masking_enabled: true
+    minimal_data_retention: "180_days"
+
+reporting:
+  output_formats: ["html", "pdf", "json"]
+  include_medication_images: true
+  include_pharmacy_information: true
+  voice_output_enabled: true
+  language_preference: "ko-KR"
+
+monitoring:
+  logging_level: "INFO"
+  performance_tracking: true
+  error_reporting: true
+  audit_logging: true
+
+feature_flags:
+  enable_voice_output: true
+  enable_pharmacy_delivery: true
+  enable_real_time_pricing: false  # MFDS public pricing only
+  enable_patient_history: true
+  enable_drug_interaction_warnings: true

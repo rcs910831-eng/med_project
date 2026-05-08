@@ -1,0 +1,137 @@
+# Kubernetes Ingress - External HTTP/HTTPS Access
+# 프로덕션 환경: 도메인 기반 라우팅 및 SSL/TLS 설정
+
+---
+# TLS 인증서 (Let's Encrypt)
+apiVersion: v1
+kind: Secret
+metadata:
+  name: pharma-tls-cert
+  namespace: shield-pharma
+type: kubernetes.io/tls
+data:
+  tls.crt: "${TLS_CERT_BASE64}"
+  tls.key: "${TLS_KEY_BASE64}"
+
+---
+# Ingress - 메인 애플리케이션
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pharma-ingress
+  namespace: shield-pharma
+  labels:
+    app: pharma-hybrid
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"  # 자동 인증서 발급
+    nginx.ingress.kubernetes.io/rate-limit: "100"  # 속도 제한
+    nginx.ingress.kubernetes.io/proxy-body-size: "100m"  # 최대 업로드 크기
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"  # HTTP → HTTPS 리다이렉트
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+
+spec:
+  tls:
+    - hosts:
+        - pharma.example.com
+        - api.pharma.example.com
+        - monitoring.pharma.example.com
+      secretName: pharma-tls-cert
+
+  rules:
+    # 메인 UI
+    - host: pharma.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: pharma-app-service
+                port:
+                  number: 80
+
+    # API 엔드포인트 (향후)
+    - host: api.pharma.example.com
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: pharma-app-service
+                port:
+                  number: 80
+          - path: /metrics
+            pathType: Prefix
+            backend:
+              service:
+                name: pharma-app-service
+                port:
+                  number: 8888
+
+    # 모니터링 (Grafana)
+    - host: monitoring.pharma.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: grafana-service
+                port:
+                  number: 3000
+
+---
+# Cert-Manager ClusterIssuer (Let's Encrypt)
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: admin@shieldpharma.com
+    privateKeySecretRef:
+      name: letsencrypt-prod
+    solvers:
+      - http01:
+          ingress:
+            class: nginx
+
+---
+# HTTP → HTTPS 리다이렉트 Ingress
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pharma-http-redirect
+  namespace: shield-pharma
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+
+spec:
+  rules:
+    - host: pharma.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: pharma-app-service
+                port:
+                  number: 80
+    - host: monitoring.pharma.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: grafana-service
+                port:
+                  number: 3000

@@ -1,0 +1,207 @@
+# Kubernetes Deployment - Main Application
+# 메인 애플리케이션 배포 (3개 레플리카)
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pharma-hybrid
+  namespace: shield-pharma
+  labels:
+    app: pharma-hybrid
+    version: v21.0
+    tier: frontend
+spec:
+  replicas: 3  # 3개의 인스턴스 실행
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1  # 추가 인스턴스 1개 허용
+      maxUnavailable: 0  # 다운타임 없음
+
+  selector:
+    matchLabels:
+      app: pharma-hybrid
+      tier: frontend
+
+  template:
+    metadata:
+      labels:
+        app: pharma-hybrid
+        version: v21.0
+        tier: frontend
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8888"
+        prometheus.io/path: "/metrics"
+
+    spec:
+      # 서비스 계정
+      serviceAccountName: pharma-app
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 1000
+
+      # Pod 안티어피니티 (다른 노드에 배치)
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - pharma-hybrid
+                topologyKey: kubernetes.io/hostname
+
+      # 초기화 컨테이너 (데이터베이스 마이그레이션)
+      initContainers:
+        - name: db-migration
+          image: shield-pharma:v21.0
+          imagePullPolicy: IfNotPresent
+          command: ["python", "scripts/db_migration.py"]
+          env:
+            - name: DATABASE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: pharma-config
+                  key: DATABASE_HOST
+            - name: DATABASE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: pharma-secrets
+                  key: database-username
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pharma-secrets
+                  key: database-password
+
+      # 메인 컨테이너
+      containers:
+        - name: pharma-app
+          image: shield-pharma:v21.0
+          imagePullPolicy: IfNotPresent
+
+          # 포트 설정
+          ports:
+            - name: ui
+              containerPort: 8501
+              protocol: TCP
+            - name: metrics
+              containerPort: 8888
+              protocol: TCP
+
+          # 환경 변수 (ConfigMap에서 로드)
+          envFrom:
+            - configMapRef:
+                name: pharma-config
+
+          # 민감한 환경 변수 (Secrets에서 로드)
+          env:
+            - name: ANTHROPIC_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: pharma-secrets
+                  key: anthropic-api-key
+            - name: GOOGLE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: pharma-secrets
+                  key: google-api-key
+            - name: GOOGLE_CLOUD_PROJECT
+              valueFrom:
+                secretKeyRef:
+                  name: pharma-secrets
+                  key: google-cloud-project
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pharma-secrets
+                  key: database-password
+            - name: JWT_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: pharma-secrets
+                  key: jwt-secret-key
+
+          # 자원 요청 및 제한
+          resources:
+            requests:
+              cpu: 500m
+              memory: 512Mi
+            limits:
+              cpu: 1000m
+              memory: 1Gi
+
+          # 볼륨 마운트
+          volumeMounts:
+            - name: patient-data
+              mountPath: /app/patient_histories
+            - name: price-data
+              mountPath: /app/price_database
+            - name: output-data
+              mountPath: /app/pharma_output
+            - name: logs
+              mountPath: /app/logs
+            - name: rag-db
+              mountPath: /app/rag_db
+
+          # 헬스 체크 (Liveness Probe)
+          livenessProbe:
+            httpGet:
+              path: /_stcore/health
+              port: 8501
+              scheme: HTTP
+            initialDelaySeconds: 40
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 3
+
+          # 준비 상태 체크 (Readiness Probe)
+          readinessProbe:
+            httpGet:
+              path: /_stcore/health
+              port: 8501
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+
+          # 보안 컨텍스트
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: false
+            capabilities:
+              drop:
+                - ALL
+
+      # 볼륨 정의
+      volumes:
+        - name: patient-data
+          persistentVolumeClaim:
+            claimName: pharma-patients-pvc
+        - name: price-data
+          persistentVolumeClaim:
+            claimName: pharma-prices-pvc
+        - name: output-data
+          persistentVolumeClaim:
+            claimName: pharma-output-pvc
+        - name: logs
+          persistentVolumeClaim:
+            claimName: pharma-logs-pvc
+        - name: rag-db
+          persistentVolumeClaim:
+            claimName: pharma-rag-db-pvc
+
+      # 재시작 정책
+      restartPolicy: Always
+
+      # 종료 대기 시간
+      terminationGracePeriodSeconds: 30
+
+      # DNS 정책
+      dnsPolicy: ClusterFirst

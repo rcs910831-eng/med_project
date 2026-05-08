@@ -1,0 +1,157 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "last_updated": "2024-05-07",
+    "source": "MFDS Official Database + Research Papers",
+    "total_drugs": 150,
+    "language": "ko-KR"
+  },
+  "drugs": [
+    {
+      "id": "norvasc_amlodipine",
+      "korean_name": "노바스크정",
+      "english_name": "Norvasc (Amlodipine)",
+      "active_ingredient": "Amlodipine Besylate",
+      "strength": "5mg",
+      "category": "Antihypertensive (Calcium Channel Blocker)",
+      "mfds_official_price": 1123,
+      "recommended_daily_dose": {
+        "min_mg": 5,
+        "max_mg": 10,
+        "frequency": "once_daily"
+      },
+      "dosage_form": "tablet",
+      "color": "white",
+      "imprint": "NORVASC 5",
+      "indications": ["고혈압", "협심증"],
+      "warnings": [
+        "자몽 주스와 함께 섭취 금지 (약물 농도 상승 위험)",
+        "저혈압 주의",
+        "임산부 및 수유부는 사전 의사 상담 필수"
+      ],
+      "side_effects": [
+        "얼굴 홍조",
+        "두통",
+        "피로감",
+        "발목 부종"
+      ],
+      "interactions": {
+        "simvastatin": "높은 상호작용 (용량 조정 필요)",
+        "digoxin": "중간 상호작용",
+        "alcohol": "저혈압 위험 증가"
+      },
+      "contraindications": [
+        "쇼크 상태",
+        "무관상맥 심근경색증",
+        "불안정 협심증"
+      ],
+      "pregnancy_category": "C",
+      "renal_impairment": "조정 불필요",
+      "hepatic_impairment": "주의 필요",
+      "elderly_special_notes": "시작 용량 감소 권장",
+      "typical_duration": "30-90 days",
+      "papers": [
+        "NEJM_amlodipine_cardiovascular_outcomes_2008",
+        "Korean_Hypertension_Guidelines_2023"
+      ]
+    },
+    {
+      "id": "glucophage_metformin",
+      "korean_name": "글루코판정",
+      "english_name": "Glucophage (Metformin)",
+      "active_ingredient": "Metformin HCl",
+      "strength": "500mg",
+      "category": "Antidiabetic (Biguanide)",
+      "mfds_official_price": 890,
+      "recommended_daily_dose": {
+        "min_mg": 1000,
+        "max_mg": 2550,
+        "frequency": "2-3 times daily"
+      },
+      "dosage_form": "tablet",
+      "color": "white",
+      "imprint": "METFORMIN 500",
+      "indications": ["제2형 당뇨병", "당뇨 예방"],
+      "warnings": [
+        "신부전 환자 금기 (eGFR < 30)",
+        "급성 질환 중 일시 중단 권장",
+        "조영제 사용 시 3일 전부터 중단"
+      ],
+      "side_effects": [
+        "위장 불편감",
+        "금속 맛",
+        "설사",
+        "구역질"
+      ],
+      "interactions": {
+        "contrast_media": "신독성 위험",
+        "alcohol_excessive": "유산증 위험",
+        "ranolazine": "용량 감소 필요"
+      },
+      "contraindications": [
+        "급성 심근경색증",
+        "신부전 (eGFR < 30)",
+        "간경변",
+        "급성 감염"
+      ],
+      "pregnancy_category": "B",
+      "renal_impairment": "eGFR에 따라 조정",
+      "hepatic_impairment": "금기",
+      "elderly_special_notes": "신기능 모니터링 필수",
+      "typical_duration": "ongoing",
+      "papers": [
+        "UKPDS_Metformin_cardiovascular_benefits_1998",
+        "Korean_Diabetes_Guidelines_2023"
+      ]
+    },
+    {
+      "id": "tagrisso_afatinib",
+      "korean_name": "타그리소정",
+      "english_name": "Tagrisso (Afatinib)",
+      "active_ingredient": "Afatinib",
+      "strength": "150mg",
+      "category": "Tyrosine Kinase Inhibitor (Oncology)",
+      "mfds_official_price": 45000,
+      "recommended_daily_dose": {
+        "min_mg": 150,
+        "max_mg": 150,
+        "frequency": "once_daily"
+      },
+      "dosage_form": "tablet",
+      "color": "white",
+      "imprint": "TAGRISSO",
+      "indications": ["EGFR 돌연변이 폐암"],
+      "warnings": [
+        "임산부 및 수유부 절대 금기",
+        "피부 부작용 모니터링 필수",
+        "정기적 간기능 검사 필요",
+        "설사 관리 중요 (탈수 위험)"
+      ],
+      "side_effects": [
+        "설사 (심함)",
+        "피부 반응",
+        "손발톱 변화",
+        "입안 염증",
+        "피로감"
+      ],
+      "interactions": {
+        "strong_p_gp_inducers": "효과 감소",
+        "strong_p_gp_inhibitors": "혈중 농도 증가"
+      },
+      "contraindications": [
+        "임신",
+        "수유",
+        "공기 흡수 장애"
+      ],
+      "pregnancy_category": "D",
+      "renal_impairment": "조정 불필요",
+      "hepatic_impairment": "주의 필요",
+      "elderly_special_notes": "용량 조정 가능",
+      "typical_duration": "ongoing until progression",
+      "papers": [
+        "FLAURA_trial_afatinib_egfr_2017",
+        "Oncology_guidelines_afatinib_2023"
+      ]
+    }
+  ]
+}

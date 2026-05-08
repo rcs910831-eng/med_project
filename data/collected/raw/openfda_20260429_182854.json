@@ -1,0 +1,1169 @@
+{
+  "source": "미국 FDA OpenFDA (api.fda.gov)",
+  "source_urls": {
+    "label": "https://api.fda.gov/drug/label.json",
+    "events": "https://api.fda.gov/drug/event.json",
+    "ndc": "https://api.fda.gov/drug/ndc.json"
+  },
+  "license": "CC0 Public Domain (미국 정부 공개 데이터)",
+  "note": "영문 데이터. 미국 FDA 승인 기준으로 한국 허가 내용과 다를 수 있음.",
+  "collected_at": "2026-04-29T18:28:54.012610",
+  "data": {
+    "키트루다": {
+      "korean_name": "키트루다",
+      "english_name": "pembrolizumab",
+      "diseases": [
+        "흑색종",
+        "비소세포폐암",
+        "두경부암",
+        "MSI-H 고형암"
+      ],
+      "fda_label": {
+        "generic_name_en": "pembrolizumab",
+        "brand_names": [
+          "KEYTRUDA QLEX"
+        ],
+        "manufacturer": [
+          "Merck Sharp & Dohme LLC"
+        ],
+        "route": [
+          "SUBCUTANEOUS"
+        ],
+        "indications": "1 INDICATIONS AND USAGE KEYTRUDA QLEX is a combination of pembrolizumab, a programmed death receptor-1 (PD-1)-blocking antibody, and berahyaluronidase alfa, an endoglycosidase, indicated: Melanoma for the treatment of adult patients with unresectable or metastatic melanoma. ( 1.1 ) for the adjuvant treatment of adult and pediatric patients 12 years and older with Stage IIB, IIC, or III melanoma following complete resection. ( 1.1 ) Non-Small Cell Lung Cancer (NSCLC) in combination with pemetrexe",
+        "dosage": "2 DOSAGE AND ADMINISTRATION KEYTRUDA QLEX has different recommended dosage and administration than intravenous pembrolizumab. ( 2.2 ) KEYTRUDA QLEX is for subcutaneous use in the thigh or abdomen only. ( 2.2 ) Do not administer KEYTRUDA QLEX intravenously. ( 2.2 ) KEYTRUDA QLEX must be administered by a healthcare provider. ( 2.2 ) The recommended dose for adults and pediatric patients 12 years an",
+        "warnings": "",
+        "adverse_reactions": "6 ADVERSE REACTIONS The following clinically significant adverse reactions are described elsewhere in the labeling. Severe and fatal immune-mediated adverse reactions [see Warnings and Precautions (5.1) ] . Hypersensitivity and Administration-Related Reactions [see Warnings and Precautions (5.2) ]. The most common adverse reactions (≥20%) in patients treated with KEYTRUDA QLEX in combination with ",
+        "contraindications": "4 CONTRAINDICATIONS KEYTRUDA QLEX is contraindicated in patients with known hypersensitivity to berahyaluronidase alfa, hyaluronidase or to any of its excipients. KEYTRUDA QLEX is contraindicated in patients with known hypersensitivity to berahyaluronidase alfa, hyaluronidase or to any of its excipients. ( 4 )",
+        "drug_interactions": "",
+        "pregnancy_category": "8.1 Pregnancy Risk Summary Based on its mechanism of action [see Clinical Pharmacology (12.1) ] , KEYTRUDA QLEX can cause fetal harm when administered to a pregnant woman. There are no available human",
+        "source": "미국 FDA OpenFDA - Drug Label (SPL)",
+        "source_url": "https://api.fda.gov/drug/label.json",
+        "collected_at": "2026-04-29T18:28:17.714640"
+      },
+      "faers_top_ae": {
+        "generic_name_en": "pembrolizumab",
+        "top_adverse_events": [
+          {
+            "reaction": "MALIGNANT NEOPLASM PROGRESSION",
+            "count": 2611
+          },
+          {
+            "reaction": "OFF LABEL USE",
+            "count": 2182
+          },
+          {
+            "reaction": "DIARRHOEA",
+            "count": 1799
+          },
+          {
+            "reaction": "FATIGUE",
+            "count": 1430
+          },
+          {
+            "reaction": "DRUG INEFFECTIVE",
+            "count": 1401
+          },
+          {
+            "reaction": "DEATH",
+            "count": 1351
+          },
+          {
+            "reaction": "NAUSEA",
+            "count": 1269
+          },
+          {
+            "reaction": "PYREXIA",
+            "count": 1180
+          }
+        ],
+        "total_reports": 0,
+        "source": "미국 FDA FAERS (부작용 자발보고 시스템)",
+        "source_url": "https://api.fda.gov/drug/event.json",
+        "note": "FAERS 보고는 인과관계를 의미하지 않으며 보고 빈도 기반 통계입니다.",
+        "collected_at": "2026-04-29T18:28:18.418134"
+      },
+      "ndc_info": {
+        "generic_name_en": "pembrolizumab",
+        "ndc_products": [
+          {
+            "brand_name": "KEYTRUDA QLEX",
+            "labeler": "Merck Sharp & Dohme LLC",
+            "dosage_form": "INJECTION, SOLUTION",
+            "route": [
+              "SUBCUTANEOUS"
+            ],
+            "active_ingredients": [
+              {
+                "name": "BERAHYALURONIDASE ALFA",
+                "strength": "2000 U/mL"
+              },
+              {
+                "name": "PEMBROLIZUMAB",
+                "strength": "165 mg/mL"
+              }
+            ],
+            "product_ndc": "0006-3083"
+          },
+          {
+            "brand_name": "",
+            "labeler": "Boehringer Ingelheim Fremont, Inc.",
+            "dosage_form": "LIQUID",
+            "route": [],
+            "active_ingredients": [
+              {
+                "name": "PEMBROLIZUMAB",
+                "strength": "25 mg/25mg"
+              }
+            ],
+            "product_ndc": "83012-010"
+          },
+          {
+            "brand_name": "KEYTRUDA",
+            "labeler": "Merck Sharp & Dohme LLC",
+            "dosage_form": "INJECTION, SOLUTION",
+            "route": [
+              "INTRAVENOUS"
+            ],
+            "active_ingredients": [
+              {
+                "name": "PEMBROLIZUMAB",
+                "strength": "25 mg/mL"
+              }
+            ],
+            "product_ndc": "0006-3026"
+          }
+        ],
+        "source": "미국 FDA NDC 국가약품코드 디렉토리",
+        "source_url": "https://api.fda.gov/drug/ndc.json",
+        "collected_at": "2026-04-29T18:28:19.020774"
+      }
+    },
+    "글리벡정": {
+      "korean_name": "글리벡정",
+      "english_name": "imatinib",
+      "diseases": [
+        "만성골수성백혈병(CML)",
+        "GIST"
+      ],
+      "fda_label": {
+        "generic_name_en": "imatinib",
+        "brand_names": [
+          "Imatinib Mesylate"
+        ],
+        "manufacturer": [
+          "Apotex Corp"
+        ],
+        "route": [
+          "ORAL"
+        ],
+        "indications": "1 INDICATIONS AND USAGE Imatinib mesylate is a kinase inhibitor indicated for the treatment of: • Newly diagnosed adult and pediatric patients with Philadelphia chromosome positive chronic myeloid leukemia (Ph+ CML) in chronic phase ( 1.1 ) • Patients with Philadelphia chromosome positive chronic myeloid leukemia (Ph+ CML) in blast crisis (BC), accelerated phase (AP), or in chronic phase (CP) after failure of interferon-alpha therapy ( 1.2 ) • Adult patients with relapsed or refractory Philadelp",
+        "dosage": "2 DOSAGE AND ADMINISTRATION Adults with Ph+ CML CP ( 2.2 ): 400 mg/day Adults with Ph+ CML AP or BC ( 2.2 ): 600 mg/day Pediatrics with Ph+ CML CP ( 2.3 ): 340 mg/m 2 /day Adults with Ph+ ALL ( 2.4 ): 600 mg/day Pediatrics with Ph+ ALL ( 2.5 ) 340 mg/m 2 /day Adults with MDS/MPD ( 2.6 ): 400 mg/day Adults with ASM ( 2.7 ): 100 mg/day or 400 mg/day Adults with HES/CEL ( 2.8 ): 100 mg/day or 400 mg/",
+        "warnings": "",
+        "adverse_reactions": "6 ADVERSE REACTIONS The following serious adverse reactions are described elsewhere in the labeling: Fluid Retention and Edema [see Warnings and Precautions ( 5.1 )] Hematologic Toxicity [see Warnings and Precautions ( 5.2 )] Congestive Heart Failure and Left Ventricular Dysfunction [see Warnings and Precautions ( 5.3 )] Hepatotoxicity [see Warnings and Precautions ( 5.4 )] Hemorrhage [see Warning",
+        "contraindications": "4 CONTRAINDICATIONS None. None ( 4 ).",
+        "drug_interactions": "7 DRUG INTERACTIONS CYP3A4 inducers may decrease imatinib mesylate C max and area under curve (AUC). ( 2.12 , 7.1 , 12.3 ) CYP3A4 inhibitors may increase imatinib mesylate C max and AUC. ( 7.2 , 12.3 ) Imatinib mesylate is an inhibitor of CYP3A4 and CYP2D6 which may increase the C max and AUC of oth",
+        "pregnancy_category": "8.1 Pregnancy Risk Summary Imatinib mesylate tablets can cause fetal harm when administered to a pregnant woman based on human and animal data. There are no clinical studies regarding use of imatinib ",
+        "source": "미국 FDA OpenFDA - Drug Label (SPL)",
+        "source_url": "https://api.fda.gov/drug/label.json",
+        "collected_at": "2026-04-29T18:28:20.433363"
+      },
+      "faers_top_ae": {
+        "generic_name_en": "imatinib",
+        "top_adverse_events": [
+          {
+            "reaction": "DRUG INEFFECTIVE",
+            "count": 1720
+          },
+          {
+            "reaction": "NAUSEA",
+            "count": 1399
+          },
+          {
+            "reaction": "DIARRHOEA",
+            "count": 1307
+          },
+          {
+            "reaction": "DEATH",
+            "count": 1108
+          },
+          {
+            "reaction": "DRUG RESISTANCE",
+            "count": 1091
+          },
+          {
+            "reaction": "FATIGUE",
+            "count": 1031
+          },
+          {
+            "reaction": "DRUG INTOLERANCE",
+            "count": 929
+          },
+          {
+            "reaction": "VOMITING",
+            "count": 897
+          }
+        ],
+        "total_reports": 0,
+        "source": "미국 FDA FAERS (부작용 자발보고 시스템)",
+        "source_url": "https://api.fda.gov/drug/event.json",
+        "note": "FAERS 보고는 인과관계를 의미하지 않으며 보고 빈도 기반 통계입니다.",
+        "collected_at": "2026-04-29T18:28:21.070554"
+      },
+      "ndc_info": {
+        "generic_name_en": "imatinib",
+        "ndc_products": [
+          {
+            "brand_name": "Imatinib Mesylate",
+            "labeler": "Mylan Pharmaceuticals Inc.",
+            "dosage_form": "TABLET, FILM COATED",
+            "route": [
+              "ORAL"
+            ],
+            "active_ingredients": [
+              {
+                "name": "IMATINIB MESYLATE",
+                "strength": "400 mg/1"
+              }
+            ],
+            "product_ndc": "0378-2246"
+          },
+          {
+            "brand_name": "",
+            "labeler": "zhejiang jiuzhou pharmaceutical Co., Ltd.",
+            "dosage_form": "POWDER",
+            "route": [],
+            "active_ingredients": [
+              {
+                "name": "IMATINIB MESYLATE",
+                "strength": "1 kg/kg"
+              }
+            ],
+            "product_ndc": "65344-0020"
+          },
+          {
+            "brand_name": "",
+            "labeler": "LAURUS LABS LIMITED",
+            "dosage_form": "POWDER",
+            "route": [],
+            "active_ingredients": [
+              {
+                "name": "IMATINIB MESYLATE",
+                "strength": "1 kg/kg"
+              }
+            ],
+            "product_ndc": "42385-720"
+          }
+        ],
+        "source": "미국 FDA NDC 국가약품코드 디렉토리",
+        "source_url": "https://api.fda.gov/drug/ndc.json",
+        "collected_at": "2026-04-29T18:28:21.684472"
+      }
+    },
+    "노바스크정": {
+      "korean_name": "노바스크정",
+      "english_name": "amlodipine",
+      "diseases": [
+        "고혈압",
+        "협심증"
+      ],
+      "fda_label": {
+        "generic_name_en": "amlodipine",
+        "brand_names": [
+          "Amlodipine Besylate"
+        ],
+        "manufacturer": [
+          "Lupin Pharmaceuticals, Inc."
+        ],
+        "route": [
+          "ORAL"
+        ],
+        "indications": "1 INDICATIONS AND USAGE Amlodipine besylate tablets are calcium channel blocker and may be used alone or in combination with other antihypertensive and antianginal agents for the treatment of: •Hypertension ( 1.1 ) о Amlodipine besylate tablets are indicated for the treatment of hypertension, to lower blood pressure. Lowering blood pressure reduces the risk of fatal and nonfatal cardiovascular events, primarily strokes and myocardial infarctions. •Coronary Artery Disease ( 1.2 ) о Chronic Stable",
+        "dosage": "2 DOSAGE AND ADMINISTRATION •Adult recommended starting dose: 5 mg once daily with maximum dose 10 mg once daily. ( 2.1 ) о Small, fragile, or elderly patients, or patients with hepatic insufficiency may be started on 2.5 mg once daily. ( 2.1 ) •Pediatric starting dose: 2.5 mg to 5 mg once daily. ( 2.2 ) Important Limitation : Doses in excess of 5 mg daily have not been studied in pediatric patien",
+        "warnings": "",
+        "adverse_reactions": "6 ADVERSE REACTIONS Most common adverse reaction to amlodipine is edema which occurred in a dose related manner. Other adverse experiences not dose related but reported with an incidence >1.0% are fatigue, nausea, abdominal pain, and somnolence. ( 6 ) To report SUSPECTED ADVERSE REACTIONS, contact Lupin Pharmaceuticals, Inc. at 1-800-399-2561 or www.lupinpharmaceuticals.com or FDA at 1-800-FDA-108",
+        "contraindications": "4 CONTRAINDICATIONS Known sensitivity to amlodipine ( 4 ) Amlodipine besylate tablets are contraindicated in patients with known sensitivity to amlodipine.",
+        "drug_interactions": "7 DRUG INTERACTIONS Do not exceed doses greater than 20 mg daily of simvastatin. ( 7.2 ) 7.1 Impact of Other Drugs on Amlodipine CYP3A Inhibitors Co-administration with CYP3A inhibitors (moderate and strong) results in increased systemic exposure to amlodipine and may require dose reduction. Monitor",
+        "pregnancy_category": "8.1 Pregnancy Risk Summary The limited available data based on post-marketing reports with amlodipine use in pregnant women are not sufficient to inform a drug-associated risk for major birth defects ",
+        "source": "미국 FDA OpenFDA - Drug Label (SPL)",
+        "source_url": "https://api.fda.gov/drug/label.json",
+        "collected_at": "2026-04-29T18:28:22.958453"
+      },
+      "faers_top_ae": {
+        "generic_name_en": "amlodipine",
+        "top_adverse_events": [
+          {
+            "reaction": "FATIGUE",
+            "count": 22588
+          },
+          {
+            "reaction": "DIARRHOEA",
+            "count": 19524
+          },
+          {
+            "reaction": "NAUSEA",
+            "count": 18703
+          },
+          {
+            "reaction": "DYSPNOEA",
+            "count": 18195
+          },
+          {
+            "reaction": "DRUG INEFFECTIVE",
+            "count": 17398
+          },
+          {
+            "reaction": "OFF LABEL USE",
+            "count": 15212
+          },
+          {
+            "reaction": "DIZZINESS",
+            "count": 15117
+          },
+          {
+            "reaction": "HEADACHE",
+            "count": 14163
+          }
+        ],
+        "total_reports": 0,
+        "source": "미국 FDA FAERS (부작용 자발보고 시스템)",
+        "source_url": "https://api.fda.gov/drug/event.json",
+        "note": "FAERS 보고는 인과관계를 의미하지 않으며 보고 빈도 기반 통계입니다.",
+        "collected_at": "2026-04-29T18:28:23.672373"
+      },
+      "ndc_info": {
+        "generic_name_en": "amlodipine",
+        "ndc_products": [
+          {
+            "brand_name": "",
+            "labeler": "Siegfried Barbera, SL",
+            "dosage_form": "TABLET, FILM COATED",
+            "route": [],
+            "active_ingredients": [
+              {
+                "name": "AMLODIPINE BESYLATE",
+                "strength": "10 mg/1"
+              },
+              {
+                "name": "HYDROCHLOROTHIAZIDE",
+                "strength": "25 mg/1"
+              },
+              {
+                "name": "VALSARTAN",
+                "strength": "320 mg/1"
+              }
+            ],
+            "product_ndc": "81719-012"
+          },
+          {
+            "brand_name": "Amlodipine and Atorvastatin",
+            "labeler": "Prasco Laboratories",
+            "dosage_form": "TABLET, COATED",
+            "route": [
+              "ORAL"
+            ],
+            "active_ingredients": [
+              {
+                "name": "AMLODIPINE BESYLATE",
+                "strength": "10 mg/1"
+              },
+              {
+                "name": "ATORVASTATIN CALCIUM TRIHYDRATE",
+                "strength": "20 mg/1"
+              }
+            ],
+            "product_ndc": "66993-271"
+          },
+          {
+            "brand_name": "amlodipine besylate",
+            "labeler": "POLYGEN PHARMACEUTICALS INC.",
+            "dosage_form": "TABLET",
+            "route": [
+              "ORAL"
+            ],
+            "active_ingredients": [
+              {
+                "name": "AMLODIPINE BESYLATE",
+                "strength": "10 mg/1"
+              }
+            ],
+            "product_ndc": "52605-043"
+          }
+        ],
+        "source": "미국 FDA NDC 국가약품코드 디렉토리",
+        "source_url": "https://api.fda.gov/drug/ndc.json",
+        "collected_at": "2026-04-29T18:28:24.277580"
+      }
+    },
+    "다이아벡스정": {
+      "korean_name": "다이아벡스정",
+      "english_name": "metformin",
+      "diseases": [
+        "제2형 당뇨병"
+      ],
+      "fda_label": {
+        "generic_name_en": "metformin",
+        "brand_names": [
+          "ZITUVIMET"
+        ],
+        "manufacturer": [
+          "Zydus Lifesciences Limited"
+        ],
+        "route": [
+          "ORAL"
+        ],
+        "indications": "1 INDICATIONS AND USAGE ZITUVIMET is a combination of sitagliptin, a dipeptidyl peptidase-4 (DPP-4) inhibitor, and metformin hydrochloride (HCl), a biguanide, indicated as an adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus. ( 1 ) Limitations of Use: ZITUVIMET is not recommended in patients with type 1 diabetes mellitus. ( 1 ) ZITUVIMET has not been studied in patients with a history of pancreatitis. ( 1 ) ZITUVIMET is indicated as an adjunct to di",
+        "dosage": "2 DOSAGE AND ADMINISTRATION Take ZITUVIMET orally twice daily with meals. ( 2.1 ) Individualize the dosage of ZITUVIMET on the basis of the patient's current regimen, effectiveness, and tolerability. ( 2.1 ) The maximum recommended daily dose is 100 mg of sitagliptin and 2,000 mg of metformin HCl. ( 2.1 ) The recommended starting dose in patients not currently treated with metformin is 50 mg sitag",
+        "warnings": "",
+        "adverse_reactions": "6 ADVERSE REACTIONS The following adverse reactions are also discussed elsewhere in the prescribing information: Lactic Acidosis [see Warnings and Precautions ( 5.1 )] Pancreatitis [see Warnings and Precautions ( 5.2 )] Heart Failure [see Warnings and Precautions ( 5.3 )] Acute Renal Failure [see Warnings and Precautions ( 5.4 )] Vitamin B12 Deficiency [see Warnings and Precautions ( 5.5 )] Hypogl",
+        "contraindications": "4 CONTRAINDICATIONS Severe renal impairment: (eGFR below 30 mL/min/1.73 m 2 ) ( 4) Metabolic acidosis, including diabetic ketoacidosis. ( 4 ) History of a serious hypersensitivity reaction to ZITUVIMET, sitagliptin, or metformin, such as anaphylaxis or angioedema. (4) ZITUVIMET is contraindicated in patients with: Severe renal impairment (eGFR below 30 mL/min/1.73 m 2 ) [see Warnings and Precautio",
+        "drug_interactions": "7 DRUG INTERACTIONS Table 4 presents clinically significant drug interactions with ZITUVIMET: Table 4: Clinically Significant Drug Interactions with ZITUVIMET Carbonic Anhydrase Inhibitors Clinical Impact: Carbonic anhydrase inhibitors frequently cause a decrease in serum bicarbonate and induce non-",
+        "pregnancy_category": "8.1 Pregnancy Risk Summary Available data with ZITUVIMET and sitagliptin use in pregnant women are not sufficient to inform a ZITUVIMET-associated or sitagliptin-associated risk for major birth defect",
+        "source": "미국 FDA OpenFDA - Drug Label (SPL)",
+        "source_url": "https://api.fda.gov/drug/label.json",
+        "collected_at": "2026-04-29T18:28:25.620103"
+      },
+      "faers_top_ae": {
+        "generic_name_en": "metformin",
+        "top_adverse_events": [
+          {
+            "reaction": "NAUSEA",
+            "count": 29158
+          },
+          {
+            "reaction": "DIARRHOEA",
+            "count": 26884
+          },
+          {
+            "reaction": "BLOOD GLUCOSE INCREASED",
+            "count": 26855
+          },
+          {
+            "reaction": "DRUG INEFFECTIVE",
+            "count": 21792
+          },
+          {
+            "reaction": "FATIGUE",
+            "count": 20632
+          },
+          {
+            "reaction": "LACTIC ACIDOSIS",
+            "count": 19129
+          },
+          {
+            "reaction": "VOMITING",
+            "count": 18722
+          },
+          {
+            "reaction": "ACUTE KIDNEY INJURY",
+            "count": 17541
+          }
+        ],
+        "total_reports": 0,
+        "source": "미국 FDA FAERS (부작용 자발보고 시스템)",
+        "source_url": "https://api.fda.gov/drug/event.json",
+        "note": "FAERS 보고는 인과관계를 의미하지 않으며 보고 빈도 기반 통계입니다.",
+        "collected_at": "2026-04-29T18:28:26.337580"
+      },
+      "ndc_info": {
+        "generic_name_en": "metformin",
+        "ndc_products": [
+          {
+            "brand_name": "Metformin",
+            "labeler": "Coupler LLC",
+            "dosage_form": "TABLET, EXTENDED RELEASE",
+            "route": [
+              "ORAL"
+            ],
+            "active_ingredients": [
+              {
+                "name": "METFORMIN HYDROCHLORIDE",
+                "strength": "1000 mg/1"
+              }
+            ],
+            "product_ndc": "67046-1584"
+          },
+          {
+            "brand_name": "METFORMIN HYDROCHLORIDE",
+            "labeler": "Ascend Laboratories, LLC",
+            "dosage_form": "TABLET, FILM COATED",
+            "route": [
+              "ORAL"
+            ],
+            "active_ingredients": [
+              {
+                "name": "METFORMIN HYDROCHLORIDE",
+                "strength": "850 mg/1"
+              }
+            ],
+            "product_ndc": "67877-931"
+          },
+          {
+            "brand_name": "Metformin Hydrochloride",
+            "labeler": "REMEDYREPACK INC.",
+            "dosage_form": "TABLET",
+            "route": [
+              "ORAL"
+            ],
+            "active_ingredients": [
+              {
+                "name": "METFORMIN HYDROCHLORIDE",
+                "strength": "500 mg/1"
+              }
+            ],
+            "product_ndc": "70518-2833"
+          }
+        ],
+        "source": "미국 FDA NDC 국가약품코드 디렉토리",
+        "source_url": "https://api.fda.gov/drug/ndc.json",
+        "collected_at": "2026-04-29T18:28:26.943556"
+      }
+    },
+    "벤톨린네뷸": {
+      "korean_name": "벤톨린네뷸",
+      "english_name": "salbutamol",
+      "diseases": [
+        "천식 급성 발작"
+      ],
+      "fda_label": {
+        "generic_name_en": "salbutamol",
+        "status": "not_found",
+        "source": "미국 FDA OpenFDA"
+      },
+      "faers_top_ae": {
+        "generic_name_en": "salbutamol",
+        "top_adverse_events": [
+          {
+            "reaction": "ASTHMA",
+            "count": 9381
+          },
+          {
+            "reaction": "DYSPNOEA",
+            "count": 8649
+          },
+          {
+            "reaction": "WHEEZING",
+            "count": 4739
+          },
+          {
+            "reaction": "THERAPEUTIC PRODUCT EFFECT INCOMPLETE",
+            "count": 3913
+          },
+          {
+            "reaction": "COUGH",
+            "count": 3621
+          },
+          {
+            "reaction": "PNEUMONIA",
+            "count": 3142
+          },
+          {
+            "reaction": "DRUG INEFFECTIVE",
+            "count": 3007
+          },
+          {
+            "reaction": "BLOOD COUNT ABNORMAL",
+            "count": 2882
+          }
+        ],
+        "total_reports": 0,
+        "source": "미국 FDA FAERS (부작용 자발보고 시스템)",
+        "source_url": "https://api.fda.gov/drug/event.json",
+        "note": "FAERS 보고는 인과관계를 의미하지 않으며 보고 빈도 기반 통계입니다.",
+        "collected_at": "2026-04-29T18:28:32.352448"
+      },
+      "ndc_info": {
+        "generic_name_en": "salbutamol",
+        "ndc_products": [
+          {
+            "brand_name": "",
+            "labeler": "Glaxo Operations UK Ltd",
+            "dosage_form": "POWDER",
+            "route": [],
+            "active_ingredients": [
+              {
+                "name": "ALBUTEROL SULFATE",
+                "strength": "1 kg/kg"
+              }
+            ],
+            "product_ndc": "63379-007"
+          },
+          {
+            "brand_name": "",
+            "labeler": "SICOR Societa' Italiana Corticosteroidi s.r.l.",
+            "dosage_form": "POWDER",
+            "route": [],
+            "active_ingredients": [
+              {
+                "name": "ALBUTEROL",
+                "strength": "100 kg/100kg"
+              }
+            ],
+            "product_ndc": "48292-0013"
+          },
+          {
+            "brand_name": "",
+            "labeler": "SICOR Societa' Italiana Corticosteroidi s.r.l.",
+            "dosage_form": "POWDER",
+            "route": [],
+            "active_ingredients": [
+              {
+                "name": "ALBUTEROL",
+                "strength": "100 kg/100kg"
+              }
+            ],
+            "product_ndc": "48292-0904"
+          }
+        ],
+        "source": "미국 FDA NDC 국가약품코드 디렉토리",
+        "source_url": "https://api.fda.gov/drug/ndc.json",
+        "collected_at": "2026-04-29T18:28:32.961627"
+      }
+    },
+    "이뮤란": {
+      "korean_name": "이뮤란",
+      "english_name": "azathioprine",
+      "diseases": [
+        "크론병",
+        "장기이식 거부반응"
+      ],
+      "fda_label": {
+        "generic_name_en": "azathioprine",
+        "brand_names": [
+          "Azathioprine"
+        ],
+        "manufacturer": [
+          "American Health Packaging"
+        ],
+        "route": [
+          "ORAL"
+        ],
+        "indications": "INDICATIONS AND USAGE Azathioprine tablets, USP are indicated as an adjunct for the prevention of rejection in renal homotransplantation. It is also indicated for the management of active rheumatoid arthritis to reduce signs and symptoms. Renal Homotransplantation Azathioprine tablets, USP are indicated as an adjunct for the prevention of rejection in renal homotransplantation. Experience with over 16,000 transplants shows a 5-year patient survival of 35% to 55%, but this is dependent on donor, ",
+        "dosage": "DOSAGE AND ADMINISTRATION Renal Homotransplantation The dose of azathioprine tablets required to prevent rejection and minimize toxicity will vary with individual patients; this necessitates careful management. The initial dose is usually 3 to 5 mg/kg daily, beginning at the time of transplant. Azathioprine tablets are usually given as a single daily dose on the day of, and in a minority of cases ",
+        "warnings": "WARNINGS Malignancy Patients receiving immunosuppressants, including azathioprine, are at increased risk of developing lymphoma and other malignancies, particularly of the skin. Physicians should inform patients of the risk of malignancy with azathioprine. As usual for patients with increased risk for skin cancer, exposure to sunlight and ultraviolet light should be limited by wearing protective c",
+        "adverse_reactions": "ADVERSE REACTIONS The principal and potentially serious toxic effects of azathioprine tablets are hematologic and gastrointestinal. The risks of secondary infection and malignancy are also significant (see WARNINGS ). The frequency and severity of adverse reactions depend on the dose and duration of azathioprine tablets as well as on the patient’s underlying disease or concomitant therapies. The i",
+        "contraindications": "CONTRAINDICATIONS Azathioprine tablets should not be given to patients who have shown hypersensitivity to the drug. Azathioprine tablets should not be used for treating rheumatoid arthritis in pregnant women. Patients with rheumatoid arthritis previously treated with alkylating agents (cyclophosphamide, chlorambucil, melphalan, or others) may have a prohibitive risk of malignancy if treated with a",
+        "drug_interactions": "Drug Interactions Use with xanthine oxidase (XO) inhibitors: One of the pathways for inactivation of azathioprine is inhibited by XO inhibitors (allopurinol or febuxostat). Patients receiving azathioprine and allopurinol concomitantly should have a dose reduction of azathioprine, to approximately 1/",
+        "pregnancy_category": "Pregnancy Azathioprine tablets can cause fetal harm when administered to a pregnant woman. Azathioprine tablets should not be given during pregnancy without careful weighing of risk versus benefit. Wh",
+        "source": "미국 FDA OpenFDA - Drug Label (SPL)",
+        "source_url": "https://api.fda.gov/drug/label.json",
+        "collected_at": "2026-04-29T18:28:34.182585"
+      },
+      "faers_top_ae": {
+        "generic_name_en": "azathioprine",
+        "top_adverse_events": [
+          {
+            "reaction": "DRUG INEFFECTIVE",
+            "count": 10739
+          },
+          {
+            "reaction": "OFF LABEL USE",
+            "count": 10662
+          },
+          {
+            "reaction": "CONDITION AGGRAVATED",
+            "count": 5499
+          },
+          {
+            "reaction": "ARTHRALGIA",
+            "count": 4599
+          },
+          {
+            "reaction": "DIARRHOEA",
+            "count": 3976
+          },
+          {
+            "reaction": "FATIGUE",
+            "count": 3939
+          },
+          {
+            "reaction": "NAUSEA",
+            "count": 3936
+          },
+          {
+            "reaction": "DRUG INTOLERANCE",
+            "count": 3644
+          }
+        ],
+        "total_reports": 0,
+        "source": "미국 FDA FAERS (부작용 자발보고 시스템)",
+        "source_url": "https://api.fda.gov/drug/event.json",
+        "note": "FAERS 보고는 인과관계를 의미하지 않으며 보고 빈도 기반 통계입니다.",
+        "collected_at": "2026-04-29T18:28:38.171452"
+      },
+      "ndc_info": {
+        "generic_name_en": "azathioprine",
+        "ndc_products": [
+          {
+            "brand_name": "",
+            "labeler": "Apicore Pharmaceuticals Private Limited",
+            "dosage_form": "POWDER",
+            "route": [],
+            "active_ingredients": [
+              {
+                "name": "AZATHIOPRINE",
+                "strength": "1 kg/kg"
+              }
+            ],
+            "product_ndc": "42973-143"
+          },
+          {
+            "brand_name": "",
+            "labeler": "Aarti Pharmalabs Limited",
+            "dosage_form": "POWDER",
+            "route": [],
+            "active_ingredients": [
+              {
+                "name": "AZATHIOPRINE",
+                "strength": "1 kg/kg"
+              }
+            ],
+            "product_ndc": "15308-0732"
+          },
+          {
+            "brand_name": "",
+            "labeler": "Professional Compounding Centers of America dba PCCA",
+            "dosage_form": "POWDER",
+            "route": [],
+            "active_ingredients": [
+              {
+                "name": "AZATHIOPRINE",
+                "strength": "1 kg/kg"
+              }
+            ],
+            "product_ndc": "51927-0071"
+          }
+        ],
+        "source": "미국 FDA NDC 국가약품코드 디렉토리",
+        "source_url": "https://api.fda.gov/drug/ndc.json",
+        "collected_at": "2026-04-29T18:28:43.054838"
+      }
+    },
+    "리루텍정": {
+      "korean_name": "리루텍정",
+      "english_name": "riluzole",
+      "diseases": [
+        "루게릭병(ALS)"
+      ],
+      "fda_label": {
+        "generic_name_en": "riluzole",
+        "brand_names": [
+          "Teglutik"
+        ],
+        "manufacturer": [
+          "EDW PHARMA, INC"
+        ],
+        "route": [
+          "ORAL"
+        ],
+        "indications": "",
+        "dosage": "",
+        "warnings": "",
+        "adverse_reactions": "",
+        "contraindications": "",
+        "drug_interactions": "",
+        "pregnancy_category": "",
+        "source": "미국 FDA OpenFDA - Drug Label (SPL)",
+        "source_url": "https://api.fda.gov/drug/label.json",
+        "collected_at": "2026-04-29T18:28:44.180280"
+      },
+      "faers_top_ae": {
+        "generic_name_en": "riluzole",
+        "top_adverse_events": [
+          {
+            "reaction": "DEATH",
+            "count": 297
+          },
+          {
+            "reaction": "NAUSEA",
+            "count": 107
+          },
+          {
+            "reaction": "DIARRHOEA",
+            "count": 98
+          },
+          {
+            "reaction": "DRUG INEFFECTIVE",
+            "count": 98
+          },
+          {
+            "reaction": "DISEASE PROGRESSION",
+            "count": 92
+          },
+          {
+            "reaction": "AMYOTROPHIC LATERAL SCLEROSIS",
+            "count": 82
+          },
+          {
+            "reaction": "DYSPNOEA",
+            "count": 74
+          },
+          {
+            "reaction": "FATIGUE",
+            "count": 72
+          }
+        ],
+        "total_reports": 0,
+        "source": "미국 FDA FAERS (부작용 자발보고 시스템)",
+        "source_url": "https://api.fda.gov/drug/event.json",
+        "note": "FAERS 보고는 인과관계를 의미하지 않으며 보고 빈도 기반 통계입니다.",
+        "collected_at": "2026-04-29T18:28:44.806616"
+      },
+      "ndc_info": {
+        "generic_name_en": "riluzole",
+        "ndc_products": [
+          {
+            "brand_name": "",
+            "labeler": "Syn-Tech Chem. & Pharm. Co., Ltd.",
+            "dosage_form": "POWDER",
+            "route": [],
+            "active_ingredients": [
+              {
+                "name": "RILUZOLE",
+                "strength": "1 kg/kg"
+              }
+            ],
+            "product_ndc": "54871-1098"
+          },
+          {
+            "brand_name": "Riluzole",
+            "labeler": "Ascend Laboratories, LLC",
+            "dosage_form": "TABLET",
+            "route": [
+              "ORAL"
+            ],
+            "active_ingredients": [
+              {
+                "name": "RILUZOLE",
+                "strength": "50 mg/1"
+              }
+            ],
+            "product_ndc": "67877-286"
+          },
+          {
+            "brand_name": "",
+            "labeler": "SUN PHARMACEUTICAL INDUSTRIES, INC.",
+            "dosage_form": "POWDER",
+            "route": [],
+            "active_ingredients": [
+              {
+                "name": "RILUZOLE",
+                "strength": "25 kg/25kg"
+              }
+            ],
+            "product_ndc": "62756-983"
+          }
+        ],
+        "source": "미국 FDA NDC 국가약품코드 디렉토리",
+        "source_url": "https://api.fda.gov/drug/ndc.json",
+        "collected_at": "2026-04-29T18:28:45.417294"
+      }
+    },
+    "마도파": {
+      "korean_name": "마도파",
+      "english_name": "levodopa benserazide",
+      "diseases": [
+        "파킨슨병"
+      ],
+      "fda_label": {
+        "generic_name_en": "levodopa benserazide",
+        "status": "not_found",
+        "source": "미국 FDA OpenFDA"
+      },
+      "faers_top_ae": {
+        "generic_name_en": "levodopa benserazide",
+        "top_adverse_events": [
+          {
+            "reaction": "FALL",
+            "count": 57
+          },
+          {
+            "reaction": "DYSKINESIA",
+            "count": 52
+          },
+          {
+            "reaction": "GENERAL PHYSICAL HEALTH DETERIORATION",
+            "count": 51
+          },
+          {
+            "reaction": "TREMOR",
+            "count": 38
+          },
+          {
+            "reaction": "CONDITION AGGRAVATED",
+            "count": 37
+          },
+          {
+            "reaction": "DYSPNOEA",
+            "count": 35
+          },
+          {
+            "reaction": "GAIT DISTURBANCE",
+            "count": 35
+          },
+          {
+            "reaction": "ANAEMIA",
+            "count": 33
+          }
+        ],
+        "total_reports": 0,
+        "source": "미국 FDA FAERS (부작용 자발보고 시스템)",
+        "source_url": "https://api.fda.gov/drug/event.json",
+        "note": "FAERS 보고는 인과관계를 의미하지 않으며 보고 빈도 기반 통계입니다.",
+        "collected_at": "2026-04-29T18:28:47.785109"
+      },
+      "ndc_info": {
+        "generic_name_en": "levodopa benserazide",
+        "ndc_products": [],
+        "source": "미국 FDA NDC"
+      }
+    },
+    "렉사프로": {
+      "korean_name": "렉사프로",
+      "english_name": "escitalopram",
+      "diseases": [
+        "우울증",
+        "불안장애"
+      ],
+      "fda_label": {
+        "generic_name_en": "escitalopram",
+        "brand_names": [
+          "Escitalopram Oral Solution"
+        ],
+        "manufacturer": [
+          "Chartwell RX, LLC"
+        ],
+        "route": [
+          "ORAL"
+        ],
+        "indications": "1 INDICATIONS AND USAGE Escitalopram is indicated for the treatment of: major depressive disorder (MDD) in adults and pediatric patients 12 years of age and older. generalized anxiety disorder (GAD) in adults. Additional pediatric use information is approved for AbbVie Inc.’s Lexapro (escitalopram) tablets and LEXAPRO (escitalopram) oral solution. However, due to AbbVie Inc.’s marketing exclusivity rights, this drug product is not labeled with that information. Escitalopram is a selective seroto",
+        "dosage": "2 DOSAGE AND ADMINISTRATION Indication and Population Recommended Dosage MDD in Adults ( 2.1 ) Initial: 10 mg once daily Recommended: 10 mg once daily Maximum: 20 mg once daily MDD in Pediatric Patients 12 years and older ( 2.1 ) Initial: 10 mg once daily Recommended: 10 mg once daily Maximum: 20 mg once daily GAD in Adults ( 2.2 ) Initial: 10 mg once daily Recommended: 10 mg once daily Maximum: 2",
+        "warnings": "",
+        "adverse_reactions": "6 ADVERSE REACTIONS The following adverse reactions are discussed in greater detail in other sections of the labeling: Suicidal thoughts and behaviors in adolescents and young adults [ see Warnings and Precautions (5.1) ] Serotonin syndrome [ see Warnings and Precautions(5.2) ] Discontinuation syndrome [ see Warnings and Precautions(5.3) ] Seizures [ see Warnings and Precautions (5.4) ] Activation",
+        "contraindications": "4 CONTRAINDICATIONS Escitalopram is contraindicated in patients: taking MAOIs with escitalopram or within 14 days of stopping treatment with escitalopram because of an increased risk of serotonin syndrome. The use of escitalopram within 14 days of stopping an MAOI intended to treat psychiatric disorders is also contraindicated [ see Dosage and Administration (2.7) and Warnings and Precautions (5.2",
+        "drug_interactions": "7 DRUG INTERACTIONS Table 6 presents clinically important drug interactions with escitalopram. TABLE 6 Clinically Important Drug Interactions with Escitalopram Monoamine Oxidase Inhibitors (MAOIs) Clinical Impact: Concomitant use of SSRIs, including escitalopram, and MAOIs increases the risk of sero",
+        "pregnancy_category": "",
+        "source": "미국 FDA OpenFDA - Drug Label (SPL)",
+        "source_url": "https://api.fda.gov/drug/label.json",
+        "collected_at": "2026-04-29T18:28:49.621135"
+      },
+      "faers_top_ae": {
+        "generic_name_en": "escitalopram",
+        "top_adverse_events": [
+          {
+            "reaction": "DRUG INEFFECTIVE",
+            "count": 4826
+          },
+          {
+            "reaction": "FATIGUE",
+            "count": 4630
+          },
+          {
+            "reaction": "NAUSEA",
+            "count": 4452
+          },
+          {
+            "reaction": "OFF LABEL USE",
+            "count": 3823
+          },
+          {
+            "reaction": "HEADACHE",
+            "count": 3768
+          },
+          {
+            "reaction": "DIARRHOEA",
+            "count": 3716
+          },
+          {
+            "reaction": "DRUG INTERACTION",
+            "count": 3230
+          },
+          {
+            "reaction": "DIZZINESS",
+            "count": 3197
+          }
+        ],
+        "total_reports": 0,
+        "source": "미국 FDA FAERS (부작용 자발보고 시스템)",
+        "source_url": "https://api.fda.gov/drug/event.json",
+        "note": "FAERS 보고는 인과관계를 의미하지 않으며 보고 빈도 기반 통계입니다.",
+        "collected_at": "2026-04-29T18:28:50.303936"
+      },
+      "ndc_info": {
+        "generic_name_en": "escitalopram",
+        "ndc_products": [
+          {
+            "brand_name": "Escitalopram",
+            "labeler": "RedPharm Drug, Inc.",
+            "dosage_form": "TABLET, FILM COATED",
+            "route": [
+              "ORAL"
+            ],
+            "active_ingredients": [
+              {
+                "name": "ESCITALOPRAM OXALATE",
+                "strength": "20 mg/1"
+              }
+            ],
+            "product_ndc": "67296-1421"
+          },
+          {
+            "brand_name": "Escitalopram",
+            "labeler": "Proficient Rx LP",
+            "dosage_form": "TABLET, FILM COATED",
+            "route": [
+              "ORAL"
+            ],
+            "active_ingredients": [
+              {
+                "name": "ESCITALOPRAM OXALATE",
+                "strength": "10 mg/1"
+              }
+            ],
+            "product_ndc": "71205-782"
+          },
+          {
+            "brand_name": "Escitalopram",
+            "labeler": "Advanced Rx Pharmacy of Tennessee, LLC",
+            "dosage_form": "TABLET, FILM COATED",
+            "route": [
+              "ORAL"
+            ],
+            "active_ingredients": [
+              {
+                "name": "ESCITALOPRAM OXALATE",
+                "strength": "10 mg/1"
+              }
+            ],
+            "product_ndc": "80425-0320"
+          }
+        ],
+        "source": "미국 FDA NDC 국가약품코드 디렉토리",
+        "source_url": "https://api.fda.gov/drug/ndc.json",
+        "collected_at": "2026-04-29T18:28:50.918198"
+      }
+    },
+    "타이레놀정": {
+      "korean_name": "타이레놀정",
+      "english_name": "acetaminophen",
+      "diseases": [
+        "두통",
+        "발열",
+        "근육통"
+      ],
+      "fda_label": {
+        "generic_name_en": "acetaminophen",
+        "brand_names": [
+          "Pain Reliever Extra Strength"
+        ],
+        "manufacturer": [
+          "Valu Merchandisers Company"
+        ],
+        "route": [
+          "ORAL"
+        ],
+        "indications": "Uses temporarily relieves minor aches and pains due to: headache the common cold backache minor pain of arthritis toothache muscular aches premenstrual and menstrual cramps temporarily reduces fever",
+        "dosage": "Directions do not take more than directed adults and children 12 years and over take 2 gelcaps every 6 hours while symptoms last do not take more than 6 gelcaps in 24 hours, unless directed by a doctor do not take for more than 10 days unless directed by a doctor children under 12 years: ask a doctor",
+        "warnings": "Warnings Liver warning: This product contains acetaminophen. Severe liver damage may occur if you take more than 4,000 mg of acetaminophen in 24 hours with other drugs containing acetaminophen 3 or more alcoholic drinks every day while using this product Allergy alert: Acetaminophen may cause severe skin reactions. Symptoms may include: skin reddening blisters rash If a skin reaction occurs, stop ",
+        "adverse_reactions": "",
+        "contraindications": "",
+        "drug_interactions": "",
+        "pregnancy_category": "",
+        "source": "미국 FDA OpenFDA - Drug Label (SPL)",
+        "source_url": "https://api.fda.gov/drug/label.json",
+        "collected_at": "2026-04-29T18:28:52.035423"
+      },
+      "faers_top_ae": {
+        "generic_name_en": "acetaminophen",
+        "top_adverse_events": [
+          {
+            "reaction": "DRUG DEPENDENCE",
+            "count": 51115
+          },
+          {
+            "reaction": "OVERDOSE",
+            "count": 44393
+          },
+          {
+            "reaction": "PAIN",
+            "count": 41675
+          },
+          {
+            "reaction": "DEPENDENCE",
+            "count": 36992
+          },
+          {
+            "reaction": "DEATH",
+            "count": 28996
+          },
+          {
+            "reaction": "FATIGUE",
+            "count": 27272
+          },
+          {
+            "reaction": "TOXICITY TO VARIOUS AGENTS",
+            "count": 26958
+          },
+          {
+            "reaction": "DRUG INEFFECTIVE",
+            "count": 26748
+          }
+        ],
+        "total_reports": 0,
+        "source": "미국 FDA FAERS (부작용 자발보고 시스템)",
+        "source_url": "https://api.fda.gov/drug/event.json",
+        "note": "FAERS 보고는 인과관계를 의미하지 않으며 보고 빈도 기반 통계입니다.",
+        "collected_at": "2026-04-29T18:28:52.877710"
+      },
+      "ndc_info": {
+        "generic_name_en": "acetaminophen",
+        "ndc_products": [
+          {
+            "brand_name": "pain and fever",
+            "labeler": "Meijer Distribution Inc",
+            "dosage_form": "SUSPENSION",
+            "route": [
+              "ORAL"
+            ],
+            "active_ingredients": [
+              {
+                "name": "ACETAMINOPHEN",
+                "strength": "160 mg/5mL"
+              }
+            ],
+            "product_ndc": "41250-946"
+          },
+          {
+            "brand_name": "Vicks DayQuil ELDERBERRY COLD and FLU",
+            "labeler": "The Procter & Gamble Manufacturing Company",
+            "dosage_form": "LIQUID",
+            "route": [
+              "ORAL"
+            ],
+            "active_ingredients": [
+              {
+                "name": "ACETAMINOPHEN",
+                "strength": "325 mg/15mL"
+              },
+              {
+                "name": "DEXTROMETHORPHAN HYDROBROMIDE",
+                "strength": "10 mg/15mL"
+              }
+            ],
+            "product_ndc": "84126-307"
+          },
+          {
+            "brand_name": "Multi Symptom Cold and Multi Symptom Nighttime Cold Childrens",
+            "labeler": "TARGET Corporation",
+            "dosage_form": "KIT",
+            "route": [],
+            "active_ingredients": [],
+            "product_ndc": "11673-420"
+          }
+        ],
+        "source": "미국 FDA NDC 국가약품코드 디렉토리",
+        "source_url": "https://api.fda.gov/drug/ndc.json",
+        "collected_at": "2026-04-29T18:28:53.512362"
+      }
+    }
+  }
+}

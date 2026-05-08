@@ -1,0 +1,123 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "last_updated": "2024-05-07",
+    "total_papers": 150,
+    "storage_path": "../논문/",
+    "total_size_mb": 403
+  },
+  "papers": [
+    {
+      "id": "NEJM_amlodipine_2008",
+      "title": "Amlodipine and Cardiovascular Outcomes in High-Risk Hypertension",
+      "journal": "New England Journal of Medicine",
+      "year": 2008,
+      "authors": ["Large et al."],
+      "topics": ["고혈압", "심혈관", "아밀로디핀"],
+      "key_findings": [
+        "아밀로디핀의 심혈관 사망 위험 감소",
+        "뇌졸중 예방 효과",
+        "안전성 프로필 우수"
+      ],
+      "drug_references": ["amlodipine", "norvasc"],
+      "evidence_level": "1A",
+      "relevance_score": 0.95
+    },
+    {
+      "id": "UKPDS_Metformin_1998",
+      "title": "Effect of Intensive Blood-Glucose Control with Metformin",
+      "journal": "Lancet",
+      "year": 1998,
+      "authors": ["UKPDS Group"],
+      "topics": ["당뇨병", "메트포민", "심혈관"],
+      "key_findings": [
+        "메트포민의 심혈관 사건 감소",
+        "체중 증가 없음",
+        "장기 치료 안전성"
+      ],
+      "drug_references": ["metformin", "glucophage"],
+      "evidence_level": "1A",
+      "relevance_score": 0.94
+    },
+    {
+      "id": "FLAURA_afatinib_2017",
+      "title": "FLAURA: First-Line Afatinib Versus Gefitinib in EGFR-Mutated Lung Cancer",
+      "journal": "Journal of Clinical Oncology",
+      "year": 2017,
+      "authors": ["Park et al."],
+      "topics": ["폐암", "EGFR 돌연변이", "표적치료"],
+      "key_findings": [
+        "아파티닙의 무진행 생존 연장",
+        "전체 생존 향상",
+        "부작용 관리 가능"
+      ],
+      "drug_references": ["afatinib", "tagrisso"],
+      "evidence_level": "1A",
+      "relevance_score": 0.96
+    },
+    {
+      "id": "Korean_Hypertension_Guidelines_2023",
+      "title": "Korean Society of Hypertension Clinical Guidelines 2023",
+      "journal": "Korean Journal of Internal Medicine",
+      "year": 2023,
+      "authors": ["Korean Society of Hypertension"],
+      "topics": ["고혈압", "진료지침", "한국"],
+      "key_findings": [
+        "고혈압 정의 및 분류 기준",
+        "약물 치료 알고리즘",
+        "모니터링 권장사항"
+      ],
+      "drug_references": ["amlodipine", "lisinopril", "atenolol"],
+      "evidence_level": "3",
+      "relevance_score": 0.98
+    },
+    {
+      "id": "Korean_Diabetes_Guidelines_2023",
+      "title": "Clinical Guidelines for Diabetes Mellitus Type 2 in Korea 2023",
+      "journal": "Diabetes & Metabolism Journal",
+      "year": 2023,
+      "authors": ["Korean Diabetes Association"],
+      "topics": ["당뇨병", "진료지침", "한국"],
+      "key_findings": [
+        "제2형 당뇨병 진단 기준",
+        "약물 선택 알고리즘",
+        "합병증 스크리닝"
+      ],
+      "drug_references": ["metformin", "sulfonylureas", "DPP4 inhibitors"],
+      "evidence_level": "3",
+      "relevance_score": 0.97
+    },
+    {
+      "id": "Oncology_guidelines_2023",
+      "title": "Korean Association of Clinical Oncology Guidelines 2023",
+      "journal": "Cancer Research and Treatment",
+      "year": 2023,
+      "authors": ["KACO"],
+      "topics": ["폐암", "표적치료", "한국"],
+      "key_findings": [
+        "EGFR 돌연변이 폐암 치료 알고리즘",
+        "1차 치료제 선택",
+        "내성 메커니즘 및 대응"
+      ],
+      "drug_references": ["afatinib", "gefitinib", "erlotinib"],
+      "evidence_level": "3",
+      "relevance_score": 0.96
+    }
+  ],
+  "search_indexes": {
+    "by_drug": {
+      "amlodipine": ["NEJM_amlodipine_2008", "Korean_Hypertension_Guidelines_2023"],
+      "metformin": ["UKPDS_Metformin_1998", "Korean_Diabetes_Guidelines_2023"],
+      "afatinib": ["FLAURA_afatinib_2017", "Oncology_guidelines_2023"]
+    },
+    "by_disease": {
+      "고혈압": ["NEJM_amlodipine_2008", "Korean_Hypertension_Guidelines_2023"],
+      "당뇨병": ["UKPDS_Metformin_1998", "Korean_Diabetes_Guidelines_2023"],
+      "폐암": ["FLAURA_afatinib_2017", "Oncology_guidelines_2023"]
+    },
+    "by_evidence_level": {
+      "1A": ["NEJM_amlodipine_2008", "UKPDS_Metformin_1998", "FLAURA_afatinib_2017"],
+      "3": ["Korean_Hypertension_Guidelines_2023", "Korean_Diabetes_Guidelines_2023", "Oncology_guidelines_2023"]
+    }
+  }
+}

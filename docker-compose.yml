@@ -1,0 +1,162 @@
+version: '3.8'
+
+# SHIELD PHARMA-HYBRID v21.0 - Docker Compose Configuration
+# 로컬 개발 및 스테이징 환경
+
+services:
+  # ========================================================================
+  # 메인 애플리케이션
+  # ========================================================================
+  pharma-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pharma-hybrid-v21
+    ports:
+      - "8501:8501"  # Streamlit UI
+    environment:
+      - PYTHONUNBUFFERED=1
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - GOOGLE_CLOUD_PROJECT=${GOOGLE_CLOUD_PROJECT:-shield-pharma}
+      - LOG_LEVEL=INFO
+      - DATABASE_URL=sqlite:////app/pharma_v21.db
+    volumes:
+      - ./patient_histories:/app/patient_histories
+      - ./price_database:/app/price_database
+      - ./pharma_output:/app/pharma_output
+      - ./logs:/app/logs
+      - ./rag_db:/app/rag_db
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - pharma-network
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # ========================================================================
+  # 모니터링: Prometheus (메트릭 수집)
+  # ========================================================================
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: pharma-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention.time=15d'
+    networks:
+      - pharma-network
+    restart: unless-stopped
+    depends_on:
+      - pharma-app
+
+  # ========================================================================
+  # 모니터링: Grafana (시각화)
+  # ========================================================================
+  grafana:
+    image: grafana/grafana:latest
+    container_name: pharma-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./grafana/datasources:/etc/grafana/provisioning/datasources
+    networks:
+      - pharma-network
+    restart: unless-stopped
+    depends_on:
+      - prometheus
+
+  # ========================================================================
+  # 로깅: Loki (로그 수집)
+  # ========================================================================
+  loki:
+    image: grafana/loki:latest
+    container_name: pharma-loki
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./loki-config.yml:/etc/loki/local-config.yml
+      - loki_data:/loki
+    command: -config.file=/etc/loki/local-config.yml
+    networks:
+      - pharma-network
+    restart: unless-stopped
+
+  # ========================================================================
+  # 데이터베이스 (선택사항: PostgreSQL)
+  # ========================================================================
+  postgres:
+    image: postgres:15-alpine
+    container_name: pharma-postgres
+    environment:
+      POSTGRES_DB: pharma_db
+      POSTGRES_USER: pharma_user
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-pharma_secure_password}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - pharma-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pharma_user"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ========================================================================
+  # 관리 도구: pgAdmin (PostgreSQL 관리)
+  # ========================================================================
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pharma-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@shieldpharma.com
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD:-admin}
+    ports:
+      - "5050:80"
+    networks:
+      - pharma-network
+    restart: unless-stopped
+    depends_on:
+      - postgres
+
+# ========================================================================
+# 네트워크 정의
+# ========================================================================
+networks:
+  pharma-network:
+    driver: bridge
+
+# ========================================================================
+# 볼륨 정의
+# ========================================================================
+volumes:
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local
+  loki_data:
+    driver: local
+  postgres_data:
+    driver: local

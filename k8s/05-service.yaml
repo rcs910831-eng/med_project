@@ -1,0 +1,108 @@
+# Kubernetes Service - Internal and External Access
+# 애플리케이션에 접근하기 위한 서비스 정의
+
+---
+# 메인 애플리케이션 서비스
+apiVersion: v1
+kind: Service
+metadata:
+  name: pharma-app-service
+  namespace: shield-pharma
+  labels:
+    app: pharma-hybrid
+    tier: frontend
+  annotations:
+    description: "SHIELD PHARMA Main Application Service"
+spec:
+  type: LoadBalancer  # 외부 접근 가능 (프로덕션에서는 ClusterIP + Ingress 권장)
+  selector:
+    app: pharma-hybrid
+    tier: frontend
+  ports:
+    - name: ui
+      port: 80
+      targetPort: 8501
+      protocol: TCP
+    - name: metrics
+      port: 8888
+      targetPort: 8888
+      protocol: TCP
+  sessionAffinity: ClientIP  # 클라이언트 IP 기반 세션 유지
+
+---
+# Prometheus 서비스
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus-service
+  namespace: shield-pharma
+  labels:
+    app: prometheus
+spec:
+  type: ClusterIP
+  selector:
+    app: prometheus
+  ports:
+    - name: web
+      port: 9090
+      targetPort: 9090
+      protocol: TCP
+
+---
+# Grafana 서비스
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana-service
+  namespace: shield-pharma
+  labels:
+    app: grafana
+spec:
+  type: LoadBalancer  # 외부에서 Grafana 접근 가능
+  selector:
+    app: grafana
+  ports:
+    - name: web
+      port: 3000
+      targetPort: 3000
+      protocol: TCP
+
+---
+# PostgreSQL 서비스 (내부)
+apiVersion: v1
+kind: Service
+metadata:
+  name: pharma-postgres
+  namespace: shield-pharma
+  labels:
+    app: postgres
+spec:
+  type: ClusterIP
+  clusterIP: None  # Headless Service
+  selector:
+    app: postgres
+  ports:
+    - name: postgresql
+      port: 5432
+      targetPort: 5432
+      protocol: TCP
+
+---
+# Headless Service (StatefulSet용)
+apiVersion: v1
+kind: Service
+metadata:
+  name: pharma-app-headless
+  namespace: shield-pharma
+  labels:
+    app: pharma-hybrid
+spec:
+  type: ClusterIP
+  clusterIP: None
+  selector:
+    app: pharma-hybrid
+  ports:
+    - name: ui
+      port: 8501
+      targetPort: 8501
+      protocol: TCP

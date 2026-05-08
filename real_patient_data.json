@@ -1,0 +1,530 @@
+{
+    "P005": {
+        "pid": "P005",
+        "name": "신준호",
+        "age": "",
+        "gender": "",
+        "hospital": "",
+        "disease_main": "고혈압",
+        "disease_sub": "",
+        "meds": [
+            {
+                "type": "주진료",
+                "name": "딜라트렌정 12.5mg",
+                "dosage": "1정",
+                "frequency": "2",
+                "duration": "30",
+                "note": "자몽주스 섭취 시 약효 과다 위험, 말초부종, 안면홍조, 두통"
+            },
+            {
+                "type": "주진료",
+                "name": "카나브정 60mg",
+                "dosage": "1정",
+                "frequency": "1",
+                "duration": "30",
+                "note": "자몽주스 섭취 시 약효 과다 위험, 말초부종, 안면홍조, 두통"
+            },
+            {
+                "type": "주진료",
+                "name": "노바스크정 5mg",
+                "dosage": "1정",
+                "frequency": "1",
+                "duration": "30",
+                "note": "자몽주스 섭취 시 약효 과다 위험, 말초부종, 안면홍조, 두통"
+            }
+        ]
+    },
+    "P008": {
+        "pid": "P008",
+        "name": "한수진",
+        "age": "",
+        "gender": "",
+        "hospital": "",
+        "disease_main": "철결핍성 빈혈",
+        "disease_sub": "",
+        "meds": [
+            {
+                "type": "주진료",
+                "name": "훼로바유정",
+                "dosage": "1정",
+                "frequency": "1",
+                "duration": "60",
+                "note": "복용 전 전문가와 상담하십시오."
+            },
+            {
+                "type": "주진료",
+                "name": "비타민C",
+                "dosage": "1정",
+                "frequency": "3",
+                "duration": "60",
+                "note": "복용 전 전문가와 상담하십시오."
+            },
+            {
+                "type": "주진료",
+                "name": "폴산 1mg",
+                "dosage": "1정",
+                "frequency": "3",
+                "duration": "60",
+                "note": "복용 전 전문가와 상담하십시오."
+            },
+            {
+                "type": "주진료",
+                "name": "액티넘EX",
+                "dosage": "1정",
+                "frequency": "3",
+                "duration": "60",
+                "note": "복용 전 전문가와 상담하십시오."
+            }
+        ]
+    },
+    "P012": {
+        "pid": "P012",
+        "name": "이수진",
+        "age": null,
+        "gender": "",
+        "hospital": "",
+        "disease_main": "우울증",
+        "disease_sub": "",
+        "meds": [
+            {
+                "type": "주진료",
+                "name": "렉사프로정 10mg",
+                "dosage": "1정",
+                "frequency": "1",
+                "duration": "30",
+                "note": "복용 전 전문가와 상담하십시오."
+            },
+            {
+                "type": "주진료",
+                "name": "데파스정",
+                "dosage": "1정",
+                "frequency": "2",
+                "duration": "30",
+                "note": "복용 전 전문가와 상담하십시오."
+            },
+            {
+                "type": "주진료",
+                "name": "자낙스정 0.25mg",
+                "dosage": "1정",
+                "frequency": "1",
+                "duration": "30",
+                "note": "복용 전 전문가와 상담하십시오."
+            }
+        ]
+    },
+    "P015": {
+        "pid": "P015-2026",
+        "name": "정하은",
+        "age": "",
+        "gender": "",
+        "hospital": "",
+        "disease_main": "아토피 피부염",
+        "disease_sub": "",
+        "meds": [
+            {
+                "type": "주진료",
+                "name": "엘리델크림",
+                "dosage": "적당량",
+                "frequency": "1일 2회",
+                "duration": "30",
+                "note": "복용 전 전문가와 상담하십시오."
+            },
+            {
+                "type": "주진료",
+                "name": "페니라민시럽",
+                "dosage": "5mL",
+                "frequency": "1일 3회",
+                "duration": "30",
+                "note": "복용 전 전문가와 상담하십시오."
+            },
+            {
+                "type": "주진료",
+                "name": "제모스보습제",
+                "dosage": "충분히",
+                "frequency": "수시로",
+                "duration": "30",
+                "note": "복용 전 전문가와 상담하십시오."
+            },
+            {
+                "type": "주진료",
+                "name": "락티케어로션",
+                "dosage": "적당량",
+                "frequency": "1일 2회",
+                "duration": "30",
+                "note": "복용 전 전문가와 상담하십시오."
+            }
+        ]
+    },
+    "P017": {
+        "pid": "P017",
+        "name": "박소윤",
+        "age": "",
+        "gender": "",
+        "hospital": "PHARMA-HYBRID STRATEGIC CLINICAL SYSTEM",
+        "disease_main": "불안장애",
+        "disease_sub": "",
+        "meds": [
+            {
+                "type": "주진료",
+                "name": "알프람정",
+                "dosage": "1정",
+                "frequency": "3",
+                "duration": "14",
+                "note": "복용 전 전문가와 상담하십시오."
+            },
+            {
+                "type": "주진료",
+                "name": "인데놀정 10mg",
+                "dosage": "1정",
+                "frequency": "2",
+                "duration": "14",
+                "note": "복용 전 전문가와 상담하십시오."
+            },
+            {
+                "type": "주진료",
+                "name": "스틸녹스정 10mg",
+                "dosage": "1정",
+                "frequency": "1",
+                "duration": "14",
+                "note": "취침전 복용, 복용 전 전문가와 상담하십시오."
+            }
+        ]
+    },
+    "P019": {
+        "pid": "P019",
+        "name": "이정태",
+        "age": "",
+        "gender": "",
+        "hospital": "",
+        "disease_main": "고지혈증",
+        "disease_sub": "",
+        "meds": [
+            {
+                "type": "주진료",
+                "name": "크레스토정 10mg",
+                "dosage": "1정",
+                "frequency": "1일 1회",
+                "duration": "30",
+                "note": "복용 전 전문가와 상담하십시오."
+            },
+            {
+                "type": "주진료",
+                "name": "에제티미브",
+                "dosage": "1정",
+                "frequency": "1일 1회",
+                "duration": "30",
+                "note": "복용 전 전문가와 상담하십시오."
+            },
+            {
+                "type": "주진료",
+                "name": "고덱스캡슐",
+                "dosage": "1캡슐",
+                "frequency": "1일 3회",
+                "duration": "30",
+                "note": "복용 전 전문가와 상담하십시오."
+            }
+        ]
+    },
+    "P020": {
+        "pid": "P020-2026",
+        "name": "오창현",
+        "age": null,
+        "gender": "",
+        "hospital": "",
+        "disease_main": "울혈성 부종",
+        "disease_sub": "",
+        "meds": [
+            {
+                "type": "주진료",
+                "name": "알닥톤정 25mg",
+                "dosage": "1정",
+                "frequency": "2회",
+                "duration": "14일",
+                "note": "복용 전 전문가와 상담하십시오."
+            },
+            {
+                "type": "주진료",
+                "name": "라식스정 20mg",
+                "dosage": "0.5정",
+                "frequency": "1회",
+                "duration": "14일",
+                "note": "복용 전 전문가와 상담하십시오."
+            },
+            {
+                "type": "주진료",
+                "name": "토르세미드정 5mg",
+                "dosage": "1정",
+                "frequency": "1회",
+                "duration": "14일",
+                "note": "복용 전 전문가와 상담하십시오."
+            }
+        ]
+    },
+    "P021": {
+        "pid": "P021",
+        "name": "윤지영",
+        "age": "",
+        "gender": "",
+        "hospital": "PHARMA-HYBRID STRATEGIC CLINICAL SYSTEM",
+        "disease_main": "시력저하관리",
+        "disease_sub": "",
+        "meds": [
+            {
+                "type": "주진료",
+                "name": "루테인 지아잔틴",
+                "dosage": "1캡슐",
+                "frequency": "1",
+                "duration": "90",
+                "note": "복용 전 전문가와 상담하십시오."
+            },
+            {
+                "type": "주진료",
+                "name": "오메가3",
+                "dosage": "1캡슐",
+                "frequency": "1",
+                "duration": "90",
+                "note": "복용 전 전문가와 상담하십시오."
+            },
+            {
+                "type": "주진료",
+                "name": "리레바점안액",
+                "dosage": "1방울",
+                "frequency": "수시로",
+                "duration": "90",
+                "note": "복용 전 전문가와 상담하십시오."
+            }
+        ]
+    },
+    "P026": {
+        "pid": "P026",
+        "name": "송은주",
+        "age": null,
+        "gender": "",
+        "hospital": "",
+        "disease_main": "영양결핍성 빈혈",
+        "disease_sub": "",
+        "meds": [
+            {
+                "type": "주진료",
+                "name": "훼로바유정",
+                "dosage": "1정",
+                "frequency": "1회",
+                "duration": "60일",
+                "note": "복용 전 전문가와 상담하십시오."
+            },
+            {
+                "type": "주진료",
+                "name": "폴산",
+                "dosage": "1정",
+                "frequency": "3회",
+                "duration": "60일",
+                "note": "복용 전 전문가와 상담하십시오."
+            },
+            {
+                "type": "주진료",
+                "name": "비타민B12",
+                "dosage": "1정",
+                "frequency": "3회",
+                "duration": "60일",
+                "note": "복용 전 전문가와 상담하십시오."
+            },
+            {
+                "type": "주진료",
+                "name": "비타민C",
+                "dosage": "1정",
+                "frequency": "3회",
+                "duration": "60일",
+                "note": "복용 전 전문가와 상담하십시오."
+            }
+        ]
+    },
+    "P001": {
+        "pid": "P001-2026",
+        "name": "김상은",
+        "age": "",
+        "gender": "",
+        "hospital": "",
+        "disease_main": "고혈압",
+        "disease_sub": "당뇨"
+    },
+    "P002": {
+        "pid": "P002-2026",
+        "name": "박지현",
+        "age": "",
+        "gender": "",
+        "hospital": "",
+        "disease_main": "위암",
+        "disease_sub": "항암후오심"
+    },
+    "P003": {
+        "pid": "P003-2026",
+        "name": "이준호",
+        "age": "",
+        "gender": "",
+        "hospital": "",
+        "disease_main": "심부전",
+        "disease_sub": "천식"
+    },
+    "P004": {
+        "pid": "P004-2026",
+        "name": "최영민",
+        "age": null,
+        "gender": null,
+        "hospital": null,
+        "disease_main": "만성위염",
+        "disease_sub": "만성피로"
+    },
+    "P006": {
+        "pid": "P006-2026",
+        "name": "임대균",
+        "age": "",
+        "gender": "",
+        "hospital": "",
+        "disease_main": "퇴행성관절염",
+        "disease_sub": ""
+    },
+    "P007": {
+        "pid": "P007-2026",
+        "name": "최민준",
+        "age": "",
+        "gender": "",
+        "hospital": "",
+        "disease_main": "가와사키병",
+        "disease_sub": ""
+    },
+    "P009": {
+        "pid": "P009-2026",
+        "name": "조영진",
+        "age": "",
+        "gender": "",
+        "hospital": "PHARMA-HYBRID STRATEGIC CLINICAL SYSTEM",
+        "disease_main": "비소세포폐암",
+        "disease_sub": ""
+    },
+    "P010": {
+        "pid": "P010-2026",
+        "name": "이지온",
+        "age": "",
+        "gender": "",
+        "hospital": "PHARMA-HYBRID STRATEGIC CLINICAL SYSTEM",
+        "disease_main": "급성 세기관지염",
+        "disease_sub": ""
+    },
+    "P011": {
+        "pid": "P011-2026",
+        "name": "김도윤",
+        "age": "",
+        "gender": "",
+        "hospital": "",
+        "disease_main": "성장호르몬결핍증",
+        "disease_sub": ""
+    },
+    "P013": {
+        "pid": "P013-2026",
+        "name": "박서연",
+        "age": "",
+        "gender": "",
+        "hospital": "",
+        "disease_main": "골육종",
+        "disease_sub": ""
+    },
+    "P014": {
+        "pid": "P014-2026",
+        "name": "김철수",
+        "age": "",
+        "gender": "",
+        "hospital": "",
+        "disease_main": "알츠하이머형 치매",
+        "disease_sub": "울혈성 심부전"
+    },
+    "P016": {
+        "pid": "P016-2026",
+        "name": "James Lee",
+        "age": "",
+        "gender": "",
+        "hospital": "",
+        "disease_main": "알레르기 비염",
+        "disease_sub": ""
+    },
+    "P018": {
+        "pid": "P018-2026",
+        "name": "Michael Kim",
+        "age": "",
+        "gender": "",
+        "hospital": "",
+        "disease_main": "고혈압",
+        "disease_sub": ""
+    },
+    "P022": {
+        "pid": "P022-2026",
+        "name": "강민서",
+        "age": "",
+        "gender": "",
+        "hospital": "PHARMA-HYBRID STRATEGIC CLINICAL SYSTEM",
+        "disease_main": "긴장성 두통",
+        "disease_sub": ""
+    },
+    "P023": {
+        "pid": "P023-2026",
+        "name": "서동훈",
+        "age": "",
+        "gender": "",
+        "hospital": "",
+        "disease_main": "혈관육종",
+        "disease_sub": ""
+    },
+    "P024": {
+        "pid": "P024-2026",
+        "name": "한지민",
+        "age": "",
+        "gender": "",
+        "hospital": "",
+        "disease_main": "알레르기 비염",
+        "disease_sub": ""
+    },
+    "P025": {
+        "pid": "P025-2026",
+        "name": "류태영",
+        "age": "",
+        "gender": "",
+        "hospital": "",
+        "disease_main": "만성 위염",
+        "disease_sub": ""
+    },
+    "P027": {
+        "pid": "P027-2026",
+        "name": "최희정",
+        "age": "",
+        "gender": "",
+        "hospital": "",
+        "disease_main": "골다공증",
+        "disease_sub": ""
+    },
+    "P028": {
+        "pid": "P028-2026",
+        "name": "김현숙",
+        "age": "",
+        "gender": "",
+        "hospital": "",
+        "disease_main": "유방암",
+        "disease_sub": ""
+    },
+    "P029": {
+        "pid": "P001",
+        "name": "박맹심",
+        "age": "55",
+        "gender": "여",
+        "hospital": "양산부산대학교병원",
+        "disease_main": "I427",
+        "disease_sub": "C55"
+    },
+    "P030": {
+        "pid": "PXXX",
+        "name": "유창수",
+        "age": "34",
+        "gender": "남",
+        "hospital": "윤이비인후과의원",
+        "disease_main": "정보 없음",
+        "disease_sub": "정보 없음"
+    }
+}

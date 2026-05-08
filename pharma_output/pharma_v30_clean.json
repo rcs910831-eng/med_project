@@ -1,0 +1,62 @@
+{
+  "version": "30.0",
+  "timestamp": "2026-04-27T11:13:09.424468",
+  "status": "sqlite_error_fixed",
+  "medications": {
+    "001": {
+      "name": "타세바정",
+      "type": "폐암",
+      "status": "한국"
+    },
+    "002": {
+      "name": "키트루다",
+      "type": "면역항암",
+      "status": "FDA"
+    },
+    "003": {
+      "name": "베실리온정",
+      "type": "영양",
+      "status": "한국"
+    },
+    "004": {
+      "name": "옵디보",
+      "type": "면역항암",
+      "status": "FDA"
+    },
+    "005": {
+      "name": "넥사바정",
+      "type": "간암",
+      "status": "한국"
+    }
+  },
+  "cancers": {
+    "lung": {
+      "name": "폐암",
+      "survival": 32
+    },
+    "breast": {
+      "name": "유방암",
+      "survival": 93
+    },
+    "liver": {
+      "name": "간암",
+      "survival": 18
+    },
+    "colon": {
+      "name": "대장암",
+      "survival": 72
+    },
+    "liquid": {
+      "name": "액상생검 암",
+      "icd10": "C80.9",
+      "status": "신종"
+    }
+  },
+  "synergies": {
+    "syn_001": "강황+검은후추: 200% 흡수율",
+    "syn_002": "녹차+레몬: 5배 효과",
+    "syn_003": "마늘+토마토: 항암 극대화",
+    "syn_004": "생선+베리: 330% 항염증",
+    "syn_005": "브로콜리+올리브유: 150% 암 억제"
+  }
+}

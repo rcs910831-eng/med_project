@@ -1,0 +1,152 @@
+{
+  "source": "공공데이터포털 - 식품의약품안전처 의약품안전나라",
+  "source_url": "https://apis.data.go.kr/1471000/",
+  "api_key_note": "인증키: data.go.kr 발급 (서비스별 활용신청 필요)",
+  "service_ids": {
+    "의약품쉬운정보": "https://www.data.go.kr/data/15075057/openapi.do",
+    "낱알식별정보": "https://www.data.go.kr/data/15057639/openapi.do"
+  },
+  "collected_at": "2026-04-29T18:28:16.583685",
+  "data": {
+    "타이레놀정": {
+      "drug_info": {
+        "drug_name_kr": "타이레놀정",
+        "status": "HTTP_403",
+        "note": "data.go.kr 활용신청 필요",
+        "service_url": "https://www.data.go.kr/data/15075057/openapi.do"
+      },
+      "pill_appearance": {
+        "drug_name_kr": "타이레놀정",
+        "status": "HTTP_500",
+        "note": "data.go.kr 낱알식별 서비스 활용신청 필요",
+        "service_url": "https://www.data.go.kr/data/15057639/openapi.do"
+      }
+    },
+    "노바스크정": {
+      "drug_info": {
+        "drug_name_kr": "노바스크정",
+        "status": "HTTP_403",
+        "note": "data.go.kr 활용신청 필요",
+        "service_url": "https://www.data.go.kr/data/15075057/openapi.do"
+      },
+      "pill_appearance": {
+        "drug_name_kr": "노바스크정",
+        "status": "HTTP_500",
+        "note": "data.go.kr 낱알식별 서비스 활용신청 필요",
+        "service_url": "https://www.data.go.kr/data/15057639/openapi.do"
+      }
+    },
+    "키트루다": {
+      "drug_info": {
+        "drug_name_kr": "키트루다",
+        "status": "HTTP_403",
+        "note": "data.go.kr 활용신청 필요",
+        "service_url": "https://www.data.go.kr/data/15075057/openapi.do"
+      },
+      "pill_appearance": {
+        "drug_name_kr": "키트루다",
+        "status": "HTTP_500",
+        "note": "data.go.kr 낱알식별 서비스 활용신청 필요",
+        "service_url": "https://www.data.go.kr/data/15057639/openapi.do"
+      }
+    },
+    "글리벡정": {
+      "drug_info": {
+        "drug_name_kr": "글리벡정",
+        "status": "HTTP_403",
+        "note": "data.go.kr 활용신청 필요",
+        "service_url": "https://www.data.go.kr/data/15075057/openapi.do"
+      },
+      "pill_appearance": {
+        "drug_name_kr": "글리벡정",
+        "status": "HTTP_500",
+        "note": "data.go.kr 낱알식별 서비스 활용신청 필요",
+        "service_url": "https://www.data.go.kr/data/15057639/openapi.do"
+      }
+    },
+    "다이아벡스정": {
+      "drug_info": {
+        "drug_name_kr": "다이아벡스정",
+        "status": "HTTP_403",
+        "note": "data.go.kr 활용신청 필요",
+        "service_url": "https://www.data.go.kr/data/15075057/openapi.do"
+      },
+      "pill_appearance": {
+        "drug_name_kr": "다이아벡스정",
+        "status": "HTTP_500",
+        "note": "data.go.kr 낱알식별 서비스 활용신청 필요",
+        "service_url": "https://www.data.go.kr/data/15057639/openapi.do"
+      }
+    },
+    "벤톨린네뷸": {
+      "drug_info": {
+        "drug_name_kr": "벤톨린네뷸",
+        "status": "HTTP_403",
+        "note": "data.go.kr 활용신청 필요",
+        "service_url": "https://www.data.go.kr/data/15075057/openapi.do"
+      },
+      "pill_appearance": {
+        "drug_name_kr": "벤톨린네뷸",
+        "status": "HTTP_500",
+        "note": "data.go.kr 낱알식별 서비스 활용신청 필요",
+        "service_url": "https://www.data.go.kr/data/15057639/openapi.do"
+      }
+    },
+    "렉사프로": {
+      "drug_info": {
+        "drug_name_kr": "렉사프로",
+        "status": "HTTP_403",
+        "note": "data.go.kr 활용신청 필요",
+        "service_url": "https://www.data.go.kr/data/15075057/openapi.do"
+      },
+      "pill_appearance": {
+        "drug_name_kr": "렉사프로",
+        "status": "HTTP_500",
+        "note": "data.go.kr 낱알식별 서비스 활용신청 필요",
+        "service_url": "https://www.data.go.kr/data/15057639/openapi.do"
+      }
+    },
+    "이뮤란": {
+      "drug_info": {
+        "drug_name_kr": "이뮤란",
+        "status": "HTTP_403",
+        "note": "data.go.kr 활용신청 필요",
+        "service_url": "https://www.data.go.kr/data/15075057/openapi.do"
+      },
+      "pill_appearance": {
+        "drug_name_kr": "이뮤란",
+        "status": "HTTP_500",
+        "note": "data.go.kr 낱알식별 서비스 활용신청 필요",
+        "service_url": "https://www.data.go.kr/data/15057639/openapi.do"
+      }
+    },
+    "리루텍정": {
+      "drug_info": {
+        "drug_name_kr": "리루텍정",
+        "status": "HTTP_403",
+        "note": "data.go.kr 활용신청 필요",
+        "service_url": "https://www.data.go.kr/data/15075057/openapi.do"
+      },
+      "pill_appearance": {
+        "drug_name_kr": "리루텍정",
+        "status": "HTTP_500",
+        "note": "data.go.kr 낱알식별 서비스 활용신청 필요",
+        "service_url": "https://www.data.go.kr/data/15057639/openapi.do"
+      }
+    },
+    "마도파": {
+      "drug_info": {
+        "drug_name_kr": "마도파",
+        "status": "HTTP_403",
+        "note": "data.go.kr 활용신청 필요",
+        "service_url": "https://www.data.go.kr/data/15075057/openapi.do"
+      },
+      "pill_appearance": {
+        "drug_name_kr": "마도파",
+        "status": "HTTP_500",
+        "note": "data.go.kr 낱알식별 서비스 활용신청 필요",
+        "service_url": "https://www.data.go.kr/data/15057639/openapi.do"
+      }
+    }
+  }
+}

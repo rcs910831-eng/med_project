@@ -1,0 +1,46 @@
+# Anthropic SDK - Managed Agents support
+anthropic>=0.32.0
+
+# Google Cloud Services
+google-cloud-texttospeech>=2.14.0
+google-cloud-storage>=2.10.0
+google-maps-services>=1.16.0
+
+# Core Dependencies
+python-dotenv>=1.0.0
+requests>=2.31.0
+pillow>=10.0.0
+opencv-python>=4.8.0
+
+# PDF Generation
+reportlab>=4.0.0
+fpdf2>=2.7.0
+
+# Image Processing
+numpy>=1.24.0
+scipy>=1.10.0
+
+# Data Processing
+pandas>=2.0.0
+json5>=0.9.0
+
+# Testing
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+
+# Logging & Debugging
+loguru>=0.7.0
+
+# Async Support
+aiohttp>=3.8.0
+asyncio-contextmanager>=1.0.0
+
+# Medical Data Processing
+beautifulsoup4>=4.12.0
+html5lib>=1.1
+
+# OCR Enhancement (optional)
+pytesseract>=0.3.10
+
+# Audio/Voice (Google TTS integration)
+pydub>=0.25.1

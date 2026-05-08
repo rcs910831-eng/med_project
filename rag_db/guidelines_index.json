@@ -1,0 +1,168 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "last_updated": "2024-05-07",
+    "source": "Korean Clinical Guidelines + International Standards",
+    "total_guidelines": 20
+  },
+  "guidelines": [
+    {
+      "id": "hypertension_management_2023",
+      "disease": "고혈압",
+      "english_name": "Hypertension Management",
+      "last_updated": 2023,
+      "organization": "Korean Society of Hypertension",
+      "stages": [
+        {
+          "stage": "Stage 1 (130-139 systolic or 80-89 diastolic)",
+          "recommended_drugs": ["amlodipine", "lisinopril", "losartan"],
+          "lifestyle": ["식이요법", "운동", "스트레스 관리"]
+        },
+        {
+          "stage": "Stage 2 (≥140 systolic or ≥90 diastolic)",
+          "recommended_drugs": ["amlodipine", "hydrochlorothiazide", "lisinopril + amlodipine"],
+          "lifestyle": ["식이요법", "운동", "스트레스 관리"]
+        }
+      ],
+      "monitoring": "혈압 자가 측정 권장, 월 1회 이상 의사 방문",
+      "target_bp": "130/80 mmHg 이하 (일반), 140/90 mmHg (고령자)",
+      "key_points": [
+        "약물 단독 치료 앞서 생활습관 개선 시도",
+        "정기적 모니터링 필수",
+        "약물 순응도 관리"
+      ]
+    },
+    {
+      "id": "type2_diabetes_management_2023",
+      "disease": "제2형 당뇨병",
+      "english_name": "Type 2 Diabetes Management",
+      "last_updated": 2023,
+      "organization": "Korean Diabetes Association",
+      "stages": [
+        {
+          "stage": "Newly Diagnosed",
+          "recommended_drugs": ["metformin"],
+          "lifestyle": ["식이요법", "운동", "체중 감량"],
+          "target_HbA1c": "< 6.5%"
+        },
+        {
+          "stage": "Inadequate Control on Monotherapy",
+          "recommended_drugs": ["metformin + sulfonylurea", "metformin + DPP4", "metformin + GLP1"],
+          "lifestyle": ["식이요법", "운동"],
+          "target_HbA1c": "< 7.0%"
+        },
+        {
+          "stage": "Multiple Comorbidities",
+          "recommended_drugs": ["metformin + SGLT2i", "SGLT2i for heart failure", "GLP1 for cardiovascular risk"],
+          "lifestyle": ["식이요법", "운동"],
+          "target_HbA1c": "< 8.0%"
+        }
+      ],
+      "monitoring": "HbA1c 3개월마다, 신기능 6개월마다",
+      "key_points": [
+        "메트포민 첫 치료 선택",
+        "신기능에 따른 용량 조정",
+        "심혈관 위험도 평가"
+      ]
+    },
+    {
+      "id": "egfr_mutated_lung_cancer_2023",
+      "disease": "EGFR 돌연변이 폐암",
+      "english_name": "EGFR-Mutated Non-Small Cell Lung Cancer",
+      "last_updated": 2023,
+      "organization": "Korean Association of Clinical Oncology",
+      "stages": [
+        {
+          "stage": "Untreated (TKI-naive)",
+          "first_line": "afatinib",
+          "alternative": ["gefitinib", "erlotinib"],
+          "typical_duration": "until resistance or intolerance",
+          "expected_pfs": "13-16 months"
+        },
+        {
+          "stage": "Disease Progression on TKI",
+          "management": "T790M mutation testing",
+          "if_T790M_positive": "osimertinib",
+          "if_T790M_negative": "chemotherapy or clinical trial"
+        }
+      ],
+      "monitoring": "CT scan every 8-12 weeks, ECOG performance status",
+      "toxicity_management": {
+        "diarrhea": "supportive care, antidiarrheal drugs if needed",
+        "rash": "topical steroids, systemic steroids if severe",
+        "nail_changes": "monitoring and supportive care"
+      },
+      "key_points": [
+        "아파티닙 설사 관리 중요",
+        "정기적 CT 추적 필수",
+        "내성 메커니즘 검사"
+      ]
+    },
+    {
+      "id": "elderly_patient_special_considerations_2023",
+      "disease": "고령자 특수 고려사항",
+      "english_name": "Special Considerations for Elderly Patients",
+      "last_updated": 2023,
+      "organization": "Korean Geriatrics Society",
+      "special_points": [
+        {
+          "age_group": "65-74 years",
+          "considerations": ["약물 상호작용 주의", "신기능 및 간기능 평가"],
+          "dosage_adjustment": "필요에 따라"
+        },
+        {
+          "age_group": "≥75 years",
+          "considerations": ["보수적 치료 접근", "다제약물 복용 최소화", "낙상 위험"],
+          "dosage_adjustment": "대부분 감량 권장"
+        }
+      ],
+      "polypharmacy_management": "정기적 약물 검토, 중복 제거",
+      "monitoring": "신기능, 간기능, 혈청 약물 농도 (필요시)",
+      "key_points": [
+        "1일 4개 이상 약물 피하기",
+        "저혈압 주의",
+        "인지 기능 모니터링"
+      ]
+    },
+    {
+      "id": "pregnancy_and_lactation_2023",
+      "disease": "임신 및 수유 중 약물 관리",
+      "english_name": "Medication Use in Pregnancy and Lactation",
+      "last_updated": 2023,
+      "organization": "Korean Society of Gynecologists",
+      "warnings": [
+        {
+          "drug": "afatinib",
+          "pregnancy_category": "D",
+          "recommendation": "금기 (absolute contraindication)",
+          "reason": "기형 및 유산 위험"
+        },
+        {
+          "drug": "amlodipine",
+          "pregnancy_category": "C",
+          "recommendation": "사전 의사 상담 필수, 필요시만 사용",
+          "reason": "동물 실험상 기형 위험 없으나 인체 자료 부족"
+        },
+        {
+          "drug": "metformin",
+          "pregnancy_category": "B",
+          "recommendation": "안전하게 사용 가능",
+          "reason": "임신성 당뇨병 및 당뇨병 모두 안전"
+        }
+      ],
+      "lactation_considerations": "모유 수유 중 약물 농도 및 영아 노출 평가",
+      "key_points": [
+        "임신 계획 시 전문가 상담",
+        "기형 유발 위험 약물 사전 중단",
+        "필수 약물은 안전하게 지속"
+      ]
+    }
+  ],
+  "search_by_disease": {
+    "고혈압": ["hypertension_management_2023", "elderly_patient_special_considerations_2023"],
+    "당뇨병": ["type2_diabetes_management_2023", "elderly_patient_special_considerations_2023"],
+    "폐암": ["egfr_mutated_lung_cancer_2023"],
+    "고령자": ["elderly_patient_special_considerations_2023"],
+    "임신": ["pregnancy_and_lactation_2023"]
+  }
+}

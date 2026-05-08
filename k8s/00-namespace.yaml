@@ -1,0 +1,12 @@
+# Kubernetes Namespace for SHIELD PHARMA-HYBRID
+# 격리된 환경에서 애플리케이션 실행
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: shield-pharma
+  labels:
+    name: shield-pharma
+    environment: production
+  annotations:
+    description: "SHIELD PHARMA-HYBRID v21.0 Production Environment"
