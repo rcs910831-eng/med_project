@@ -2,28 +2,14 @@ services:
   - type: web
     name: pharma-mobile-backend
     env: python
-    plan: starter
+    plan: free
     runtime: python-3.11
 
-    # Build configuration
     buildCommand: pip install -r requirements_backend.txt
+    startCommand: gunicorn -w 2 backend_main:app --bind 0.0.0.0:$PORT
 
-    # Start command for production
-    startCommand: gunicorn -w 4 -k uvicorn.workers.UvicornWorker backend_main:app --bind 0.0.0.0:$PORT --timeout 120
-
-    # Environment variables
     envVars:
       - key: PYTHON_VERSION
         value: 3.11
-      - key: ENVIRONMENT
-        value: production
 
-    # Health check
     healthCheckPath: /health
-
-    # Scale configuration
-    numInstances: 1
-
-    # Git configuration
-    repo: https://github.com/rcs910831-eng/med_project.git
-    branch: main
