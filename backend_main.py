@@ -920,14 +920,14 @@ if __name__ == "__main__":
     import uvicorn
 
     print("""
-    ╔════════════════════════════════════════════════════════════╗
-    ║         🏥 PHARMA-MOBILE FastAPI Backend v1.0             ║
-    ║                                                            ║
-    ║  🚀 서버 시작 중...                                        ║
-    ║  📍 http://localhost:8000                                 ║
-    ║  📖 API 문서: http://localhost:8000/docs                 ║
-    ║                                                            ║
-    ╚════════════════════════════════════════════════════════════╝
+    ============================================================
+    PHARMA-MOBILE FastAPI Backend v1.0
+
+    [*] Starting server...
+    [*] http://localhost:8000
+    [*] API Documentation: http://localhost:8000/docs
+
+    ============================================================
     """)
 
     uvicorn.run(app, host="0.0.0.0", port=8000)

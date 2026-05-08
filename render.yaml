@@ -27,7 +27,7 @@ services:
         sync: false  # This needs to be set manually in Render dashboard
 
     # Health check
-    healthCheckPath: /api/health
+    healthCheckPath: /health
     healthCheckStartupFailureThresholdCount: 10
 
     # Scale configuration
