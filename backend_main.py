@@ -18,6 +18,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, validator
 from dotenv import load_dotenv
+import io
+from PIL import Image
+import base64
 
 # 환경 변수 로드
 load_dotenv()
@@ -92,6 +95,23 @@ class APIResponse(BaseModel):
     data: Optional[Dict] = None
     timestamp: str
 
+class PrescriptionData(BaseModel):
+    """처방전 데이터"""
+    patient_name: Optional[str] = None
+    patient_age: Optional[int] = None
+    patient_gender: Optional[str] = None
+    primary_disease: Optional[str] = None
+    secondary_disease: Optional[str] = None
+    medications: Optional[List[Dict]] = []
+    prescription_date: Optional[str] = None
+
+class PrescriptionAnalysis(BaseModel):
+    """처방전 분석 결과"""
+    prescription_data: PrescriptionData
+    extracted_text: Optional[str] = None
+    confidence: Optional[float] = None
+    image_size: Optional[Dict] = None
+
 # ══════════════════════════════════════════════════════════════
 # 3. 헬스 체크 엔드포인트
 # ══════════════════════════════════════════════════════════════
@@ -154,15 +174,46 @@ async def get_user_profile(user_id: str):
 
 @app.get("/api/medications/{medication_name}", response_model=APIResponse)
 async def get_medication_info(medication_name: str):
-    """약물 정보 조회"""
+    """약물 기본 정보 조회"""
     return APIResponse(
         success=True,
-        message=f"약물 '{medication_name}' 정보",
+        message=f"약물 '{medication_name}' 정보 조회 완료",
         data={
             "medication_name": medication_name,
-            "dosage": "정보 조회됨",
-            "frequency": "정보 조회됨"
+            "dosage": "정보 조회 중",
+            "frequency": "정보 조회 중"
         },
+        timestamp=datetime.now().isoformat()
+    )
+
+@app.get("/api/medications/{medication_name}/detailed", response_model=APIResponse)
+async def get_medication_detailed(medication_name: str):
+    """약물 상세 정보 조회 (MFDS/논문 기반)"""
+    # Phase 1: MFDS API 연동 예정
+    medication_detail = {
+        "medication_name": medication_name,
+        "mfds_code": "조회 중",
+        "generic_name": "조회 중",
+        "manufacturer": "조회 중",
+        "dosage": "조회 중",
+        "frequency": "1일 1회",
+        "duration": "30일",
+        "mfds_price": "공시약가 조회 중",
+        "side_effects": [
+            "두통 (드물음)",
+            "현기증 (매우 드물음)"
+        ],
+        "contraindications": "조회 중",
+        "drug_interactions": [],
+        "special_warnings": "고령자 주의",
+        "image_url": None,
+        "reference_paper": None
+    }
+
+    return APIResponse(
+        success=True,
+        message=f"약물 '{medication_name}' 상세 정보 (Phase 1 개발 중)",
+        data=medication_detail,
         timestamp=datetime.now().isoformat()
     )
 
@@ -182,24 +233,56 @@ async def log_medication(medication_name: str, taken: bool):
 
 @app.post("/api/voice/transcribe", response_model=APIResponse)
 async def transcribe_voice(file: UploadFile = File(...)):
-    """음성 파일 전사 (STT)"""
+    """음성 파일 전사 (STT) - Google Cloud Speech API 기반"""
     try:
+        # Phase 1: Google Cloud Speech API 연동 예정
+        contents = await file.read()
+        file_size = len(contents)
+
+        transcribed_text = "[음성 인식 중...] 처방전 분석을 위한 음성 입력 처리 예정"
+
         return APIResponse(
             success=True,
-            message="음성 파일이 처리되었습니다",
-            data={"file_name": file.filename},
+            message="음성 파일이 처리되었습니다 (STT 기본 버전)",
+            data={
+                "file_name": file.filename,
+                "file_size": file_size,
+                "transcribed_text": transcribed_text,
+                "confidence": 0.0,
+                "language": "ko-KR"
+            },
             timestamp=datetime.now().isoformat()
         )
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
 @app.post("/api/voice/synthesize", response_model=APIResponse)
-async def synthesize_voice(text: str):
-    """텍스트를 음성으로 변환 (TTS)"""
+async def synthesize_voice(text: str, language: str = "ko-KR"):
+    """텍스트를 음성으로 변환 (TTS) - Google Cloud TTS 기반"""
+    # Phase 1: Google Cloud Text-to-Speech API 연동 예정
+    audio_data = {
+        "audio_content_base64": "[audio_base64_encoded_data]",
+        "audio_config": {
+            "audio_encoding": "MP3",
+            "sample_rate_hertz": 24000,
+            "pitch": 0.0,
+            "speaking_rate": 1.0
+        },
+        "voice": {
+            "language_code": language,
+            "name": "ko-KR-Neural2-A"
+        }
+    }
+
     return APIResponse(
         success=True,
-        message="음성 합성 완료",
-        data={"text": text},
+        message="음성 합성 완료 (TTS 기본 버전)",
+        data={
+            "text": text,
+            "language": language,
+            "audio_length_seconds": len(text) / 10,  # 대략적 예상
+            "audio": audio_data
+        },
         timestamp=datetime.now().isoformat()
     )
 
@@ -209,24 +292,82 @@ async def synthesize_voice(text: str):
 
 @app.post("/api/analysis/prescription", response_model=APIResponse)
 async def analyze_prescription(file: UploadFile = File(...)):
-    """처방전 분석"""
+    """처방전 분석 (이미지 -> 의료 정보 추출)"""
     try:
+        # 이미지 읽기
+        contents = await file.read()
+        image = Image.open(io.BytesIO(contents))
+
+        # 이미지 정보 추출
+        image_size = image.size
+        image_format = image.format
+
+        # 더미 처방전 데이터 (실제로는 Claude Vision API 사용)
+        prescription_data = PrescriptionData(
+            patient_name="분석 중...",
+            patient_age=None,
+            patient_gender=None,
+            primary_disease="분석 필요",
+            secondary_disease=None,
+            medications=[],
+            prescription_date=datetime.now().strftime("%Y-%m-%d")
+        )
+
+        analysis_result = PrescriptionAnalysis(
+            prescription_data=prescription_data,
+            extracted_text="OCR 분석 진행 중",
+            confidence=0.0,
+            image_size={"width": image_size[0], "height": image_size[1]}
+        )
+
         return APIResponse(
             success=True,
-            message="처방전이 분석되었습니다",
-            data={"file_name": file.filename},
+            message="처방전이 분석되었습니다. (Phase 1 기본 버전)",
+            data=analysis_result.dict(),
             timestamp=datetime.now().isoformat()
         )
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
 @app.get("/api/pharmacies/nearby", response_model=APIResponse)
-async def find_nearby_pharmacies(latitude: float, longitude: float):
-    """근처 약국 검색"""
+async def find_nearby_pharmacies(latitude: float, longitude: float, radius_km: int = 2):
+    """근처 약국 검색 (Google Places API 기반)"""
+    # Phase 1: Google Places API 연동 예정
+    sample_pharmacies = [
+        {
+            "name": "서울약국",
+            "latitude": latitude + 0.005,
+            "longitude": longitude + 0.005,
+            "distance_m": 500,
+            "phone": "02-1234-5678",
+            "hours": "09:00-22:00",
+            "rating": 4.5,
+            "delivery": True,
+            "estimated_time": "30분"
+        },
+        {
+            "name": "한약국",
+            "latitude": latitude - 0.005,
+            "longitude": longitude - 0.005,
+            "distance_m": 800,
+            "phone": "02-9876-5432",
+            "hours": "10:00-21:00",
+            "rating": 4.2,
+            "delivery": True,
+            "estimated_time": "45분"
+        }
+    ]
+
     return APIResponse(
         success=True,
-        message=f"위치 ({latitude}, {longitude}) 근처 약국 검색 완료",
-        data={"latitude": latitude, "longitude": longitude, "pharmacies": []},
+        message=f"위치 ({latitude}, {longitude}) 반경 {radius_km}km 근처 약국 검색 완료",
+        data={
+            "latitude": latitude,
+            "longitude": longitude,
+            "radius_km": radius_km,
+            "pharmacies": sample_pharmacies,
+            "count": len(sample_pharmacies)
+        },
         timestamp=datetime.now().isoformat()
     )
 
