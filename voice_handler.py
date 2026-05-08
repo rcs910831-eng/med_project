@@ -21,15 +21,20 @@ class VoiceHandler:
 
     def __init__(self):
         """Google Cloud 클라이언트 초기화"""
-        # 환경 변수에서 Google Cloud 인증 정보 파일 경로 읽기
-        credentials_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS", "")
+        # google-cloud-key.json 파일 경로 설정
+        credentials_path = os.path.join(os.path.dirname(__file__), "google-cloud-key.json")
+        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = credentials_path
 
         try:
+            logger.info(f"🔍 Google Cloud 인증 파일 확인: {credentials_path}")
+            logger.info(f"📂 파일 존재 여부: {os.path.exists(credentials_path)}")
+
             self.speech_client = speech.SpeechClient()
             self.tts_client = texttospeech_v1.TextToSpeechClient()
             logger.info("✅ Google Cloud 클라이언트 초기화 완료")
         except Exception as e:
             logger.warning(f"⚠️ Google Cloud 클라이언트 초기화 실패: {str(e)}")
+            logger.warning(f"📝 상세 정보: {type(e).__name__}")
             self.speech_client = None
             self.tts_client = None
 
