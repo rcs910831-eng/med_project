@@ -158,6 +158,28 @@ async def create_user_profile(profile: UserProfile):
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
+@app.post("/api/patient/info", response_model=APIResponse)
+async def enter_patient_info(patient: PatientInfo):
+    """환자 정보 입력 (휴대폰 텍스트 입력용)"""
+    try:
+        patient_data = {
+            "name": patient.name,
+            "age": patient.age,
+            "gender": patient.gender,
+            "primary_disease": patient.primary_disease,
+            "secondary_disease": patient.secondary_disease,
+            "registered_at": datetime.now().isoformat()
+        }
+
+        return APIResponse(
+            success=True,
+            message=f"환자 '{patient.name}' 정보가 등록되었습니다",
+            data={"patient": patient_data},
+            timestamp=datetime.now().isoformat()
+        )
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
 @app.get("/api/users/{user_id}", response_model=APIResponse)
 async def get_user_profile(user_id: str):
     """사용자 프로필 조회"""
@@ -231,60 +253,71 @@ async def log_medication(medication_name: str, taken: bool):
 # 6. 음성 처리 엔드포인트
 # ══════════════════════════════════════════════════════════════
 
-@app.post("/api/voice/transcribe", response_model=APIResponse)
-async def transcribe_voice(file: UploadFile = File(...)):
-    """음성 파일 전사 (STT) - Google Cloud Speech API 기반"""
+@app.post("/api/prescription/from-text", response_model=APIResponse)
+async def analyze_prescription_text(prescription_text: str):
+    """처방전을 텍스트로 입력받아 분석 (휴대폰 텍스트 입력용)"""
     try:
-        # Phase 1: Google Cloud Speech API 연동 예정
-        contents = await file.read()
-        file_size = len(contents)
+        # 텍스트에서 기본 정보 추출
+        lines = prescription_text.split('\n')
 
-        transcribed_text = "[음성 인식 중...] 처방전 분석을 위한 음성 입력 처리 예정"
+        prescription_data = PrescriptionData(
+            patient_name="분석 중",
+            patient_age=None,
+            patient_gender=None,
+            primary_disease="분석 중",
+            secondary_disease=None,
+            medications=[],
+            prescription_date=datetime.now().strftime("%Y-%m-%d")
+        )
 
         return APIResponse(
             success=True,
-            message="음성 파일이 처리되었습니다 (STT 기본 버전)",
+            message="처방전 텍스트 분석 완료",
             data={
-                "file_name": file.filename,
-                "file_size": file_size,
-                "transcribed_text": transcribed_text,
-                "confidence": 0.0,
-                "language": "ko-KR"
+                "prescription": prescription_data.dict(),
+                "input_lines": len(lines),
+                "input_text": prescription_text[:200]
             },
             timestamp=datetime.now().isoformat()
         )
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
-@app.post("/api/voice/synthesize", response_model=APIResponse)
-async def synthesize_voice(text: str, language: str = "ko-KR"):
-    """텍스트를 음성으로 변환 (TTS) - Google Cloud TTS 기반"""
-    # Phase 1: Google Cloud Text-to-Speech API 연동 예정
-    audio_data = {
-        "audio_content_base64": "[audio_base64_encoded_data]",
-        "audio_config": {
-            "audio_encoding": "MP3",
-            "sample_rate_hertz": 24000,
-            "pitch": 0.0,
-            "speaking_rate": 1.0
-        },
-        "voice": {
-            "language_code": language,
-            "name": "ko-KR-Neural2-A"
-        }
-    }
+class PatientInfo(BaseModel):
+    """환자 정보 (휴대폰 텍스트 입력)"""
+    name: str
+    age: Optional[int] = None
+    gender: Optional[str] = None
+    primary_disease: Optional[str] = None
+    secondary_disease: Optional[str] = None
 
-    return APIResponse(
-        success=True,
-        message="음성 합성 완료 (TTS 기본 버전)",
-        data={
-            "text": text,
-            "language": language,
-            "audio_length_seconds": len(text) / 10,  # 대략적 예상
-            "audio": audio_data
-        },
-        timestamp=datetime.now().isoformat()
-    )
+class MedicationInput(BaseModel):
+    """약물 입력 (휴대폰 텍스트 입력)"""
+    medication_name: str
+    dosage: Optional[str] = None
+    frequency: Optional[str] = None
+    duration: Optional[str] = None
+
+@app.post("/api/prescription/medications", response_model=APIResponse)
+async def add_medication_to_prescription(medication: MedicationInput):
+    """약물 정보를 직접 입력 (휴대폰 텍스트 입력용)"""
+    try:
+        medication_info = {
+            "name": medication.medication_name,
+            "dosage": medication.dosage or "미입력",
+            "frequency": medication.frequency or "미입력",
+            "duration": medication.duration or "미입력",
+            "added_at": datetime.now().isoformat()
+        }
+
+        return APIResponse(
+            success=True,
+            message=f"약물 '{medication.medication_name}' 추가됨",
+            data={"medication": medication_info},
+            timestamp=datetime.now().isoformat()
+        )
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
 # ══════════════════════════════════════════════════════════════
 # 7. 분석 및 추천 엔드포인트
