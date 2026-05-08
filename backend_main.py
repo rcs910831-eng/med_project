@@ -723,6 +723,168 @@ async def get_user_statistics(user_id: str):
         conn.close()
 
 
+# [7] 음성 처리 (Speech-to-Text)
+@app.post("/api/voice/transcribe")
+async def transcribe_audio(audio_file: UploadFile = File(...), user_id: str = ""):
+    """음성 파일을 텍스트로 변환 (Speech-to-Text)"""
+    try:
+        from voice_handler import get_voice_handler
+
+        voice_handler = get_voice_handler()
+
+        # 오디오 파일 읽기
+        audio_content = await audio_file.read()
+
+        if not audio_content:
+            raise ValueError("오디오 파일이 비어있습니다")
+
+        # Speech-to-Text 수행
+        transcript, confidence = voice_handler.speech_to_text(audio_content)
+
+        logger.info(f"✅ 음성 인식 완료: {user_id} - 신뢰도 {confidence:.2%}")
+
+        return {
+            "status": "success",
+            "transcript": transcript,
+            "confidence": confidence,
+            "timestamp": datetime.now().isoformat()
+        }
+
+    except Exception as e:
+        logger.error(f"❌ 음성 인식 오류: {str(e)}")
+        return {"status": "error", "message": str(e)}
+
+
+# [8] 음성 생성 (Text-to-Speech)
+@app.post("/api/voice/synthesize")
+async def synthesize_speech(text: str, user_id: str = ""):
+    """텍스트를 음성으로 변환 (Text-to-Speech)"""
+    try:
+        from voice_handler import get_voice_handler
+
+        voice_handler = get_voice_handler()
+
+        if not text or len(text) == 0:
+            raise ValueError("변환할 텍스트가 없습니다")
+
+        if len(text) > 5000:
+            raise ValueError("텍스트는 5000자 이하여야 합니다")
+
+        # Text-to-Speech 수행
+        audio_content = voice_handler.text_to_speech(text)
+
+        logger.info(f"✅ 음성 생성 완료: {user_id} - {len(audio_content)} bytes")
+
+        # Base64로 인코딩하여 전송 (JSON에서 바이너리 데이터 전달용)
+        import base64
+        audio_base64 = base64.b64encode(audio_content).decode('utf-8')
+
+        return {
+            "status": "success",
+            "audio_base64": audio_base64,
+            "content_type": "audio/mpeg",
+            "timestamp": datetime.now().isoformat()
+        }
+
+    except Exception as e:
+        logger.error(f"❌ 음성 생성 오류: {str(e)}")
+        return {"status": "error", "message": str(e)}
+
+
+# [9] 건강 상태 음성 분석
+@app.post("/api/voice/health-analyze")
+async def analyze_health_with_voice(user_id: str, audio_file: UploadFile = File(...)):
+    """음성 입력으로 건강 상태 분석 및 음성 응답"""
+    try:
+        from voice_handler import get_voice_handler
+
+        voice_handler = get_voice_handler()
+        conn = DatabaseManager.get_connection()
+        cursor = conn.cursor()
+
+        # Step 1: 음성 인식 (Speech-to-Text)
+        audio_content = await audio_file.read()
+        transcript, confidence = voice_handler.speech_to_text(audio_content)
+
+        if confidence < 0.5:
+            return {
+                "status": "error",
+                "message": "음성을 명확하게 인식하지 못했습니다. 다시 시도해주세요.",
+                "confidence": confidence
+            }
+
+        # Step 2: 사용자 프로필 조회
+        cursor.execute("SELECT profile_json FROM users WHERE user_id = ?", (user_id,))
+        result = cursor.fetchone()
+
+        if not result:
+            return {"status": "error", "message": "사용자를 찾을 수 없습니다"}
+
+        user_profile = json.loads(result["profile_json"])
+
+        # Step 3: AI 건강 분석
+        analysis_result = MedicationAnalyzer.analyze_health_status(
+            user_profile,
+            transcript
+        )
+
+        # Step 4: 약물 경고
+        med_names = [m.get("name", "") for m in user_profile.get("medications", [])]
+        warnings = MedicationAnalyzer.get_drug_warnings(med_names)
+
+        # Step 5: 데이터베이스 저장
+        timestamp = datetime.now()
+        cursor.execute("""
+            INSERT INTO health_inputs (user_id, input_type, content, ai_response, timestamp)
+            VALUES (?, ?, ?, ?, ?)
+        """, (
+            user_id,
+            "voice",
+            transcript,
+            json.dumps(analysis_result),
+            timestamp
+        ))
+        conn.commit()
+
+        # Step 6: 음성 응답 생성
+        voice_response_text = f"""
+{user_profile.get('name', '사용자')}님의 건강 분석 결과입니다.
+
+분석 내용: {analysis_result.get('analysis', {}).get('status_summary', '정상입니다')}
+
+{'주의사항:' if warnings.get('warnings') else '특별한 주의사항이 없습니다.'}
+"""
+        if warnings.get("warnings"):
+            for warning in warnings["warnings"]:
+                voice_response_text += f"\n• {warning.get('medication')}: {warning.get('recommendation')}"
+
+        # Text-to-Speech 수행
+        audio_response = voice_handler.text_to_speech(voice_response_text)
+
+        # Base64 인코딩
+        import base64
+        audio_base64 = base64.b64encode(audio_response).decode('utf-8')
+
+        logger.info(f"✅ 음성 건강 분석 완료: {user_id}")
+
+        return {
+            "status": "success",
+            "transcript": transcript,
+            "transcript_confidence": confidence,
+            "analysis": analysis_result.get("analysis", {}),
+            "warnings": warnings,
+            "voice_response_base64": audio_base64,
+            "response_text": voice_response_text,
+            "timestamp": timestamp.isoformat()
+        }
+
+    except Exception as e:
+        logger.error(f"❌ 음성 건강 분석 오류: {str(e)}")
+        return {"status": "error", "message": str(e)}
+    finally:
+        conn.close()
+
+
 # ══════════════════════════════════════════════════════════════
 # 6. 실행
 # ══════════════════════════════════════════════════════════════
