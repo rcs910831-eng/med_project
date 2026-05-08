@@ -64,3 +64,23 @@ temp/
 # OS
 .DS_Store
 Thumbs.db
+
+# Old project files (cleanup)
+pharma_v*.db
+pharma_*.py
+*.backup.*
+*_old.py
+*_backup.py
+test_*.py
+demo_*.py
+
+# Frontend build
+node_modules/
+.flutter-plugins
+.flutter-plugins-dependencies
+build/
+dist/
+
+# Notebooks
+*.ipynb_checkpoints
+.ipynb_checkpoints/
