@@ -1,0 +1,537 @@
+[
+  {
+    "name": "김상은",
+    "age": null,
+    "gender": null,
+    "diseases": [
+      "고혈압(주진단)",
+      "당뇨(부진단)"
+    ],
+    "medications": [
+      "노바스크정 5mg",
+      "코자정 50mg",
+      "다이아벡스정 500mg",
+      "아마릴정 2mg",
+      "다이아벡스정 500mg",
+      "보글리보스 0.3mg"
+    ],
+    "prescription_days": 30,
+    "sample_id": "RX_P001",
+    "image_url": "/api/prescriptions/samples/RX_P001/image",
+    "analyze_url": "/api/prescriptions/samples/RX_P001/analyze"
+  },
+  {
+    "name": "박지현",
+    "age": null,
+    "gender": null,
+    "diseases": [
+      "위암(주진단)",
+      "항암후오심(부진단)"
+    ],
+    "medications": [
+      "젤로다정 500mg",
+      "옥살리플라틴주",
+      "맥페란정",
+      "노루모액",
+      "맥페란정 10mg",
+      "조프란정 4mg",
+      "스토가정 10mg"
+    ],
+    "prescription_days": 42,
+    "sample_id": "RX_P002",
+    "image_url": "/api/prescriptions/samples/RX_P002/image",
+    "analyze_url": "/api/prescriptions/samples/RX_P002/analyze"
+  },
+  {
+    "name": "이준호",
+    "age": null,
+    "gender": null,
+    "diseases": [
+      "심부전(주진단)",
+      "천식(부진단)"
+    ],
+    "medications": [
+      "엔트레스트 50mg",
+      "라식스정 40mg",
+      "딜라트렌정 3.125mg",
+      "심비코트 터부헬러",
+      "싱귤레어정",
+      "닥터테오정 100mg"
+    ],
+    "prescription_days": 60,
+    "sample_id": "RX_P003",
+    "image_url": "/api/prescriptions/samples/RX_P003/image",
+    "analyze_url": "/api/prescriptions/samples/RX_P003/analyze"
+  },
+  {
+    "name": "최영민",
+    "age": null,
+    "gender": null,
+    "diseases": [
+      "만성위염(주진단)",
+      "만성피로"
+    ],
+    "medications": [
+      "무코스타정",
+      "파리에트정 10mg",
+      "가나톤정",
+      "베아제정",
+      "우루사정 100mg",
+      "아로나민골드",
+      "실리마린 140mg"
+    ],
+    "prescription_days": 28,
+    "sample_id": "RX_P004",
+    "image_url": "/api/prescriptions/samples/RX_P004/image",
+    "analyze_url": "/api/prescriptions/samples/RX_P004/analyze"
+  },
+  {
+    "name": "신준호",
+    "age": null,
+    "gender": null,
+    "diseases": [
+      "고혈압(주진단)"
+    ],
+    "medications": [
+      "딜라트렌정 12.5mg",
+      "카나브정 60mg",
+      "노바스크정 5mg"
+    ],
+    "prescription_days": 30,
+    "sample_id": "RX_P005",
+    "image_url": "/api/prescriptions/samples/RX_P005/image",
+    "analyze_url": "/api/prescriptions/samples/RX_P005/analyze"
+  },
+  {
+    "name": "임대균",
+    "age": null,
+    "gender": null,
+    "diseases": [
+      "퇴행성관절염"
+    ],
+    "medications": [
+      "탁센연질캡슐",
+      "조인스정 200mg",
+      "무코스타정",
+      "메디락디에스"
+    ],
+    "prescription_days": 14,
+    "sample_id": "RX_P006",
+    "image_url": "/api/prescriptions/samples/RX_P006/image",
+    "analyze_url": "/api/prescriptions/samples/RX_P006/analyze"
+  },
+  {
+    "name": "최민준",
+    "age": null,
+    "gender": null,
+    "diseases": [
+      "가와사키 병"
+    ],
+    "medications": [
+      "아이비글로불린 SN주",
+      "아스피린정 100mg",
+      "프레드니솔론정 5mg"
+    ],
+    "prescription_days": 14,
+    "sample_id": "RX_P007",
+    "image_url": "/api/prescriptions/samples/RX_P007/image",
+    "analyze_url": "/api/prescriptions/samples/RX_P007/analyze"
+  },
+  {
+    "name": "한수진",
+    "age": null,
+    "gender": null,
+    "diseases": [
+      "철결핍성 빈혈"
+    ],
+    "medications": [
+      "훼로바유정",
+      "비타민C",
+      "폴산 1mg",
+      "액티넘EX"
+    ],
+    "prescription_days": 60,
+    "sample_id": "RX_P008",
+    "image_url": "/api/prescriptions/samples/RX_P008/image",
+    "analyze_url": "/api/prescriptions/samples/RX_P008/analyze"
+  },
+  {
+    "name": "조영진",
+    "age": null,
+    "gender": null,
+    "diseases": [
+      "비소세포폐암(주진단)"
+    ],
+    "medications": [
+      "타그리소정 80mg",
+      "가나톤정",
+      "무코스타정",
+      "코대원시럽"
+    ],
+    "prescription_days": 30,
+    "sample_id": "RX_P009",
+    "image_url": "/api/prescriptions/samples/RX_P009/image",
+    "analyze_url": "/api/prescriptions/samples/RX_P009/analyze"
+  },
+  {
+    "name": "이지온",
+    "age": null,
+    "gender": null,
+    "diseases": [
+      "급성 세기관지염"
+    ],
+    "medications": [
+      "벤톨린 흡입액",
+      "풀미코트 레스풀",
+      "무코펙트시럽",
+      "메이액트세립"
+    ],
+    "prescription_days": 7,
+    "sample_id": "RX_P010",
+    "image_url": "/api/prescriptions/samples/RX_P010/image",
+    "analyze_url": "/api/prescriptions/samples/RX_P010/analyze"
+  },
+  {
+    "name": "김도윤",
+    "age": null,
+    "gender": null,
+    "diseases": [
+      "성장호르몬결핍증"
+    ],
+    "medications": [
+      "지노트로핀주",
+      "텐텐츄정",
+      "비타민D 드롭",
+      "칼슘플러스정"
+    ],
+    "prescription_days": 180,
+    "sample_id": "RX_P011",
+    "image_url": "/api/prescriptions/samples/RX_P011/image",
+    "analyze_url": "/api/prescriptions/samples/RX_P011/analyze"
+  },
+  {
+    "name": "이수진",
+    "age": null,
+    "gender": null,
+    "diseases": [
+      "우울증(주진단)"
+    ],
+    "medications": [
+      "렉사프로정 10mg",
+      "데파스정",
+      "자낙스정 0.25mg"
+    ],
+    "prescription_days": 30,
+    "sample_id": "RX_P012",
+    "image_url": "/api/prescriptions/samples/RX_P012/image",
+    "analyze_url": "/api/prescriptions/samples/RX_P012/analyze"
+  },
+  {
+    "name": "박서연",
+    "age": null,
+    "gender": null,
+    "diseases": [
+      "골육종(주진단)"
+    ],
+    "medications": [
+      "시스플라틴주",
+      "독소루비신주",
+      "메토트렉세이트주",
+      "필그라스팀주"
+    ],
+    "prescription_days": 6,
+    "sample_id": "RX_P013",
+    "image_url": "/api/prescriptions/samples/RX_P013/image",
+    "analyze_url": "/api/prescriptions/samples/RX_P013/analyze"
+  },
+  {
+    "name": "김철수",
+    "age": null,
+    "gender": null,
+    "diseases": [
+      "알츠하이머형 치매"
+    ],
+    "medications": [
+      "아리셉트정 5mg",
+      "에빅사정 10mg",
+      "쿠에타핀정 12.5mg",
+      "라식스정 40mg",
+      "알닥톤정 25mg",
+      "콩코르정 2.5mg"
+    ],
+    "prescription_days": 90,
+    "sample_id": "RX_P014",
+    "image_url": "/api/prescriptions/samples/RX_P014/image",
+    "analyze_url": "/api/prescriptions/samples/RX_P014/analyze"
+  },
+  {
+    "name": "정하은",
+    "age": null,
+    "gender": null,
+    "diseases": [
+      "아토피 피부염(주진단)"
+    ],
+    "medications": [
+      "엘리델크림",
+      "페니라민시럽",
+      "제모스보습제",
+      "락티케어로션"
+    ],
+    "prescription_days": 30,
+    "sample_id": "RX_P015",
+    "image_url": "/api/prescriptions/samples/RX_P015/image",
+    "analyze_url": "/api/prescriptions/samples/RX_P015/analyze"
+  },
+  {
+    "name": "James Lee",
+    "age": null,
+    "gender": null,
+    "diseases": [
+      "알레르기 비염(주진단)"
+    ],
+    "medications": [
+      "세티리진 10mg",
+      "아바미스 스프레이",
+      "싱귤레어정",
+      "코대원정"
+    ],
+    "prescription_days": 30,
+    "sample_id": "RX_P016",
+    "image_url": "/api/prescriptions/samples/RX_P016/image",
+    "analyze_url": "/api/prescriptions/samples/RX_P016/analyze"
+  },
+  {
+    "name": "박소윤",
+    "age": null,
+    "gender": null,
+    "diseases": [
+      "불안장애(주진단)"
+    ],
+    "medications": [
+      "알프람정",
+      "인데놀정 10mg",
+      "스틸녹스정 10mg"
+    ],
+    "prescription_days": 14,
+    "sample_id": "RX_P017",
+    "image_url": "/api/prescriptions/samples/RX_P017/image",
+    "analyze_url": "/api/prescriptions/samples/RX_P017/analyze"
+  },
+  {
+    "name": "Michael Kim",
+    "age": null,
+    "gender": null,
+    "diseases": [
+      "고혈압"
+    ],
+    "medications": [
+      "노바스크정 5mg",
+      "코자정 50mg",
+      "다이크로쥰정",
+      "리피토정 20mg"
+    ],
+    "prescription_days": 30,
+    "sample_id": "RX_P018",
+    "image_url": "/api/prescriptions/samples/RX_P018/image",
+    "analyze_url": "/api/prescriptions/samples/RX_P018/analyze"
+  },
+  {
+    "name": "이정태",
+    "age": null,
+    "gender": null,
+    "diseases": [
+      "고지혈증(주진단)"
+    ],
+    "medications": [
+      "크레스트정 10mg",
+      "에제티미브",
+      "고덱스캡슐"
+    ],
+    "prescription_days": 30,
+    "sample_id": "RX_P019",
+    "image_url": "/api/prescriptions/samples/RX_P019/image",
+    "analyze_url": "/api/prescriptions/samples/RX_P019/analyze"
+  },
+  {
+    "name": "오창현",
+    "age": null,
+    "gender": null,
+    "diseases": [
+      "울혈성 부종"
+    ],
+    "medications": [
+      "알닥톤정 25mg",
+      "라식스정 20mg",
+      "토르세미드정 5mg"
+    ],
+    "prescription_days": 14,
+    "sample_id": "RX_P020",
+    "image_url": "/api/prescriptions/samples/RX_P020/image",
+    "analyze_url": "/api/prescriptions/samples/RX_P020/analyze"
+  },
+  {
+    "name": "윤지영",
+    "age": null,
+    "gender": null,
+    "diseases": [
+      "시력저하관리"
+    ],
+    "medications": [
+      "루테인 지아잔틴",
+      "오메가3",
+      "리레바점안액"
+    ],
+    "prescription_days": 90,
+    "sample_id": "RX_P021",
+    "image_url": "/api/prescriptions/samples/RX_P021/image",
+    "analyze_url": "/api/prescriptions/samples/RX_P021/analyze"
+  },
+  {
+    "name": "강민서",
+    "age": null,
+    "gender": null,
+    "diseases": [
+      "긴장성 두통"
+    ],
+    "medications": [
+      "탁센연질캡슐",
+      "마그네슘",
+      "리리카캡슐 25mg"
+    ],
+    "prescription_days": 10,
+    "sample_id": "RX_P022",
+    "image_url": "/api/prescriptions/samples/RX_P022/image",
+    "analyze_url": "/api/prescriptions/samples/RX_P022/analyze"
+  },
+  {
+    "name": "서동훈",
+    "age": null,
+    "gender": null,
+    "diseases": [
+      "혈관육종(주진단)"
+    ],
+    "medications": [
+      "파클리탁셀주",
+      "덱사메타손정",
+      "페니라민정",
+      "가스터정"
+    ],
+    "prescription_days": 84,
+    "sample_id": "RX_P023",
+    "image_url": "/api/prescriptions/samples/RX_P023/image",
+    "analyze_url": "/api/prescriptions/samples/RX_P023/analyze"
+  },
+  {
+    "name": "한지민",
+    "age": null,
+    "gender": null,
+    "diseases": [
+      "알레르기 비염"
+    ],
+    "medications": [
+      "씨투스정",
+      "싱귤레어츄정",
+      "나조넥스스프레이"
+    ],
+    "prescription_days": 30,
+    "sample_id": "RX_P024",
+    "image_url": "/api/prescriptions/samples/RX_P024/image",
+    "analyze_url": "/api/prescriptions/samples/RX_P024/analyze"
+  },
+  {
+    "name": "류태영",
+    "age": null,
+    "gender": null,
+    "diseases": [
+      "만성 위염(주진단)"
+    ],
+    "medications": [
+      "스토가정",
+      "가나톤정",
+      "넥시움정 20mg"
+    ],
+    "prescription_days": 14,
+    "sample_id": "RX_P025",
+    "image_url": "/api/prescriptions/samples/RX_P025/image",
+    "analyze_url": "/api/prescriptions/samples/RX_P025/analyze"
+  },
+  {
+    "name": "송은주",
+    "age": null,
+    "gender": null,
+    "diseases": [
+      "영양결핍성 빈혈(주진단)"
+    ],
+    "medications": [
+      "훼로바유정",
+      "폴산",
+      "비타민B12",
+      "비타민C"
+    ],
+    "prescription_days": 60,
+    "sample_id": "RX_P026",
+    "image_url": "/api/prescriptions/samples/RX_P026/image",
+    "analyze_url": "/api/prescriptions/samples/RX_P026/analyze"
+  },
+  {
+    "name": "최희정",
+    "age": null,
+    "gender": null,
+    "diseases": [
+      "골다공증(주진단)"
+    ],
+    "medications": [
+      "포사맥스플러스디",
+      "칼슘 500mg",
+      "비타민D3 2000IU"
+    ],
+    "prescription_days": 84,
+    "sample_id": "RX_P027",
+    "image_url": "/api/prescriptions/samples/RX_P027/image",
+    "analyze_url": "/api/prescriptions/samples/RX_P027/analyze"
+  },
+  {
+    "name": "김현숙",
+    "age": null,
+    "gender": null,
+    "diseases": [
+      "유방암(주진단)"
+    ],
+    "medications": [
+      "허셉틴주",
+      "타목시펜정 20mg",
+      "비타민D",
+      "졸라덱스데포주"
+    ],
+    "prescription_days": null,
+    "sample_id": "RX_P028",
+    "image_url": "/api/prescriptions/samples/RX_P028/image",
+    "analyze_url": "/api/prescriptions/samples/RX_P028/analyze"
+  },
+  {
+    "name": "박명심",
+    "age": 55,
+    "gender": "여",
+    "diseases": [
+      "C55 (자궁암 — 주진단)",
+      "I42.7 (확장성심근병증 — 부진단)"
+    ],
+    "medications": [
+      "보트리엔트정 400MG (파조파닙·항암제·VEGFR억제)",
+      "코슈정 60MG (슈도에페드린·기침코막힘)",
+      "코푸시럽 20ML (다이하이드로코데인+클로르페니라민·기침)",
+      "삼남아세트아미노펜정 500MG (아세트아미노펜·해열진통)",
+      "트리테이스정 2.5MG (라미프릴·ACE억제제)",
+      "후릭스정 40MG (푸로세미드·루프이뇨제)",
+      "알닥톤필름코팅정 25MG (스피로노락톤·항알도스테론)",
+      "볼프코라진정 2.5MG (이소소르비드모노니트레이트·혈관확장)",
+      "자디앙정 10MG (엠파글리플로진·SGLT2억제제)",
+      "프로코란정 5MG (이바브라딘·HCN채널억제)"
+    ],
+    "prescription_days": 100,
+    "sample_id": "RX_P029",
+    "image_url": "/api/prescriptions/samples/RX_P029/image",
+    "analyze_url": "/api/prescriptions/samples/RX_P029/analyze",
+    "prescription_note": "C55(항암)+I42.7(심근병증) 통합처방. 보트리엔트(파조파닙)와 코슈정(슈도에페드린) 병용 시 혈압상승 및 CYP3A4 상호작용 주의 필요."
+  }
+]
