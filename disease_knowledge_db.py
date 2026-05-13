@@ -1050,7 +1050,7 @@ DISEASE_DB = {
                 "form": "정제"
             },
             {
-                "name": "암페타민 (Amphetamine, 에델)")  # 또는 Adderall
+                "name": "암페타민 (Amphetamine, 에델)",  # 또는 Adderall
                 "dosage": "5mg",
                 "frequency": "1일 1-2회",
                 "timing": "아침, 필요시 정오",

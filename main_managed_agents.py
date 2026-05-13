@@ -26,7 +26,9 @@ logging.basicConfig(
 logger = logging.getLogger("PHARMA-HYBRID")
 
 def main():
-    load_dotenv()
+    # Load environment variables explicitly
+    env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '.env')
+    load_dotenv(dotenv_path=env_path, override=True)
     
     parser = argparse.ArgumentParser(description="SHIELD PHARMA-HYBRID v21.0 - Prescription Analysis")
     parser.add_argument("--image", type=str, help="Path to prescription image", default="prescription_images/RX_P001.png")

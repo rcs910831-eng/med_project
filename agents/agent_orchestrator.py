@@ -9,11 +9,11 @@ from typing import Dict, List, Optional
 from datetime import datetime
 import os
 
-from anthropic import Anthropic
+import google.generativeai as genai
 from agents.agent_ocr_vision import AgentOCRVision
 from agents.agent_rag_drug import AgentRAGDrug
 from agents.agent_google_pharmacy import AgentGooglePharmacy
-from utils.pdf_generator import PDFReportGenerator
+from utils.pdf_generator import PrescriptionReportGenerator as PDFReportGenerator
 from utils.tts_handler import TTSHandler
 from utils.validators import MedicationValidator, PrescriptionValidator
 
@@ -28,14 +28,15 @@ class AgentOrchestrator:
         Initialize Orchestrator Agent
 
         Args:
-            api_key: Anthropic API key
+            api_key: Google API key
         """
-        self.api_key = api_key or os.getenv("ANTHROPIC_API_KEY")
+        self.api_key = api_key or os.getenv("GOOGLE_API_KEY")
         if not self.api_key:
-            raise ValueError("ANTHROPIC_API_KEY not found")
+            raise ValueError("GOOGLE_API_KEY not found")
 
-        self.client = Anthropic(api_key=self.api_key)
-        self.model = "claude-opus-4-7"
+        genai.configure(api_key=self.api_key)
+        self.client = genai.GenerativeModel("gemini-1.5-pro-vision")
+        self.model = "gemini-1.5-pro-vision"
 
         # Initialize sub-agents (optional)
         self.ocr_agent = None

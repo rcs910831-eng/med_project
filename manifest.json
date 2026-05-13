@@ -1,0 +1,37 @@
+{
+  "name": "PHARMA-MOBILE - 의료 처방전 분석",
+  "short_name": "PHARMA-MOBILE",
+  "description": "처방전 자동 분석 및 약물 정보 조회 시스템",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#667eea",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%23667eea' width='192' height='192'/><text x='96' y='120' font-size='80' fill='white' text-anchor='middle' font-weight='bold'>💊</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect fill='%23667eea' width='512' height='512'/><text x='256' y='380' font-size='200' fill='white' text-anchor='middle' font-weight='bold'>💊</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 540 720'><rect fill='%23f0f0f0' width='540' height='720'/><text x='270' y='360' font-size='60' fill='%23667eea' text-anchor='middle' font-weight='bold'>PHARMA-MOBILE</text></svg>",
+      "sizes": "540x720",
+      "type": "image/svg+xml",
+      "form_factor": "narrow"
+    }
+  ],
+  "categories": ["medical", "health", "productivity"],
+  "screenshots_alt": {
+    "narrow": "PHARMA-MOBILE 앱 스크린샷"
+  }
+}

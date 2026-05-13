@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHARMA-HEALTHCARE 의료진 대시보드</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .role-selector {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .role-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .role-btn {
+            padding: 12px 24px;
+            border: 2px solid #ddd;
+            background: white;
+            color: #333;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .role-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .role-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-content {
+            font-size: 28px;
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 10px;
+        }
+
+        .card-label {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .patient-list {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+
+        .patient-item {
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .patient-item:hover {
+            background: #f5f5f5;
+            border-color: #667eea;
+        }
+
+        .patient-name {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .patient-info {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .alert-badge {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            margin-right: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 13px;
+            font-family: inherit;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: #764ba2;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>💊 PHARMA-HEALTHCARE</h1>
+        <p>의료진 협력 시스템 - 환자 관리 및 처방약 추적</p>
+    </div>
+
+    <div class="container">
+        <!-- 역할 선택 -->
+        <div class="role-selector">
+            <h2>역할 선택</h2>
+            <div class="role-buttons">
+                <button class="role-btn active" onclick="switchRole('doctor')">👨‍⚕️ 의사</button>
+                <button class="role-btn" onclick="switchRole('pharmacist')">💊 약사</button>
+                <button class="role-btn" onclick="switchRole('admin')">🔧 관리자</button>
+            </div>
+        </div>
+
+        <!-- 통계 대시보드 -->
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number" id="total-patients">42</div>
+                <div class="stat-label">총 환자</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" id="active-prescriptions">128</div>
+                <div class="stat-label">활성 처방</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" id="medication-alerts">8</div>
+                <div class="stat-label">약물 경고</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" id="compliance-rate">94%</div>
+                <div class="stat-label">복약 순응도</div>
+            </div>
+        </div>
+
+        <!-- 의사용 대시보드 -->
+        <div id="doctor-section">
+            <div class="dashboard">
+                <div class="card">
+                    <h3>👤 환자 정보 등록</h3>
+                    <button onclick="openPatientRegistration()">새 환자 등록</button>
+                </div>
+
+                <div class="card">
+                    <h3>🔍 환자 검색</h3>
+                    <input type="text" id="patient-search" placeholder="환자명 또는 ID로 검색...">
+                </div>
+
+                <div class="card">
+                    <h3>📋 처방전 등록</h3>
+                    <button onclick="openPrescriptionForm()">새 처방전 작성</button>
+                </div>
+
+                <div class="card">
+                    <h3>⚠️ 약물 상호작용 확인</h3>
+                    <textarea id="drug-list" placeholder="약물명을 쉼표로 구분하여 입력..."></textarea>
+                    <button onclick="checkDrugInteractions()">확인</button>
+                </div>
+
+                <div class="card">
+                    <h3>📊 환자 건강 지표</h3>
+                    <button onclick="viewPatientHealthMetrics()">건강 지표 모니터링</button>
+                </div>
+            </div>
+
+            <div class="patient-list">
+                <h2>📱 최근 환자 목록</h2>
+                <div id="doctor-patients">
+                    <div class="patient-item">
+                        <div class="patient-name">김철수 (68/M)</div>
+                        <div class="patient-info">환자ID: P001 | 진료과: 내과 | 마지막 방문: 2026-05-08</div>
+                        <div>
+                            <span class="alert-badge">고혈압 관리중</span>
+                            <span class="alert-badge">약물 3개</span>
+                        </div>
+                    </div>
+                    <div class="patient-item">
+                        <div class="patient-name">이영희 (45/F)</div>
+                        <div class="patient-info">환자ID: P002 | 진료과: 신경과 | 마지막 방문: 2026-05-07</div>
+                        <div>
+                            <span class="alert-badge">편두통 치료</span>
+                            <span class="alert-badge">약물 2개</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 약사용 대시보드 -->
+        <div id="pharmacist-section" class="hidden">
+            <div class="dashboard">
+                <div class="card">
+                    <h3>🔔 상담 요청</h3>
+                    <button onclick="openConsultationForm()">새 상담 요청</button>
+                </div>
+
+                <div class="card">
+                    <h3>⏰ 복약 알림</h3>
+                    <button onclick="sendMedicationReminders()">알림 전송</button>
+                </div>
+
+                <div class="card">
+                    <h3>📊 부작용 모니터링</h3>
+                    <button onclick="viewSideEffects()">상세 보기</button>
+                </div>
+
+                <div class="card">
+                    <h3>🩺 환자 건강 지표 (약물 관련)</h3>
+                    <button onclick="viewPharmacistHealthMetrics()">건강 지표 모니터링</button>
+                </div>
+            </div>
+
+            <div class="patient-list">
+                <h2>💬 상담 대기 환자</h2>
+                <div id="pharmacist-patients">
+                    <div class="patient-item">
+                        <div class="patient-name">박민준 (34/M)</div>
+                        <div class="patient-info">처방약: 노바스크정 + 글루코판정 | 상담 요청: 2026-05-09 13:45</div>
+                        <div>
+                            <span class="alert-badge">상호작용 검사 필요</span>
+                            <span class="alert-badge">긴급</span>
+                        </div>
+                    </div>
+                    <div class="patient-item">
+                        <div class="patient-name">정수진 (52/F)</div>
+                        <div class="patient-info">처방약: 타이레놀 + 감기약 | 상담 요청: 2026-05-09 11:20</div>
+                        <div>
+                            <span class="alert-badge">용량 확인</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="patient-list">
+                <h2>⚠️ 부작용 보고</h2>
+                <div id="side-effects-list">
+                    <div class="patient-item">
+                        <div class="patient-name">조미래 (28/F)</div>
+                        <div class="patient-info">약물: 페니실린 | 부작용: 피부 발진 | 심각도: 중간</div>
+                        <div>
+                            <span class="alert-badge">약물 변경 권고</span>
+                            <button onclick="confirmSideEffectAction()">처리</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 관리자용 대시보드 -->
+        <div id="admin-section" class="hidden">
+            <div class="dashboard">
+                <div class="card">
+                    <h3>👥 사용자 관리</h3>
+                    <button onclick="manageUsers()">사용자 목록</button>
+                </div>
+
+                <div class="card">
+                    <h3>📈 시스템 통계</h3>
+                    <button onclick="viewSystemStats()">상세 통계</button>
+                </div>
+
+                <div class="card">
+                    <h3>🔐 시스템 설정</h3>
+                    <button onclick="openSystemSettings()">설정</button>
+                </div>
+
+                <div class="card">
+                    <h3>💊 처방전 분석 (AI)</h3>
+                    <button onclick="openPrescriptionAnalysis()">처방전 분석</button>
+                </div>
+            </div>
+
+            <div class="patient-list">
+                <h2>📊 시스템 모니터링</h2>
+                <div style="padding: 20px;">
+                    <p><strong>API 상태:</strong> ✅ 정상 운영</p>
+                    <p><strong>데이터베이스:</strong> ✅ 연결됨 (34개 약물 저장)</p>
+                    <p><strong>사용자:</strong> 👥 15명 (의사 5, 약사 8, 관리자 2)</p>
+                    <p><strong>활성 세션:</strong> 🔵 8명</p>
+                    <p><strong>처리된 처방:</strong> 📋 234개</p>
+                    <p><strong>마지막 동기화:</strong> 🕐 2026-05-09 14:32</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8000';
+        const DOCTOR_ID = 'DR001';
+        const PHARMACIST_ID = 'PH001';
+        const ADMIN_ID = 'AD001';
+
+        function switchRole(role) {
+            // UI 업데이트
+            document.querySelectorAll('.role-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // 섹션 표시/숨김
+            document.getElementById('doctor-section').classList.toggle('hidden', role !== 'doctor');
+            document.getElementById('pharmacist-section').classList.toggle('hidden', role !== 'pharmacist');
+            document.getElementById('admin-section').classList.toggle('hidden', role !== 'admin');
+
+            // 각 역할별 데이터 로드
+            if (role === 'doctor') {
+                loadDoctorPatients();
+            } else if (role === 'pharmacist') {
+                loadPharmacistData();
+            } else if (role === 'admin') {
+                loadAdminStats();
+            }
+        }
+
+        // ═══════════════════════════════════════════════════════
+        // 의사 섹션 함수
+        // ═══════════════════════════════════════════════════════
+
+        async function loadDoctorPatients() {
+            try {
+                const response = await fetch(`${API_BASE}/api/doctor/patients?doctor_id=${DOCTOR_ID}`);
+                const result = await response.json();
+
+                if (result.success) {
+                    console.log('Doctor patients loaded:', result.data);
+                }
+            } catch (error) {
+                console.error('환자 목록 로드 실패:', error);
+            }
+        }
+
+        async function openPatientRegistration() {
+            const name = prompt('환자명을 입력하세요:');
+            if (!name) return;
+
+            const dob = prompt('생년월일을 입력하세요 (YYYY-MM-DD):');
+            if (!dob) return;
+
+            const gender = prompt('성별을 입력하세요 (M/F):');
+            if (!gender || !['M', 'F'].includes(gender.toUpperCase())) return;
+
+            const phone = prompt('전화번호를 입력하세요:');
+            const address = prompt('주소를 입력하세요:');
+            const medicalHistory = prompt('의료 이력을 입력하세요:');
+            const allergies = prompt('알레르기 정보를 입력하세요:');
+
+            try {
+                const response = await fetch(`${API_BASE}/api/patients/create`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: name,
+                        date_of_birth: dob,
+                        gender: gender.toUpperCase(),
+                        phone: phone,
+                        address: address,
+                        medical_history: medicalHistory,
+                        allergies: allergies
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert(`환자 '${name}'이(가) 성공적으로 등록되었습니다.\n환자ID: ${result.data.patient_id}`);
+                    loadDoctorPatients(); // 환자 목록 새로고침
+                } else {
+                    alert(`등록 실패: ${result.message}`);
+                }
+            } catch (error) {
+                alert(`오류 발생: ${error.message}`);
+                console.error('환자 등록 실패:', error);
+            }
+        }
+
+        async function checkDrugInteractions() {
+            const drugList = document.getElementById('drug-list').value;
+            const drugs = drugList.split(',').map(d => d.trim()).filter(d => d);
+
+            if (drugs.length < 2) {
+                alert('최소 2개 이상의 약물을 입력하세요');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/api/medications/interactions`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ medications: drugs })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    const interactions = result.data.interactions || [];
+                    const safetyLevel = result.data.overall_safety || 'unknown';
+
+                    let message = `약물 상호작용 분석 완료\n\n안전도: ${safetyLevel}\n\n`;
+                    if (interactions.length > 0) {
+                        message += '발견된 상호작용:\n';
+                        interactions.forEach(inter => {
+                            message += `• ${inter.drug1} + ${inter.drug2}: ${inter.severity}\n`;
+                        });
+                    } else {
+                        message += '상호작용 없음 - 안전합니다';
+                    }
+                    alert(message);
+                } else {
+                    alert('확인 실패: ' + result.message);
+                }
+            } catch (error) {
+                alert('API 호출 실패: ' + error.message);
+            }
+        }
+
+        async function openPrescriptionForm() {
+            // 간단한 모달 폼으로 표시
+            const medications = prompt('약물명을 쉼표로 구분하여 입력하세요 (예: 약물1,약물2):', '');
+            if (!medications) return;
+
+            try {
+                const response = await fetch(`${API_BASE}/api/doctor/prescription/create`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        doctor_id: DOCTOR_ID,
+                        patient_id: 'P001',
+                        medications: medications.split(',').map(m => ({ name: m.trim() }))
+                    })
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    alert(`처방전 생성 완료!\nID: ${result.data.prescription_id}`);
+                    document.getElementById('drug-list').value = '';
+                } else {
+                    alert('처방전 생성 실패: ' + result.message);
+                }
+            } catch (error) {
+                alert('API 호출 실패: ' + error.message);
+            }
+        }
+
+        // ═══════════════════════════════════════════════════════
+        // 약사 섹션 함수
+        // ═══════════════════════════════════════════════════════
+
+        async function loadPharmacistData() {
+            try {
+                // 상담 요청 로드
+                const consultResponse = await fetch(`${API_BASE}/api/pharmacist/consultations?pharmacist_id=${PHARMACIST_ID}`);
+                const consultResult = await consultResponse.json();
+
+                // 부작용 로드
+                const sideEffectResponse = await fetch(`${API_BASE}/api/pharmacist/side-effects?pharmacist_id=${PHARMACIST_ID}`);
+                const sideEffectResult = await sideEffectResponse.json();
+
+                console.log('Pharmacist data loaded');
+            } catch (error) {
+                console.error('약사 데이터 로드 실패:', error);
+            }
+        }
+
+        async function openConsultationForm() {
+            const medicationList = prompt('상담이 필요한 약물명을 쉼표로 구분하여 입력하세요:', '');
+            if (!medicationList) return;
+
+            try {
+                const response = await fetch(`${API_BASE}/api/pharmacist/consultation/create`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        pharmacist_id: PHARMACIST_ID,
+                        patient_id: 'P001',
+                        consultation_type: 'general',
+                        medications: medicationList.split(',').map(m => m.trim())
+                    })
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    alert(`상담 요청 생성 완료!\nID: ${result.data.consultation_id}`);
+                } else {
+                    alert('상담 요청 생성 실패: ' + result.message);
+                }
+            } catch (error) {
+                alert('API 호출 실패: ' + error.message);
+            }
+        }
+
+        async function sendMedicationReminders() {
+            try {
+                const response = await fetch(`${API_BASE}/api/pharmacist/reminders/send`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        pharmacist_id: PHARMACIST_ID,
+                        patient_ids: []
+                    })
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    alert(`✓ ${result.data.sent_count}명의 환자에게 복약 알림이 전송되었습니다`);
+                } else {
+                    alert('알림 전송 실패: ' + result.message);
+                }
+            } catch (error) {
+                alert('API 호출 실패: ' + error.message);
+            }
+        }
+
+        async function viewSideEffects() {
+            try {
+                const response = await fetch(`${API_BASE}/api/pharmacist/side-effects?pharmacist_id=${PHARMACIST_ID}`);
+                const result = await response.json();
+
+                if (result.success) {
+                    const sideEffects = result.data.side_effects || [];
+                    let message = `부작용 보고 (${sideEffects.length}건)\n\n`;
+
+                    sideEffects.forEach((se, idx) => {
+                        message += `${idx + 1}. ${se.patient_name} (${se.age}/${se.gender})\n`;
+                        message += `   약물: ${se.medication}\n`;
+                        message += `   증상: ${se.side_effect}\n`;
+                        message += `   심각도: ${se.severity}\n\n`;
+                    });
+
+                    alert(message);
+                } else {
+                    alert('부작용 조회 실패: ' + result.message);
+                }
+            } catch (error) {
+                alert('API 호출 실패: ' + error.message);
+            }
+        }
+
+        async function confirmSideEffectAction() {
+            const sideEffectId = 'SE001'; // 실제로는 선택된 항목의 ID
+            const action = prompt('처리 방법을 선택하세요:\n1. 약물 변경\n2. 의사 연락\n3. 모니터링 계속', '1');
+
+            if (!action) return;
+
+            try {
+                const response = await fetch(`${API_BASE}/api/pharmacist/side-effects/update`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        side_effect_id: sideEffectId,
+                        action: action,
+                        notes: ''
+                    })
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    alert(`✓ 부작용이 처리되었습니다\n처리 방법: ${action}`);
+                } else {
+                    alert('처리 실패: ' + result.message);
+                }
+            } catch (error) {
+                alert('API 호출 실패: ' + error.message);
+            }
+        }
+
+        // ═══════════════════════════════════════════════════════
+        // 건강 지표 모니터링 함수
+        // ═══════════════════════════════════════════════════════
+
+        async function viewPatientHealthMetrics() {
+            try {
+                const response = await fetch(`${API_BASE}/api/doctor/${DOCTOR_ID}/patient-health-metrics`);
+                const result = await response.json();
+
+                if (result.success) {
+                    const patients = result.data.patients || [];
+                    let message = `📊 환자 건강 지표 모니터링 (${patients.length}명)\n\n`;
+
+                    patients.forEach((patient, idx) => {
+                        message += `${idx + 1}. ${patient.patient_name} (${patient.age}세)\n`;
+                        message += `   진료병명: ${patient.primary_disease}\n`;
+                        message += `   최근 지표:\n`;
+
+                        patient.recent_metrics.forEach(metric => {
+                            const statusEmoji = metric.status === 'normal' ? '✅' : metric.status === 'warning' ? '⚠️' : '🚨';
+                            message += `   • ${metric.metric_type}: ${metric.value} ${statusEmoji} (${metric.measurement_time})\n`;
+                        });
+
+                        if (patient.alerts.length > 0) {
+                            message += `   ⚠️ 경고: `;
+                            message += patient.alerts.map(a => a.message).join(' / ');
+                            message += '\n';
+                        }
+                        message += '\n';
+                    });
+
+                    alert(message || '모니터링할 환자가 없습니다');
+                } else {
+                    alert('건강 지표 조회 실패: ' + result.message);
+                }
+            } catch (error) {
+                alert('API 호출 실패: ' + error.message);
+            }
+        }
+
+        async function viewPharmacistHealthMetrics() {
+            try {
+                const response = await fetch(`${API_BASE}/api/pharmacist/${PHARMACIST_ID}/patient-health-metrics`);
+                const result = await response.json();
+
+                if (result.success) {
+                    const patients = result.data.patients || [];
+                    let message = `🩺 환자 건강 지표 모니터링 (약물 관련) (${patients.length}명)\n\n`;
+
+                    patients.forEach((patient, idx) => {
+                        message += `${idx + 1}. ${patient.patient_name}\n`;
+                        message += `   처방약: ${patient.medications.join(', ')}\n`;
+                        message += `   지표: ${patient.metric_type} = ${patient.current_value} (${patient.status})\n`;
+                        message += `   약사 의견: ${patient.medication_recommendation}\n\n`;
+                    });
+
+                    const totalAlerts = result.data.total_alerts || 0;
+                    message += `\n⚠️ 총 경고: ${totalAlerts}건`;
+
+                    alert(message || '모니터링할 환자가 없습니다');
+                } else {
+                    alert('건강 지표 조회 실패: ' + result.message);
+                }
+            } catch (error) {
+                alert('API 호출 실패: ' + error.message);
+            }
+        }
+
+        // ═══════════════════════════════════════════════════════
+        // 관리자 섹션 함수
+        // ═══════════════════════════════════════════════════════
+
+        async function loadAdminStats() {
+            try {
+                const response = await fetch(`${API_BASE}/api/admin/stats?admin_id=${ADMIN_ID}`);
+                const result = await response.json();
+
+                if (result.success) {
+                    console.log('Admin stats loaded:', result.data);
+                }
+            } catch (error) {
+                console.error('관리자 통계 로드 실패:', error);
+            }
+        }
+
+        async function manageUsers() {
+            try {
+                const response = await fetch(`${API_BASE}/api/admin/users?admin_id=${ADMIN_ID}`);
+                const result = await response.json();
+
+                if (result.success) {
+                    const stats = result.data;
+                    let message = `사용자 관리 (총 ${stats.total}명)\n\n`;
+                    message += `의사: ${stats.doctors}명\n`;
+                    message += `약사: ${stats.pharmacists}명\n`;
+                    message += `관리자: ${stats.admins}명\n\n`;
+                    message += `활성 사용자:\n`;
+
+                    stats.users.forEach(user => {
+                        message += `• ${user.name} (${user.role}) - ${user.status}\n`;
+                    });
+
+                    alert(message);
+                } else {
+                    alert('사용자 조회 실패: ' + result.message);
+                }
+            } catch (error) {
+                alert('API 호출 실패: ' + error.message);
+            }
+        }
+
+        async function viewSystemStats() {
+            try {
+                const response = await fetch(`${API_BASE}/api/admin/stats?admin_id=${ADMIN_ID}`);
+                const result = await response.json();
+
+                if (result.success) {
+                    const stats = result.data;
+                    let message = `시스템 통계\n\n`;
+                    message += `환자: ${stats.total_patients}명\n`;
+                    message += `활성 처방: ${stats.active_prescriptions}개\n`;
+                    message += `약물 경고: ${stats.medication_alerts}개\n`;
+                    message += `복약 순응도: ${stats.compliance_rate}%\n\n`;
+                    message += `시스템 상태:\n`;
+                    message += `API: ${stats.api_status}\n`;
+                    message += `데이터베이스: ${stats.database_records}개 약물\n`;
+                    message += `활성 세션: ${stats.active_sessions}명\n`;
+                    message += `처리 처방: ${stats.processed_prescriptions}개\n`;
+
+                    alert(message);
+                } else {
+                    alert('통계 조회 실패: ' + result.message);
+                }
+            } catch (error) {
+                alert('API 호출 실패: ' + error.message);
+            }
+        }
+
+        async function openSystemSettings() {
+            const settingKey = prompt('설정항목을 입력하세요:', 'api_timeout');
+            const settingValue = prompt('설정값을 입력하세요:', '30');
+
+            if (!settingKey || !settingValue) return;
+
+            try {
+                const response = await fetch(`${API_BASE}/api/admin/settings`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        admin_id: ADMIN_ID,
+                        settings: { [settingKey]: settingValue }
+                    })
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    alert(`✓ 설정이 업데이트되었습니다\n${settingKey}: ${settingValue}`);
+                } else {
+                    alert('설정 업데이트 실패: ' + result.message);
+                }
+            } catch (error) {
+                alert('API 호출 실패: ' + error.message);
+            }
+        }
+
+        // ═══════════════════════════════════════════════════════
+        // SHIELD PHARMA-HYBRID 통합 함수
+        // ═══════════════════════════════════════════════════════
+
+        async function openPrescriptionAnalysis() {
+            alert('💊 처방전 분석 기능\n\n' +
+                  'SHIELD PHARMA-HYBRID v21.0 통합\n\n' +
+                  '기능:\n' +
+                  '1. 처방전 이미지 분석 (OCR/Vision)\n' +
+                  '2. 약물 정보 자동 조회 (RAG)\n' +
+                  '3. 주변 약국 검색 (Google Maps)\n' +
+                  '4. 최종 보고서 생성 (HTML/PDF)\n\n' +
+                  'CLI 명령어:\n' +
+                  'python main_managed_agents.py --image [이미지경로]\n\n' +
+                  '상세: pharma_output/ 폴더에서 결과 확인');
+
+            // 또는 자동으로 처방전 분석 페이지 열기
+            // window.open('prescription_analysis.html', '_blank');
+        }
+
+        // 페이지 로드 시
+        window.addEventListener('load', () => {
+            console.log('[Healthcare Dashboard] Loaded - API Base: ' + API_BASE);
+            console.log('[Healthcare Dashboard] 의사 ID:', DOCTOR_ID);
+            console.log('[Healthcare Dashboard] 약사 ID:', PHARMACIST_ID);
+            console.log('[Healthcare Dashboard] 관리자 ID:', ADMIN_ID);
+            console.log('[Healthcare Dashboard] SHIELD PHARMA-HYBRID 통합 준비');
+        });
+    </script>
+</body>
+</html>

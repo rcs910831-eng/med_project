@@ -1,3 +1,0 @@
-2026-04-26 18:56:42,457 - [BACKUP] - ✅ 백업 저장소 생성 완료: C:\PharmaProject_Backups
-2026-04-26 18:56:42,457 - [BACKUP] - 🚀 백업 시작: C:\PharmaProject -> C:\PharmaProject_Backups\Pharma_Backup_20260426_185642.zip
-2026-04-26 18:56:42,799 - [BACKUP] - ✅ 백업 완료! (소요시간: 0.34초, 용량: 0.31MB)

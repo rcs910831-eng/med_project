@@ -1,7 +1,10 @@
-# Environment variables
+# Environment variables — API 키 절대 올리지 말 것
 .env
 .env.local
 .env.*.local
+
+# Streamlit secrets
+.streamlit/secrets.toml
 
 # Google Cloud credentials (NEVER commit this!)
 google-cloud-key.json*
@@ -67,12 +70,20 @@ Thumbs.db
 
 # Old project files (cleanup)
 pharma_v*.db
-pharma_*.py
+*.backup
 *.backup.*
+*.backup_old
 *_old.py
 *_backup.py
 test_*.py
 demo_*.py
+
+# Output / 중간 데이터 파일
+pharma_output/
+extracted_med_info_matches.json
+missing_*.json
+pharma_antigravity_dataset.json
+prescription_images/.masked_cache/
 
 # Frontend build
 node_modules/

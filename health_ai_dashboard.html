@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 건강관리 어시스턴트</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            height: 90vh;
+            max-height: 800px;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .chat-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .message-content {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            word-wrap: break-word;
+            line-height: 1.4;
+        }
+
+        .message.user .message-content {
+            background: #667eea;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message.ai .message-content {
+            background: white;
+            color: #333;
+            border: 1px solid #e0e0e0;
+            border-bottom-left-radius: 4px;
+        }
+
+        .input-area {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 14px;
+            resize: none;
+            max-height: 100px;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        button {
+            padding: 12px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .file-input-wrapper input[type=file] {
+            position: absolute;
+            left: -9999px;
+        }
+
+        .file-label {
+            display: inline-block;
+            padding: 12px 20px;
+            background: #f0f0f0;
+            color: #666;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .file-input-wrapper input[type=file]:focus + .file-label,
+        .file-label:hover {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .file-name {
+            display: block;
+            font-size: 12px;
+            color: #666;
+            margin-top: 8px;
+        }
+
+        .suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .suggestion-btn {
+            padding: 8px 12px;
+            background: #f0f0f0;
+            color: #666;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .suggestion-btn:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #667eea;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+            margin: 0 2px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .timestamp {
+            font-size: 11px;
+            color: #999;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                max-height: none;
+                height: 100vh;
+            }
+
+            .message-content {
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💊 AI 건강관리 어시스턴트</h1>
+            <p>처방전 분석 • 식단/운동 추천 • 심리 지원</p>
+        </div>
+
+        <div class="chat-container" id="chatContainer">
+            <div class="message ai">
+                <div class="message-content">
+                    안녕하세요! 저는 당신의 건강관리 어시스턴트입니다.
+                    <br><br>
+                    처방전이나 약봉투 사진을 올려주시거나, 오늘 건강 상태에 대해 말씀해주세요.
+                    <br><br>
+                    저는 당신에게 맞는 식단, 운동, 영양제를 추천해드리겠습니다! 👍
+                    <div class="timestamp" id="time0"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-area">
+            <div class="suggestions" id="suggestions">
+                <button class="suggestion-btn" onclick="useSuggestion('오늘 혈당이 높은 것 같아요')">혈당 높음</button>
+                <button class="suggestion-btn" onclick="useSuggestion('고혈압 관리하고 있습니다')">혈압 관리</button>
+                <button class="suggestion-btn" onclick="useSuggestion('몸이 피곤해요')">피로감</button>
+                <button class="suggestion-btn" onclick="useSuggestion('약을 안 챙기고 있어요')">약물 복용</button>
+            </div>
+
+            <div class="input-group">
+                <div class="file-input-wrapper">
+                    <input type="file" id="imageInput" accept="image/*" onchange="handleImageUpload()">
+                    <label for="imageInput" class="file-label">📷 사진</label>
+                    <div class="file-name" id="fileName"></div>
+                </div>
+                <textarea id="userInput" placeholder="건강 상태나 질문을 입력하세요..." rows="1" onkeypress="handleKeyPress(event)"></textarea>
+                <button onclick="sendMessage()">전송</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8000';
+        let selectedImagePath = null;
+
+        function getCurrentTime() {
+            const now = new Date();
+            return now.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' });
+        }
+
+        function handleKeyPress(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        }
+
+        function handleImageUpload() {
+            const fileInput = document.getElementById('imageInput');
+            const file = fileInput.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    // 실제 배포에서는 서버에 업로드하고 경로를 받아야 함
+                    // 지금은 클라이언트에서 처리
+                    selectedImagePath = file.name;
+                    document.getElementById('fileName').textContent = `선택됨: ${file.name}`;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function useSuggestion(text) {
+            document.getElementById('userInput').value = text;
+            document.getElementById('userInput').focus();
+        }
+
+        async function sendMessage() {
+            const userInput = document.getElementById('userInput').value.trim();
+
+            if (!userInput) {
+                alert('메시지를 입력하세요.');
+                return;
+            }
+
+            // 사용자 메시지 표시
+            addMessage('user', userInput);
+            document.getElementById('userInput').value = '';
+            document.getElementById('fileName').textContent = '';
+
+            // 로딩 표시
+            showLoading();
+
+            try {
+                // JSON 요청 생성
+                const requestData = {
+                    message: userInput,
+                    image_base64: null
+                };
+
+                // 이미지 파일이 선택되었으면 base64로 변환
+                const fileInput = document.getElementById('imageInput');
+                if (fileInput.files && fileInput.files[0]) {
+                    const file = fileInput.files[0];
+                    const reader = new FileReader();
+
+                    reader.onload = async (e) => {
+                        // base64로 인코딩된 이미지 추가
+                        requestData.image_base64 = e.target.result;
+
+                        // API 호출
+                        await callHealthAIAPI(requestData);
+                    };
+
+                    reader.readAsDataURL(file);
+                } else {
+                    // 이미지 없이 API 호출
+                    await callHealthAIAPI(requestData);
+                }
+
+            } catch (error) {
+                removeLoading();
+                console.error('오류:', error);
+                addMessage('ai', `죄송합니다. 처리 중 오류가 발생했습니다: ${error.message}`);
+            }
+        }
+
+        async function callHealthAIAPI(requestData) {
+            try {
+                const response = await fetch(`${API_BASE}/api/health-ai/chat`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(requestData)
+                });
+
+                removeLoading();
+
+                if (!response.ok) {
+                    throw new Error(`API Error: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                if (data.success && data.data && data.data.recommendation) {
+                    addMessage('ai', data.data.recommendation);
+                } else {
+                    addMessage('ai', '죄송합니다. 응답을 생성하지 못했습니다.');
+                }
+
+                // 이미지 파일 선택 초기화
+                selectedImagePath = null;
+                const fileInput = document.getElementById('imageInput');
+                fileInput.value = '';
+
+            } catch (error) {
+                removeLoading();
+                console.error('오류:', error);
+                addMessage('ai', `죄송합니다. 처리 중 오류가 발생했습니다: ${error.message}`);
+            }
+        }
+
+        function addMessage(sender, text) {
+            const chatContainer = document.getElementById('chatContainer');
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            contentDiv.innerHTML = text.replace(/\n/g, '<br>');
+
+            const timeDiv = document.createElement('div');
+            timeDiv.className = 'timestamp';
+            timeDiv.textContent = getCurrentTime();
+
+            contentDiv.appendChild(timeDiv);
+            messageDiv.appendChild(contentDiv);
+            chatContainer.appendChild(messageDiv);
+
+            // 스크롤 맨 아래로
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function showLoading() {
+            const chatContainer = document.getElementById('chatContainer');
+            const loadingDiv = document.createElement('div');
+            loadingDiv.className = 'message ai';
+            loadingDiv.id = 'loadingMessage';
+            loadingDiv.innerHTML = '<div class="message-content"><span class="loading"></span><span class="loading"></span><span class="loading"></span></div>';
+            chatContainer.appendChild(loadingDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function removeLoading() {
+            const loadingMessage = document.getElementById('loadingMessage');
+            if (loadingMessage) {
+                loadingMessage.remove();
+            }
+        }
+
+        // 초기 타임스탬프
+        document.getElementById('time0').textContent = getCurrentTime();
+    </script>
+</body>
+</html>

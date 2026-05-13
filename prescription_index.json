@@ -513,14 +513,28 @@
     "age": 55,
     "gender": "여",
     "diseases": [
-      "C55 (자궁암 — 주진단)",
-      "I42.7 (확장성심근병증 — 부진단)"
+      "C55 (자궁암 — 주진단)"
     ],
     "medications": [
       "보트리엔트정 400MG (파조파닙·항암제·VEGFR억제)",
       "코슈정 60MG (슈도에페드린·기침코막힘)",
       "코푸시럽 20ML (다이하이드로코데인+클로르페니라민·기침)",
-      "삼남아세트아미노펜정 500MG (아세트아미노펜·해열진통)",
+      "삼남아세트아미노펜정 500MG (아세트아미노펜·해열진통)"
+    ],
+    "prescription_days": 42,
+    "sample_id": "RX_P029",
+    "image_url": "/api/prescriptions/samples/RX_P029/image",
+    "analyze_url": "/api/prescriptions/samples/RX_P029/analyze",
+    "prescription_note": "C55 자궁암 항암처방. 보트리엔트(파조파닙)와 코슈정(슈도에페드린) 병용 시 혈압상승 및 CYP3A4 상호작용 주의."
+  },
+  {
+    "name": "박명심",
+    "age": 55,
+    "gender": "여",
+    "diseases": [
+      "I42.7 (확장성심근병증 — 주진단)"
+    ],
+    "medications": [
       "트리테이스정 2.5MG (라미프릴·ACE억제제)",
       "후릭스정 40MG (푸로세미드·루프이뇨제)",
       "알닥톤필름코팅정 25MG (스피로노락톤·항알도스테론)",
@@ -528,10 +542,31 @@
       "자디앙정 10MG (엠파글리플로진·SGLT2억제제)",
       "프로코란정 5MG (이바브라딘·HCN채널억제)"
     ],
-    "prescription_days": 100,
-    "sample_id": "RX_P029",
-    "image_url": "/api/prescriptions/samples/RX_P029/image",
-    "analyze_url": "/api/prescriptions/samples/RX_P029/analyze",
-    "prescription_note": "C55(항암)+I42.7(심근병증) 통합처방. 보트리엔트(파조파닙)와 코슈정(슈도에페드린) 병용 시 혈압상승 및 CYP3A4 상호작용 주의 필요."
+    "prescription_days": 90,
+    "sample_id": "RX_P029B",
+    "image_url": "/api/prescriptions/samples/RX_P029B/image",
+    "analyze_url": "/api/prescriptions/samples/RX_P029B/analyze",
+    "prescription_note": "I42.7 확장성심근병증 처방. 이뇨제+ACE억제제+SGLT2억제제 복합 심부전 치료. 프로코란(이바브라딘)은 서맥 주의."
+  },
+  {
+    "name": "유창수",
+    "age": 34,
+    "gender": "남",
+    "diseases": [
+      "J30.1 (알레르기 비염 — 주진단)",
+      "J06.9 (급성 상기도감염 — 부진단)"
+    ],
+    "medications": [
+      "살부타민정 (살부타몰·기관지확장제)",
+      "코대원정 수에크네오케이정 (다이하이드로코데인+클로르페니라민·진해항히스타민)",
+      "슈다페드정 60MG (슈도에페드린·코막힘완화)",
+      "베아졸론정 4MG (메틸프레드니솔론·항염스테로이드)",
+      "라니넥스나잘스프레이 (로르타딘·항히스타민비강분무)"
+    ],
+    "prescription_days": 7,
+    "sample_id": "RX_P030",
+    "image_url": "/api/prescriptions/samples/RX_P030/image",
+    "analyze_url": "/api/prescriptions/samples/RX_P030/analyze",
+    "prescription_note": "이비인후과 처방. 알레르기 비염+급성 상기도감염. 베아졸론(스테로이드)은 7일 이상 복용 금지. 슈다페드+살부타민 병용 시 심계항진 주의."
   }
 ]

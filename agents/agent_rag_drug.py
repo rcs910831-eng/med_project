@@ -9,7 +9,7 @@ from typing import Dict, List, Optional, Tuple
 from pathlib import Path
 import os
 
-from anthropic import Anthropic
+import google.generativeai as genai
 
 logger = logging.getLogger(__name__)
 
@@ -22,14 +22,15 @@ class AgentRAGDrug:
         Initialize RAG Drug Agent
 
         Args:
-            api_key: Anthropic API key
+            api_key: Google API key
         """
-        self.api_key = api_key or os.getenv("ANTHROPIC_API_KEY")
+        self.api_key = api_key or os.getenv("GOOGLE_API_KEY")
         if not self.api_key:
-            raise ValueError("ANTHROPIC_API_KEY not found")
+            raise ValueError("GOOGLE_API_KEY not found")
 
-        self.client = Anthropic(api_key=self.api_key)
-        self.model = "claude-opus-4-7"
+        genai.configure(api_key=self.api_key)
+        self.client = genai.GenerativeModel("gemini-1.5-pro-vision")
+        self.model = "gemini-1.5-pro-vision"
 
         # Load RAG databases
         self.drug_info = self._load_json("rag_db/drug_info_index.json")

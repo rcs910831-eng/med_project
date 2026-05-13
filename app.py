@@ -19,6 +19,12 @@ import plotly.graph_objects as go
 import random
 import time
 import os
+import logging
+
+# ── set_page_config: 반드시 첫 번째 Streamlit 명령 ──────────────────────────
+st.set_page_config(page_title="PHARMA-HYBRID v40.4", layout="wide")
+
+logger = logging.getLogger("pharma_app")
 
 # ── 상수 및 설정 ────────────────────────────────────────────────────────────
 DB_PATH = "pharma_v20.db"
@@ -86,7 +92,9 @@ def load_patients() -> Dict:
             c.execute("SELECT patient_id, real_name, age, gender, hospital, diet FROM patients")
             rows = c.fetchall()
         return {r[0]: {"real_name": r[1], "age": r[2], "gender": r[3], "hospital": r[4], "diet": r[5] or ""} for r in rows}
-    except: return DEFAULT_PATIENTS
+    except Exception as e:
+        logger.warning(f"load_patients fallback: {e}")
+        return DEFAULT_PATIENTS
 
 def load_rx() -> List[Dict]:
     try:
@@ -96,23 +104,27 @@ def load_rx() -> List[Dict]:
             rows = c.fetchall()
         keys = ["id","patient_id","medication_name","cancer_type","dosage","frequency","duration","start_date","doctor_name","status","side_effects","efficacy_rate","notes","last_updated"]
         return [dict(zip(keys, r)) for r in rows]
-    except: return []
+    except Exception as e:
+        logger.warning(f"load_rx fallback: {e}")
+        return []
 
 # ── UI 헬퍼 ─────────────────────────────────────────────────────────────
 def tts_button(text: str, key: str) -> None:
-    # 한글, 숫자, 공백, 기본 문장부호만 허용 (발음의 자연스러움과 정보량 확보)
+    # 한글, 숫자, 공백, 기본 문장부호만 허용
     clean_text = re.sub(r'[^가-힣0-9\s.,!]', '', text).strip()
-    if not clean_text: clean_text = "브리핑 할 데이터가 준비되지 않았습니다."
-    
+    if not clean_text:
+        clean_text = "브리핑 할 데이터가 준비되지 않았습니다."
+    # JS 문자열 안전 처리: 백슬래시·따옴표 이스케이프
+    safe_text = clean_text.replace('\\', '\\\\').replace("'", "\\'").replace('"', '\\"')
     components.html(f"""
         <script>
-        function speak() {{
-            const msg = new SpeechSynthesisUtterance("{clean_text}");
+        function speak_{key}() {{
+            var msg = new SpeechSynthesisUtterance('{safe_text}');
             msg.lang = 'ko-KR'; msg.rate = 1.0; msg.pitch = 1.0;
             window.speechSynthesis.speak(msg);
         }}
         </script>
-        <button onclick="speak()" style="background:linear-gradient(90deg, #00f2ff, #0060ff); border:none; color:#000; border-radius:8px; padding:12px 25px; cursor:pointer; font-size:1.1rem; font-weight:900; width:100%; box-shadow:0 4px 15px rgba(0,242,255,0.4);">🎙️ AI 마스터 브리핑 재생 (v40.2 고음질)</button>
+        <button onclick="speak_{key}()" style="background:linear-gradient(90deg,#00f2ff,#0060ff);border:none;color:#000;border-radius:8px;padding:12px 25px;cursor:pointer;font-size:1.1rem;font-weight:900;width:100%;box-shadow:0 4px 15px rgba(0,242,255,0.4);">🎙️ AI 마스터 브리핑 재생</button>
     """, height=65)
 
 def emergency_floating_panel():
@@ -122,8 +134,6 @@ def emergency_floating_panel():
         <a href="tel:112" style="text-decoration:none;"><div style="background:#0060ff; color:white; padding:15px; border-radius:50px; width:120px; text-align:center; font-weight:900; box-shadow:0 0 20px rgba(0,96,255,0.6); border:2px solid white;">🚓 112 신고</div></a>
     </div>
     """, unsafe_allow_html=True)
-
-st.set_page_config(page_title="PHARMA-HYBRID v40.4", layout="wide")
 
 st.markdown("""
 <style>

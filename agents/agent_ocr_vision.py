@@ -10,7 +10,7 @@ from typing import Dict, Optional, List
 from pathlib import Path
 import base64
 
-from anthropic import Anthropic
+import google.generativeai as genai
 
 logger = logging.getLogger(__name__)
 
@@ -23,14 +23,15 @@ class AgentOCRVision:
         Initialize OCR Vision Agent
 
         Args:
-            api_key: Anthropic API key (uses environment variable if not provided)
+            api_key: Google API key (uses environment variable if not provided)
         """
-        self.api_key = api_key or os.getenv("ANTHROPIC_API_KEY")
+        self.api_key = api_key or os.getenv("GOOGLE_API_KEY")
         if not self.api_key:
-            raise ValueError("ANTHROPIC_API_KEY not found")
+            raise ValueError("GOOGLE_API_KEY not found")
 
-        self.client = Anthropic(api_key=self.api_key)
-        self.model = "claude-opus-4-7"  # High-resolution vision support
+        genai.configure(api_key=self.api_key)
+        self.client = genai.GenerativeModel("gemini-1.5-pro-vision")  # Vision-capable model
+        self.model = "gemini-1.5-pro-vision"
 
         self.system_prompt = """당신은 의료 처방전 이미지 분석 전문가입니다.
 
@@ -73,61 +74,47 @@ class AgentOCRVision:
             # Determine media type
             media_type = self._get_media_type(image_path)
 
-            # Call Claude Vision API
-            response = self.client.messages.create(
-                model=self.model,
-                max_tokens=2048,
-                system=self.system_prompt,
-                messages=[
-                    {
-                        "role": "user",
-                        "content": [
-                            {
-                                "type": "image",
-                                "source": {
-                                    "type": "base64",
-                                    "media_type": media_type,
-                                    "data": image_data,
-                                },
-                            },
-                            {
-                                "type": "text",
-                                "text": """이 처방전 이미지를 분석해주세요.
+            # Call Google Gemini Vision API
+            from PIL import Image
+
+            # Load image for Gemini
+            image = Image.open(image_path)
+
+            prompt = f"""{self.system_prompt}
+
+이 처방전 이미지를 분석해주세요.
 
 다음 정보를 JSON 형식으로 추출해주세요:
-{
-  "patient": {
+{{
+  "patient": {{
     "name": "환자명",
     "age": 나이,
     "sex": "M/F",
     "diagnosis_primary": "주진료 병명",
     "diagnosis_secondary": "부진료 병명 (없으면 null)"
-  },
+  }},
   "medications": [
-    {
+    {{
       "name": "약물명",
       "strength": "용량",
       "quantity": "수량",
       "frequency": "빈도"
-    }
+    }}
   ],
-  "metadata": {
+  "metadata": {{
     "prescription_date": "처방일자",
     "doctor_signature_verified": true/false,
     "hospital_seal_verified": true/false,
     "image_quality": "high/medium/low"
-  }
-}
+  }}
+}}
 
 주의: 반드시 유효한 JSON 형식으로만 응답해주세요. 다른 설명은 하지 마세요."""
-                            }
-                        ],
-                    }
-                ]
-            )
+
+            response = self.client.generate_content([prompt, image])
 
             # Extract JSON from response
-            response_text = response.content[0].text
+            response_text = response.text
             prescription_data = self._parse_json_response(response_text)
 
             if prescription_data:

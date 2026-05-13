@@ -4,7 +4,7 @@ Utils package for SHIELD PHARMA-HYBRID system
 
 from .google_api_helper import GoogleAPIHelper, Pharmacy
 from .mfds_api_helper import MFDSAPIHelper, DrugInfo
-from .pdf_generator import PDFReportGenerator
+from .pdf_generator import PrescriptionReportGenerator as PDFReportGenerator
 from .validators import (
     MedicationValidator,
     PrescriptionValidator,

@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#667eea">
+    <meta name="description" content="처방전 자동 분석 및 약물 정보 조회 시스템">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="PHARMA-MOBILE">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect fill='%23667eea' width='180' height='180'/><text x='90' y='135' font-size='80' fill='white' text-anchor='middle' font-weight='bold'>💊</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect fill='%23667eea' width='180' height='180'/><text x='90' y='135' font-size='80' fill='white' text-anchor='middle' font-weight='bold'>💊</text></svg>">
+    <title>PHARMA-MOBILE - 의료 처방전 분석</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #f0f0f0;
+            background: #fafafa;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab-button.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+            background: white;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 25px;
+            animation: fadeIn 0.3s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin-top: 10px;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .result-box {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .result-box h3 {
+            color: #667eea;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .result-box p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .success {
+            background: #f0fdf4;
+            border-left-color: #22c55e;
+            color: #166534;
+        }
+
+        .success h3 {
+            color: #22c55e;
+        }
+
+        .error {
+            background: #fef2f2;
+            border-left-color: #ef4444;
+            color: #7f1d1d;
+        }
+
+        .error h3 {
+            color: #ef4444;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #667eea;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .info-box {
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #1e40af;
+            margin-bottom: 15px;
+        }
+
+        .medications-list {
+            background: #f9fafb;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .med-item {
+            background: white;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            border-left: 3px solid #667eea;
+            font-size: 14px;
+        }
+
+        .med-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .status {
+            font-size: 12px;
+            color: #999;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💊 PHARMA-MOBILE</h1>
+            <p>의료 처방전 분석 시스템</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="switchTab('patient-tab')">환자 정보</button>
+            <button class="tab-button" onclick="switchTab('health-tab')">건강 지표</button>
+            <button class="tab-button" onclick="switchTab('medication-tab')">약물 정보</button>
+            <button class="tab-button" onclick="switchTab('result-tab')">결과</button>
+        </div>
+
+        <!-- 환자 정보 탭 -->
+        <div id="patient-tab" class="tab-content active">
+            <div class="info-box">
+                📝 환자 정보를 입력하세요
+            </div>
+
+            <div class="form-group">
+                <label>이름 *</label>
+                <input type="text" id="patient-name" placeholder="예: 홍길동">
+            </div>
+
+            <div class="form-group">
+                <label>나이</label>
+                <input type="number" id="patient-age" placeholder="예: 68" min="0" max="120">
+            </div>
+
+            <div class="form-group">
+                <label>성별</label>
+                <input type="text" id="patient-gender" placeholder="예: 남성, 여성">
+            </div>
+
+            <div class="form-group">
+                <label>주 진료병명</label>
+                <input type="text" id="primary-disease" placeholder="예: 고혈압">
+            </div>
+
+            <div class="form-group">
+                <label>부 진료병명</label>
+                <input type="text" id="secondary-disease" placeholder="예: 당뇨 (선택)">
+            </div>
+
+            <button onclick="submitPatientInfo()">환자 정보 등록</button>
+
+            <div id="patient-status" class="status"></div>
+        </div>
+
+        <!-- 건강 지표 탭 -->
+        <div id="health-tab" class="tab-content">
+            <div class="info-box">
+                📊 직접 측정한 건강 지표를 입력하세요
+            </div>
+
+            <div id="health-metrics-list" style="margin-bottom: 20px;">
+                <strong style="display: block; margin-bottom: 10px;">최근 측정값:</strong>
+                <div id="metrics-display" style="font-size: 14px; color: #666;"></div>
+            </div>
+
+            <div class="form-group">
+                <label>지표 종류 *</label>
+                <select id="metric-type">
+                    <option value="">선택하세요</option>
+                    <option value="blood_sugar">혈당 (mg/dL)</option>
+                    <option value="blood_pressure">혈압 (mmHg)</option>
+                    <option value="pulse">맥박 (bpm)</option>
+                    <option value="weight">체중 (kg)</option>
+                    <option value="temperature">체온 (℃)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>측정값 *</label>
+                <input type="number" id="metric-value" placeholder="예: 145" step="0.1">
+            </div>
+
+            <div class="form-group">
+                <label>측정 시간</label>
+                <input type="datetime-local" id="metric-time">
+            </div>
+
+            <div class="form-group">
+                <label>비고</label>
+                <input type="text" id="metric-notes" placeholder="예: 아침 식사 후 (선택)">
+            </div>
+
+            <button onclick="submitHealthMetric()">건강 지표 등록</button>
+
+            <div id="health-status" class="status"></div>
+        </div>
+
+        <!-- 약물 정보 탭 -->
+        <div id="medication-tab" class="tab-content">
+            <div class="info-box">
+                💊 복용할 약물 정보를 입력하세요
+            </div>
+
+            <div id="medications-added" class="medications-list" style="display: none;">
+                <strong>등록된 약물:</strong>
+                <div id="meds-list"></div>
+            </div>
+
+            <div class="form-group">
+                <label>약물명 *</label>
+                <input type="text" id="med-name" placeholder="예: 노바스크정">
+            </div>
+
+            <div class="form-group">
+                <label>용량</label>
+                <input type="text" id="med-dosage" placeholder="예: 5mg">
+            </div>
+
+            <div class="form-group">
+                <label>복용 횟수</label>
+                <input type="text" id="med-frequency" placeholder="예: 1일 1회">
+            </div>
+
+            <div class="form-group">
+                <label>복용 기간</label>
+                <input type="text" id="med-duration" placeholder="예: 30일">
+            </div>
+
+            <button onclick="submitMedicationInfo()">약물 추가</button>
+
+            <div id="medication-status" class="status"></div>
+        </div>
+
+        <!-- 결과 탭 -->
+        <div id="result-tab" class="tab-content">
+            <div class="info-box">
+                ✅ 분석 결과
+            </div>
+
+            <div id="result-content">
+                <p style="color: #999; text-align: center;">아직 결과가 없습니다. 정보를 입력하세요.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:9000';
+
+        let patientData = {};
+        let medicationsList = [];
+
+        function switchTab(tabId) {
+            // 모든 탭 숨기기
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // 선택한 탭 표시
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        async function submitPatientInfo() {
+            const name = document.getElementById('patient-name').value;
+            const age = document.getElementById('patient-age').value;
+            const gender = document.getElementById('patient-gender').value;
+            const primaryDisease = document.getElementById('primary-disease').value;
+            const secondaryDisease = document.getElementById('secondary-disease').value;
+
+            if (!name) {
+                alert('이름을 입력하세요');
+                return;
+            }
+
+            const status = document.getElementById('patient-status');
+            status.innerHTML = '<div class="loading"><div class="spinner"></div>등록 중...</div>';
+
+            try {
+                const response = await fetch(`${API_BASE}/api/patient/info`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name,
+                        age: age ? parseInt(age) : null,
+                        gender: gender || null,
+                        primary_disease: primaryDisease || null,
+                        secondary_disease: secondaryDisease || null
+                    })
+                });
+
+                const data = await response.json();
+
+                patientData = {
+                    name,
+                    age: age ? parseInt(age) : null,
+                    gender,
+                    primary_disease: primaryDisease,
+                    secondary_disease: secondaryDisease
+                };
+
+                if (response.ok) {
+                    status.innerHTML = '<div class="result-box success"><h3>✅ 성공</h3><p>' + data.message + '</p></div>';
+                    updateResult();
+                } else {
+                    status.innerHTML = '<div class="result-box error"><h3>❌ 오류</h3><p>' + data.detail + '</p></div>';
+                }
+            } catch (error) {
+                status.innerHTML = '<div class="result-box error"><h3>❌ 오류</h3><p>API 연결 실패: ' + error.message + '</p></div>';
+            }
+        }
+
+        async function submitMedicationInfo() {
+            const name = document.getElementById('med-name').value;
+            const dosage = document.getElementById('med-dosage').value;
+            const frequency = document.getElementById('med-frequency').value;
+            const duration = document.getElementById('med-duration').value;
+
+            if (!name) {
+                alert('약물명을 입력하세요');
+                return;
+            }
+
+            const status = document.getElementById('medication-status');
+            status.innerHTML = '<div class="loading"><div class="spinner"></div>추가 중...</div>';
+
+            try {
+                const response = await fetch(`${API_BASE}/api/prescription/medications`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        medication_name: name,
+                        dosage: dosage || null,
+                        frequency: frequency || null,
+                        duration: duration || null
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    medicationsList.push({
+                        name,
+                        dosage,
+                        frequency,
+                        duration
+                    });
+
+                    // 입력 필드 초기화
+                    document.getElementById('med-name').value = '';
+                    document.getElementById('med-dosage').value = '';
+                    document.getElementById('med-frequency').value = '';
+                    document.getElementById('med-duration').value = '';
+
+                    // 약물 목록 표시
+                    const medsList = document.getElementById('meds-list');
+                    const medItem = document.createElement('div');
+                    medItem.className = 'med-item';
+                    medItem.innerHTML = `<strong>${name}</strong><br/>용량: ${dosage || '미입력'}, 횟수: ${frequency || '미입력'}, 기간: ${duration || '미입력'}`;
+                    medsList.appendChild(medItem);
+
+                    document.getElementById('medications-added').style.display = 'block';
+                    status.innerHTML = '<div class="result-box success"><h3>✅ 성공</h3><p>' + data.message + '</p></div>';
+                    updateResult();
+                } else {
+                    status.innerHTML = '<div class="result-box error"><h3>❌ 오류</h3><p>' + data.detail + '</p></div>';
+                }
+            } catch (error) {
+                status.innerHTML = '<div class="result-box error"><h3>❌ 오류</h3><p>API 연결 실패: ' + error.message + '</p></div>';
+            }
+        }
+
+        let healthMetricsData = [];
+
+        async function submitHealthMetric() {
+            const metricType = document.getElementById('metric-type').value;
+            const metricValue = parseFloat(document.getElementById('metric-value').value);
+            const metricTime = document.getElementById('metric-time').value;
+            const metricNotes = document.getElementById('metric-notes').value;
+
+            if (!metricType) {
+                alert('지표 종류를 선택하세요');
+                return;
+            }
+
+            if (isNaN(metricValue)) {
+                alert('측정값을 입력하세요');
+                return;
+            }
+
+            const status = document.getElementById('health-status');
+            status.innerHTML = '<div class="loading"><div class="spinner"></div>등록 중...</div>';
+
+            try {
+                const patientId = patientData.name ? patientData.name.replace(/\s+/g, '_') + '_' + Math.random().toString(36).substr(2, 9) : 'P001';
+
+                const response = await fetch(`${API_BASE}/api/patient/${patientId}/health-metrics`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        patient_id: patientId,
+                        metric_type: metricType,
+                        value: metricValue,
+                        unit: getMetricUnit(metricType),
+                        measurement_time: metricTime || new Date().toISOString(),
+                        notes: metricNotes || null
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // 측정값을 리스트에 추가
+                    const metricTypeLabel = {
+                        'blood_sugar': '혈당',
+                        'blood_pressure': '혈압',
+                        'pulse': '맥박',
+                        'weight': '체중',
+                        'temperature': '체온'
+                    };
+
+                    healthMetricsData.push({
+                        type: metricType,
+                        value: metricValue,
+                        time: metricTime || new Date().toLocaleString('ko-KR'),
+                        status: data.data.metric.status
+                    });
+
+                    // 입력 필드 초기화
+                    document.getElementById('metric-type').value = '';
+                    document.getElementById('metric-value').value = '';
+                    document.getElementById('metric-time').value = '';
+                    document.getElementById('metric-notes').value = '';
+
+                    // 최근 측정값 표시
+                    updateHealthMetricsDisplay();
+
+                    let alertText = '';
+                    if (data.data.alert) {
+                        alertText = `\n⚠️ ${data.data.alert.message}`;
+                    }
+
+                    status.innerHTML = '<div class="result-box success"><h3>✅ 성공</h3><p>' + data.message + alertText + '</p></div>';
+                    updateResult();
+                } else {
+                    status.innerHTML = '<div class="result-box error"><h3>❌ 오류</h3><p>' + (data.detail || '등록 실패') + '</p></div>';
+                }
+            } catch (error) {
+                status.innerHTML = '<div class="result-box error"><h3>❌ 오류</h3><p>API 연결 실패: ' + error.message + '</p></div>';
+            }
+        }
+
+        function getMetricUnit(metricType) {
+            const units = {
+                'blood_sugar': 'mg/dL',
+                'blood_pressure': 'mmHg',
+                'pulse': 'bpm',
+                'weight': 'kg',
+                'temperature': '℃'
+            };
+            return units[metricType] || '';
+        }
+
+        function updateHealthMetricsDisplay() {
+            const display = document.getElementById('metrics-display');
+            if (healthMetricsData.length === 0) {
+                display.innerHTML = '<p style="color: #999;">등록된 측정값이 없습니다</p>';
+            } else {
+                const metricTypeLabel = {
+                    'blood_sugar': '🩺 혈당',
+                    'blood_pressure': '💉 혈압',
+                    'pulse': '❤️ 맥박',
+                    'weight': '⚖️ 체중',
+                    'temperature': '🌡️ 체온'
+                };
+
+                display.innerHTML = healthMetricsData.slice(-5).reverse().map(m => {
+                    const statusEmoji = m.status === 'normal' ? '✅' : m.status === 'warning' ? '⚠️' : '🚨';
+                    return `<div style="padding: 10px; background: #f5f5f5; border-radius: 5px; margin-bottom: 8px;">
+                        <strong>${metricTypeLabel[m.type] || m.type}</strong>: ${m.value} ${getMetricUnit(m.type)} ${statusEmoji}
+                        <br/><small style="color: #999;">${m.time}</small>
+                    </div>`;
+                }).join('');
+            }
+        }
+
+        async function searchPharmacies() {
+            const latitude = parseFloat(document.getElementById('latitude').value);
+            const longitude = parseFloat(document.getElementById('longitude').value);
+            const radius = parseInt(document.getElementById('radius').value) || 2;
+
+            if (!latitude || !longitude) {
+                alert('위도와 경도를 입력하세요');
+                return;
+            }
+
+            const resultsDiv = document.getElementById('pharmacy-results');
+            resultsDiv.innerHTML = '<div class="loading"><div class="spinner"></div>검색 중...</div>';
+
+            try {
+                const response = await fetch(`${API_BASE}/api/pharmacies/nearby?latitude=${latitude}&longitude=${longitude}&radius_km=${radius}`);
+                const data = await response.json();
+
+                if (response.ok && data.data.pharmacies.length > 0) {
+                    let html = '<div class="result-box success"><h3>✅ 약국 검색 결과</h3>';
+                    html += `<p>발견된 약국: ${data.data.count}개</p>`;
+
+                    data.data.pharmacies.forEach((pharmacy, idx) => {
+                        html += `<div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(102,126,234,0.2);">
+                            <strong>${idx + 1}. ${pharmacy.name}</strong><br/>
+                            거리: ${pharmacy.distance_m}m | 전화: ${pharmacy.phone}<br/>
+                            시간: ${pharmacy.hours} | 별점: ${pharmacy.rating}⭐<br/>
+                            배송: ${pharmacy.delivery ? '가능 (' + pharmacy.estimated_time + ')' : '불가'}
+                        </div>`;
+                    });
+
+                    html += '</div>';
+                    resultsDiv.innerHTML = html;
+                } else {
+                    resultsDiv.innerHTML = '<div class="result-box error"><h3>❌ 검색 오류</h3><p>' + (data.message || '약국을 찾을 수 없습니다') + '</p></div>';
+                }
+            } catch (error) {
+                resultsDiv.innerHTML = '<div class="result-box error"><h3>❌ 오류</h3><p>API 연결 실패: ' + error.message + '</p></div>';
+            }
+        }
+
+        function updateResult() {
+            let html = '';
+
+            if (Object.keys(patientData).length > 0) {
+                html += `<div class="result-box success">
+                    <h3>👤 환자 정보</h3>
+                    <p><strong>이름:</strong> ${patientData.name}</p>
+                    ${patientData.age ? `<p><strong>나이:</strong> ${patientData.age}세</p>` : ''}
+                    ${patientData.gender ? `<p><strong>성별:</strong> ${patientData.gender}</p>` : ''}
+                    ${patientData.primary_disease ? `<p><strong>주 진료:</strong> ${patientData.primary_disease}</p>` : ''}
+                    ${patientData.secondary_disease ? `<p><strong>부 진료:</strong> ${patientData.secondary_disease}</p>` : ''}
+                </div>`;
+            }
+
+            if (medicationsList.length > 0) {
+                html += `<div class="result-box success">
+                    <h3>💊 복용 약물</h3>`;
+                medicationsList.forEach(med => {
+                    html += `<p style="margin-top: 10px;"><strong>${med.name}</strong><br/>
+                        용량: ${med.dosage || '미입력'} | 횟수: ${med.frequency || '미입력'} | 기간: ${med.duration || '미입력'}
+                    </p>`;
+                });
+                html += '</div>';
+            }
+
+            if (html === '') {
+                html = '<p style="color: #999; text-align: center;">아직 정보가 없습니다. 환자 정보와 약물을 입력하세요.</p>';
+            }
+
+            document.getElementById('result-content').innerHTML = html;
+        }
+    </script>
+
+    <!-- Service Worker 등록 -->
+    <script>
+        // Service Worker 등록
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service_worker.js')
+                    .then(registration => {
+                        console.log('[App] Service Worker registered:', registration);
+                    })
+                    .catch(error => {
+                        console.log('[App] Service Worker registration failed:', error);
+                    });
+            });
+        }
+
+        // 알림 권한 요청
+        function requestNotificationPermission() {
+            if ('Notification' in window && Notification.permission === 'default') {
+                Notification.requestPermission().then(permission => {
+                    if (permission === 'granted') {
+                        console.log('[App] Notifications enabled');
+                    }
+                });
+            }
+        }
+
+        // 페이지 로드 시 알림 권한 요청
+        window.addEventListener('load', requestNotificationPermission);
+
+        // 주기적인 백그라운드 동기화 (복약 알림)
+        if ('serviceWorker' in navigator && 'SyncManager' in window) {
+            navigator.serviceWorker.ready.then(registration => {
+                // 6시간마다 동기화
+                registration.sync.register('sync-medications');
+            }).catch(err => console.log('[App] Sync registration failed:', err));
+        }
+
+        // 설치 배너 (홈화면 추가)
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            console.log('[App] App can be installed');
+        });
+
+        // 온라인/오프라인 상태 감지
+        window.addEventListener('online', () => {
+            console.log('[App] Online');
+            alert('인터넷 연결이 복구되었습니다');
+        });
+
+        window.addEventListener('offline', () => {
+            console.log('[App] Offline');
+            alert('인터넷 연결이 끊겼습니다. 캐시된 정보를 사용합니다.');
+        });
+    </script>
+</body>
+</html>
