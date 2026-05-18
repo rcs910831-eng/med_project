@@ -63,6 +63,7 @@ backend_final.log
 *.tmp
 .temp/
 temp/
+temp_zip/
 
 # OS
 .DS_Store

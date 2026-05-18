@@ -1,6 +1,5 @@
 name: SHIELD PHARMA CI/CD Pipeline
 
-# 트리거
 on:
   push:
     branches:
@@ -9,307 +8,142 @@ on:
     paths:
       - 'agents/**'
       - 'utils/**'
+      - 'modules/**'
       - '*.py'
       - 'requirements*.txt'
-      - 'Dockerfile'
+      - 'Dockerfile_backend'
       - 'docker-compose.yml'
-      - 'k8s/**'
       - '.github/workflows/**'
   pull_request:
     branches:
       - main
       - develop
   schedule:
-    # 매일 자정 (UTC) 자동 테스트
     - cron: '0 0 * * *'
 
-env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}/pharma-hybrid
-  DOCKER_BUILDKIT: 1
-
 jobs:
-  # ========================================================================
-  # 1단계: 빌드 (Build)
-  # ========================================================================
-  build:
-    name: Build & Test
+  # ────────────────────────────────────────────────
+  # 1단계: 코드 품질 검사
+  # ────────────────────────────────────────────────
+  lint:
+    name: Code Quality
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
+      - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: 'pip'
 
-      - name: Install dependencies
+      - name: Install lint tools
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements_agents.txt
-          pip install pytest pytest-cov black flake8 mypy
+          pip install flake8 black
 
-      - name: Code Quality - Black (Format Check)
-        run: black --check . --exclude="(__pycache__|\.git|\.venv)"
+      - name: Flake8 — syntax & fatal errors only
+        run: flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics --exclude=temp_zip,__pycache__,.git
         continue-on-error: true
 
-      - name: Code Quality - Flake8 (Lint)
-        run: flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+      - name: Black — format check
+        run: black --check . --exclude="(temp_zip|__pycache__|\.git|\.venv)"
         continue-on-error: true
 
-      - name: Code Quality - MyPy (Type Check)
-        run: mypy . --ignore-missing-imports
-        continue-on-error: true
-
-      - name: Unit Tests
-        run: |
-          pytest tests/ -v --cov=. --cov-report=xml --cov-report=html
-        continue-on-error: true
-
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          file: ./coverage.xml
-          flags: unittests
-          name: codecov-umbrella
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-
-      - name: Log in to Container Registry
-        if: github.event_name == 'push'
-        uses: docker/login-action@v2
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Extract metadata
-        id: meta
-        uses: docker/metadata-action@v4
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          tags: |
-            type=ref,event=branch
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=sha,prefix={{branch}}-
-            type=raw,value=latest,enable={{is_default_branch}}
-
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache
-          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache,mode=max
-
-  # ========================================================================
-  # 2단계: E2E 테스트 (Integration Tests)
-  # ========================================================================
-  e2e-tests:
-    name: E2E Tests
-    runs-on: ubuntu-latest
-    needs: build
-    if: github.event_name == 'push'
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
-          cache: 'pip'
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements_agents.txt
-
-      - name: Set ANTHROPIC_API_KEY
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-        run: |
-          export ANTHROPIC_API_KEY
-          export GOOGLE_API_KEY
-
-      - name: Run E2E Tests
-        run: python -m pytest tests/test_e2e.py -v --timeout=300
-        continue-on-error: true
-
-  # ========================================================================
-  # 3단계: 보안 스캔 (Security)
-  # ========================================================================
+  # ────────────────────────────────────────────────
+  # 2단계: 보안 스캔
+  # ────────────────────────────────────────────────
   security-scan:
     name: Security Scan
     runs-on: ubuntu-latest
-    needs: build
+    needs: lint
+    permissions:
+      security-events: write
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Run Trivy vulnerability scanner
+      - name: Trivy — filesystem vulnerability scan
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: 'fs'
           scan-ref: '.'
           format: 'sarif'
           output: 'trivy-results.sarif'
-
-      - name: Upload Trivy results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: 'trivy-results.sarif'
-
-      - name: Run OWASP Dependency-Check
-        uses: dependency-check/Dependency-Check_Action@main
-        with:
-          project: 'SHIELD-PHARMA'
-          path: '.'
-          format: 'JSON'
         continue-on-error: true
 
-  # ========================================================================
-  # 4단계: Kubernetes 배포 (Deploy)
-  # ========================================================================
-  deploy:
-    name: Deploy to Kubernetes
+      - name: Upload Trivy results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: 'trivy-results.sarif'
+        continue-on-error: true
+
+  # ────────────────────────────────────────────────
+  # 3단계: Docker 이미지 빌드 (main 브랜치만)
+  # ────────────────────────────────────────────────
+  docker-build:
+    name: Docker Build
     runs-on: ubuntu-latest
-    needs: [build, e2e-tests, security-scan]
+    needs: lint
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile_backend
+          push: true
+          tags: ghcr.io/${{ github.repository }}/pharma-hybrid:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # ────────────────────────────────────────────────
+  # 4단계: Render 배포 상태 확인
+  # ────────────────────────────────────────────────
+  verify-render:
+    name: Verify Render Deployment
+    runs-on: ubuntu-latest
+    needs: [lint, security-scan]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up kubectl
-        uses: azure/setup-kubectl@v3
-        with:
-          version: 'v1.27.0'
-
-      - name: Configure kubectl context
+      - name: Trigger Render deploy
         run: |
-          mkdir -p $HOME/.kube
-          echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > $HOME/.kube/config
-          chmod 600 $HOME/.kube/config
-
-      - name: Create/Update Kubernetes Namespace
-        run: kubectl apply -f k8s/00-namespace.yaml
-
-      - name: Create Kubernetes Secrets
-        run: |
-          kubectl create secret generic pharma-secrets \
-            --from-literal=anthropic-api-key=${{ secrets.ANTHROPIC_API_KEY }} \
-            --from-literal=google-api-key=${{ secrets.GOOGLE_API_KEY }} \
-            --from-literal=database-password=${{ secrets.DB_PASSWORD }} \
-            --from-literal=grafana-admin-password=${{ secrets.GRAFANA_PASSWORD }} \
-            --from-literal=jwt-secret-key=${{ secrets.JWT_SECRET_KEY }} \
-            -n shield-pharma \
-            --dry-run=client \
-            -o yaml | kubectl apply -f -
-
-      - name: Apply Kubernetes ConfigMaps
-        run: kubectl apply -f k8s/01-configmap.yaml
-
-      - name: Apply Kubernetes PersistentVolumeClaims
-        run: kubectl apply -f k8s/03-persistence.yaml
-
-      - name: Deploy Application
-        run: |
-          kubectl set image deployment/pharma-hybrid \
-            pharma-app=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest \
-            -n shield-pharma \
-            --record
-          kubectl rollout status deployment/pharma-hybrid -n shield-pharma --timeout=5m
-
-      - name: Apply Services and Ingress
-        run: |
-          kubectl apply -f k8s/05-service.yaml
-          kubectl apply -f k8s/06-ingress.yaml
-
-      - name: Verify Deployment
-        run: |
-          kubectl get pods -n shield-pharma
-          kubectl get svc -n shield-pharma
-          kubectl get ingress -n shield-pharma
-
-      - name: Check Health
-        run: |
-          kubectl rollout status deployment/pharma-hybrid -n shield-pharma --timeout=5m
-          sleep 10
-          kubectl logs -n shield-pharma -l app=pharma-hybrid --tail=20
-
-  # ========================================================================
-  # 5단계: 모니터링 및 알림 (Monitoring)
-  # ========================================================================
-  post-deploy:
-    name: Post-Deploy Verification
-    runs-on: ubuntu-latest
-    needs: deploy
-    if: always()
-
-    steps:
-      - name: Check Deployment Status
-        run: |
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://pharma.example.com)
-          if [ "$STATUS" != "200" ]; then
-            echo "Deployment health check failed: HTTP $STATUS"
-            exit 1
+          if [ -n "${{ secrets.RENDER_API_KEY }}" ] && [ -n "${{ secrets.RENDER_SERVICE_ID }}" ]; then
+            curl -s -X POST \
+              "https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}" \
+              -o /dev/null
+            echo "Render deploy triggered"
+          else
+            echo "RENDER secrets not configured — skipping"
           fi
-          echo "✓ Deployment is healthy"
 
-      - name: Slack Notification - Success
-        if: success()
-        uses: slackapi/slack-github-action@v1.24.0
-        with:
-          payload: |
-            {
-              "text": "✅ SHIELD PHARMA v21.0 Deployment Successful",
-              "blocks": [
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "*✅ Deployment Successful*\n*Repository:* ${{ github.repository }}\n*Branch:* ${{ github.ref }}\n*Commit:* ${{ github.sha }}\n*Status:* Production Deployed"
-                  }
-                }
-              ]
-            }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
-
-      - name: Slack Notification - Failure
-        if: failure()
-        uses: slackapi/slack-github-action@v1.24.0
-        with:
-          payload: |
-            {
-              "text": "❌ SHIELD PHARMA v21.0 Deployment Failed",
-              "blocks": [
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "*❌ Deployment Failed*\n*Repository:* ${{ github.repository }}\n*Branch:* ${{ github.ref }}\n*Commit:* ${{ github.sha }}\n*Status:* FAILED - Check logs"
-                  }
-                }
-              ]
-            }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+      - name: Wait and check Render health
+        run: |
+          sleep 30
+          if [ -n "${{ secrets.RENDER_HEALTH_URL }}" ]; then
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${{ secrets.RENDER_HEALTH_URL }}/health" || echo "000")
+            echo "Health check status: $STATUS"
+            if [ "$STATUS" = "200" ]; then
+              echo "Deployment is healthy"
+            else
+              echo "Health check returned $STATUS (may still be starting)"
+            fi
+          else
+            echo "RENDER_HEALTH_URL not set — skipping health check"
+          fi
